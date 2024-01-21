@@ -1,0 +1,31 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "fmttbook:features",
+  "description": "book.fmttbook.fmttbook.features.multiblock.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "minecraft:furnace"
+  },
+  "name": "book.fmttbook.fmttbook.features.multiblock.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "show_title_separator": true,
+      "text": "book.fmttbook.fmttbook.features.multiblock.intro.text",
+      "title": "book.fmttbook.fmttbook.features.multiblock.intro.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "anchor": "",
+      "multiblock_id": "modonomicon:blockentity",
+      "multiblock_name": "multiblocks.fmttbook.blockentity",
+      "show_visualize_button": true,
+      "text": "book.fmttbook.fmttbook.features.multiblock.multiblock.text"
+    }
+  ],
+  "x": -8,
+  "y": -2
+}
