@@ -5,6 +5,7 @@ import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.config.FMTTClientConfig;
 import net.gabriele333.fmtt.config.FMTTCommonConfig;
 import net.gabriele333.fmtt.item.FMTTItems;
+import net.gabriele333.fmtt.network.FMTTNetwork;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -62,6 +63,9 @@ public class fmtt {
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
+        event.enqueueWork(FMTTNetwork::register);
+
+
 
     }
 
