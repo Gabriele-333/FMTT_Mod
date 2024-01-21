@@ -5,6 +5,8 @@ import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXPProvider;
 import net.gabriele333.fmtt.client.ModpackVersion;
 import net.gabriele333.fmtt.config.FMTTClientConfig;
 import net.gabriele333.fmtt.fmtt;
+import net.gabriele333.fmtt.network.FMTTNetwork;
+import net.gabriele333.fmtt.network.packet.TestC2SPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -44,6 +46,7 @@ public class ModEvents {
 
             if (!versionMessageSent && !Objects.equals(ModpackVersion.main(), FMTTClientConfig.MiscSettings.Version.get())) {
                 event.getEntity().sendSystemMessage(Component.literal("§bThere is a newer version of the modpack: " + ModpackVersion.main()));
+                FMTTNetwork.sendToServer(new TestC2SPacket());
                 versionMessageSent = true;
             }
         }
