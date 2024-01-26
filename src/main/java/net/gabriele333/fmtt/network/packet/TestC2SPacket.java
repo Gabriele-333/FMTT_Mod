@@ -29,9 +29,9 @@ public class TestC2SPacket {
             // HERE WE ARE ON THE SERVER!
             ServerPlayer player = context.getSender();
             assert player != null;
-            ServerLevel level = player.serverLevel();
+           /* ServerLevel level = player.getLevel;
 
-           /* EntityType.COW.spawn(level, (ItemStack) null, null, player.blockPosition(),
+           EntityType.COW.spawn(level, (ItemStack) null, null, player.blockPosition(),
                     MobSpawnType.COMMAND, true, false);*/
         });
         return true;

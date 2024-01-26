@@ -34,7 +34,6 @@ public class FMTTNetwork {
                 .consumerMainThread(TestC2SPacket::handle)
                 .add();
 
-
     }
 
     public static <MSG> void sendToServer(MSG message) {
