@@ -10,7 +10,11 @@ import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
 
+
 public class TestC2SPacket {
+
+
+
     public TestC2SPacket() {
 
     }
@@ -26,13 +30,14 @@ public class TestC2SPacket {
     public boolean handle(Supplier<NetworkEvent.Context> supplier) {
         NetworkEvent.Context context = supplier.get();
         context.enqueueWork(() -> {
+
+
             // HERE WE ARE ON THE SERVER!
             ServerPlayer player = context.getSender();
-            assert player != null;
-           /* ServerLevel level = player.getLevel;
+            ServerLevel level = player.serverLevel();
 
            EntityType.COW.spawn(level, (ItemStack) null, null, player.blockPosition(),
-                    MobSpawnType.COMMAND, true, false);*/
+                    MobSpawnType.COMMAND, true, false);
         });
         return true;
     }

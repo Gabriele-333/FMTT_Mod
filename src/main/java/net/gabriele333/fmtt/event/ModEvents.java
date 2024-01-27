@@ -11,9 +11,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 
-
-import java.util.Objects;
-
 public class ModEvents {
 
 
@@ -28,6 +25,9 @@ public class ModEvents {
                 }
             }
         }
+
+
+
         @SubscribeEvent
         public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
             event.register(PlayerFMTTXP.class);

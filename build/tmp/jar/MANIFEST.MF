@@ -3,7 +3,7 @@ Specification-Title: fmtt
 Specification-Vendor: Gabriele_333
 Specification-Version: 1
 Implementation-Title: FMTT_Mod_1.20.1
-Implementation-Version: net.gabriele333
+Implementation-Version: 0.1.13-1.20.1
 Implementation-Vendor: Gabriele_333
-Implementation-Timestamp: 2024-01-20T16:06:22+0100
+Implementation-Timestamp: 2024-01-27T14:02:11+0100
 
