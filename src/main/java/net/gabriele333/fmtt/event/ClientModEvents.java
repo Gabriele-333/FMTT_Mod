@@ -21,12 +21,10 @@ public class ClientModEvents {
     public static class ForgeEvents {
 
         @SubscribeEvent(priority = EventPriority.LOW)
-        public static void onPlayerJoin(PlayerEvent.PlayerLoggedInEvent event) {
-
+        public static void onPlayerJoinClient(PlayerEvent.PlayerLoggedInEvent event) {
             if (!versionMessageSent && !Objects.equals(ModpackVersion.main(), FMTTClientConfig.MiscSettings.Version.get())) {
                 event.getEntity().sendSystemMessage(Component.literal("§bThere is a newer version of the modpack: " + ModpackVersion.main()));
                 versionMessageSent = true;
-                FMTTNetwork.sendToServer(new TestC2SPacket());
             }
         }
     }
