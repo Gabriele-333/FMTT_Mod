@@ -3,19 +3,18 @@ package net.gabriele333.fmtt.event;
 import net.gabriele333.fmtt.client.ModpackVersion;
 import net.gabriele333.fmtt.config.FMTTClientConfig;
 import net.gabriele333.fmtt.fmtt;
-import net.gabriele333.fmtt.network.FMTTNetwork;
-import net.gabriele333.fmtt.network.packet.TestC2SPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-
 import java.util.Objects;
+
 
 public class ClientModEvents {
     private static boolean versionMessageSent = false;
+
 
     @Mod.EventBusSubscriber(modid = fmtt.MOD_ID, value = Dist.CLIENT)
     public static class ForgeEvents {
@@ -27,5 +26,8 @@ public class ClientModEvents {
                 versionMessageSent = true;
             }
         }
+
+
+
     }
 }

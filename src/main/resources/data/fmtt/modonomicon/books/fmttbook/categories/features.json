@@ -1,10 +1,10 @@
 {
   "background": "fmtt:textures/gui/book/test1bkgrnd.png",
-  "background_height": 1024,
+  "background_height": 512,
   "background_parallax_layers": [],
-  "background_width": 1024,
+  "background_width": 512,
   "entry_textures": "fmtt:textures/gui/entry_textures.png",
-  "background_texture_zoom_multiplier" : 0.5,
+  "background_texture_zoom_multiplier" : 1,
   "icon": {
     "item": "minecraft:nether_star"
   },

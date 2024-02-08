@@ -11,6 +11,10 @@ public class PlayerFMTTXP {
     public void addPlayerFMTTXP(int add){
         this.PlayerFMTTXP = PlayerFMTTXP + add;
     }
+    public void removePlayerFMTTXP(int remove){
+        this.PlayerFMTTXP = PlayerFMTTXP - remove;
+    }
+
     public void copyFrom(PlayerFMTTXP source) {
         this.PlayerFMTTXP = source.PlayerFMTTXP;
     }
