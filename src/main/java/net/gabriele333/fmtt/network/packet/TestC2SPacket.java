@@ -1,5 +1,5 @@
 package net.gabriele333.fmtt.network.packet;
-
+/*
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,10 +36,11 @@ public class TestC2SPacket {
             ServerPlayer player = context.getSender();
             ServerLevel level = player.serverLevel();
 
-           EntityType.COW.spawn(level, (ItemStack) null, null, player.blockPosition(),
-                    MobSpawnType.COMMAND, true, false);
+
         });
         return true;
     }
 
 }
+
+ */

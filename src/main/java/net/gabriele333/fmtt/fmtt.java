@@ -1,13 +1,10 @@
 package net.gabriele333.fmtt;
 
-
 import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.config.FMTTClientConfig;
 import net.gabriele333.fmtt.config.FMTTCommonConfig;
 import net.gabriele333.fmtt.item.FMTTItems;
-import net.gabriele333.fmtt.network.FMTTNetwork;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.server.ServerStartingEvent;
@@ -22,12 +19,9 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.slf4j.Logger;
 
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod(fmtt.MOD_ID)
 public class fmtt {
-    // Define mod id in a common place for everything to reference
     public static final String MOD_ID = "fmtt";
-    // Directly reference a slf4j logger
     public static final Logger LOGGER = LogUtils.getLogger();
     public static fmtt INSTANCE;
     public static final FMTTCommonConfig COMMON_CONFIG = new FMTTCommonConfig();
@@ -44,17 +38,9 @@ public class fmtt {
         FMTTItems.register(modEventBus);
         FMTTCreativeTabs.register(modEventBus);
 
-
-
-
-
-
         modEventBus.addListener(this::commonSetup);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
-
-
-
 
     }
     public static ResourceLocation loc(String path) {
@@ -63,17 +49,12 @@ public class fmtt {
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        event.enqueueWork(FMTTNetwork::register);
-
-
-
+        //event.enqueueWork(FMTTNetwork::register);
     }
 
-    // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
     }
 
-    // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
     }

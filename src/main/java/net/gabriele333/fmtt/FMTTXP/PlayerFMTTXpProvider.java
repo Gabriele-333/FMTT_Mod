@@ -8,25 +8,24 @@ import net.minecraftforge.common.capabilities.CapabilityToken;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
 import net.minecraftforge.common.util.LazyOptional;
-import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class PlayerFMTTXPProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
-    public static Capability<PlayerFMTTXP> Player_FMTT_XP = CapabilityManager.get(new CapabilityToken<PlayerFMTTXP>() {});
-    private PlayerFMTTXP PlayerFMTTXP = null;
-    private final LazyOptional<PlayerFMTTXP> optional = LazyOptional.of(this::createPlayerFMTTXP);
-    private PlayerFMTTXP createPlayerFMTTXP() {
-        if(this.PlayerFMTTXP == null) {
-            this.PlayerFMTTXP = new PlayerFMTTXP();
+public class PlayerFMTTXpProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
+    public static Capability<PlayerFMTTXp> player_fmtt_xp = CapabilityManager.get(new CapabilityToken<PlayerFMTTXp>() {});
+    private PlayerFMTTXp playerfmttxp = null;
+    private final LazyOptional<PlayerFMTTXp> optional = LazyOptional.of(this::createplayerfmttxp);
+    private PlayerFMTTXp createplayerfmttxp() {
+        if(this.playerfmttxp == null) {
+            this.playerfmttxp = new PlayerFMTTXp();
         }
-        return this.PlayerFMTTXP;
+        return this.playerfmttxp;
     }
 
 
     @Override
     public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == Player_FMTT_XP) {
+        if(cap == player_fmtt_xp) {
             return optional.cast();
         }
         return LazyOptional.empty();
@@ -35,13 +34,13 @@ public class PlayerFMTTXPProvider implements ICapabilityProvider, INBTSerializab
     @Override
     public CompoundTag serializeNBT() {
         CompoundTag nbt = new CompoundTag();
-        createPlayerFMTTXP().saveNBTData(nbt);
+        createplayerfmttxp().saveNBTData(nbt);
         return nbt;
     }
 
     @Override
     public void deserializeNBT(CompoundTag nbt) {
-        createPlayerFMTTXP().loadNBTData(nbt);
+        createplayerfmttxp().loadNBTData(nbt);
 
     }
 }

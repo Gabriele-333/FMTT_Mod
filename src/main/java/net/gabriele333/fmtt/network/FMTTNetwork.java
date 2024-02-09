@@ -1,5 +1,5 @@
 package net.gabriele333.fmtt.network;
-
+/*
 
 import net.gabriele333.fmtt.fmtt;
 import net.gabriele333.fmtt.network.packet.TestC2SPacket;
@@ -44,3 +44,5 @@ public class FMTTNetwork {
         INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
     }
 }
+
+ */

@@ -1,6 +1,6 @@
 package net.gabriele333.fmtt.commands;
-import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXP;
-import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXPProvider;
+import net.gabriele333.fmtt.FMTTXP.FMTTXPAdvancement;
+import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import com.mojang.brigadier.CommandDispatcher;
@@ -17,8 +17,8 @@ public class FMTTXpGet {
 
     private int getPlayerXp(CommandSourceStack source) throws CommandSyntaxException {
         ServerPlayer player = source.getPlayerOrException();
-        player.getCapability(PlayerFMTTXPProvider.Player_FMTT_XP).ifPresent(playerFMTTXP -> {
-            int xp = playerFMTTXP.getPlayerFMTTXP();
+        player.getCapability(PlayerFMTTXpProvider.player_fmtt_xp).ifPresent(playerfmttxp -> {
+            int xp = playerfmttxp.getPlayerFMTTXP();
             player.sendSystemMessage(Component.literal("You have " + xp + " Xp"));
         });
         return 1;
