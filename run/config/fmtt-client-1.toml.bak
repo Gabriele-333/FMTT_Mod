@@ -1,8 +1,0 @@
-
-#Misc Settings
-[misc]
-	#Receive a message in chat when a new version of the Modpack is released
-	NewVersionMsg = true
-	#The version of the modpack    !DON'T TOUCH!
-	Version = "1.0.0"
-
