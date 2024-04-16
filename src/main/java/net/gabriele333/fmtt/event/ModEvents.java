@@ -4,7 +4,6 @@ import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXp;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
 import net.gabriele333.fmtt.commands.FMTTXpAdd;
 import net.gabriele333.fmtt.commands.FMTTXpGet;
-import net.gabriele333.fmtt.commands.FMTTXpRemove;
 import net.gabriele333.fmtt.commands.FMTTXpSet;
 import net.gabriele333.fmtt.fmtt;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
@@ -35,7 +34,6 @@ public class ModEvents {
     }
     @SubscribeEvent
     public static void onPlayerClone(final PlayerEvent.Clone event) {
-        //only handle respawn after death -> not portal transfers
         if (event.isWasDeath()) {
             event.getOriginal().reviveCaps();
             event.getOriginal().getCapability(PlayerFMTTXpProvider.player_fmtt_xp).ifPresent(oldStore -> {
@@ -60,7 +58,6 @@ public class ModEvents {
     public static void onCommandsRegister(RegisterCommandsEvent event) {
         new FMTTXpGet(event.getDispatcher());
         new FMTTXpAdd(event.getDispatcher());
-        new FMTTXpRemove(event.getDispatcher());
         new FMTTXpSet(event.getDispatcher());
         ConfigCommand.register(event.getDispatcher());
     }

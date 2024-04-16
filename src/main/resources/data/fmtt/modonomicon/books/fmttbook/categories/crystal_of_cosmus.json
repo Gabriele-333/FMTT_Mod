@@ -6,9 +6,9 @@
   "entry_textures": "fmtt:textures/gui/entry_textures.png",
   "background_texture_zoom_multiplier" : 1,
   "icon": {
-    "item": "minecraft:nether_star"
+    "item": "fmtt:crystal_of_cosmus"
   },
-  "name": "book.fmtt.fmttbook.features",
+  "name": "book.fmttbook.fmttbook.crystal_of_cosmus",
   "show_category_button": true,
   "sort_number": -1
 }

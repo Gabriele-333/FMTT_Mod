@@ -1,8 +1,8 @@
 package net.gabriele333.fmtt.network;
-/*
+
 
 import net.gabriele333.fmtt.fmtt;
-import net.gabriele333.fmtt.network.packet.TestC2SPacket;
+
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -28,11 +28,10 @@ public class FMTTNetwork {
 
         INSTANCE = net;
 
-        net.messageBuilder(TestC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(TestC2SPacket::new)
-                .encoder(TestC2SPacket::toBytes)
-                .consumerMainThread(TestC2SPacket::handle)
-                .add();
+
+
+
+
 
     }
 
@@ -45,4 +44,3 @@ public class FMTTNetwork {
     }
 }
 
- */
