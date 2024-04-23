@@ -6,9 +6,9 @@
   "entry_textures": "fmtt:textures/gui/entry_textures.png",
   "background_texture_zoom_multiplier" : 1,
   "icon": {
-    "item": "fmtt:crystal_of_cosmos"
+    "item": "fmtt:fmtt_item"
   },
-  "name": "Cosmos",
+  "name": "FMTT",
   "show_category_button": true,
   "sort_number": -1
 }

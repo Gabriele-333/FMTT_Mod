@@ -1,0 +1,20 @@
+{
+  "category": "fmtt:fmtt",
+  "description": "",
+  "hide_while_locked": false,
+  "icon": "fmtt:fmtt_item",
+  "x": -8,
+  "y": -4,
+  "name": "FMTT",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "show_title_separator": true,
+      "text": "",
+      "title": "From Magic to Tech",
+      "use_markdown_in_title": false
+    }
+  ]
+
+}
