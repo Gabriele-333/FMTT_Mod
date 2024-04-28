@@ -32,7 +32,8 @@
     "texture_width": 256
   },
   "model": "modonomicon:modonomicon_purple",
-  "name": "book.fmttbook.fmttbook.name",
+  "name": "De Magia et Technologia",
+  "tooltip": "From Magic to Tech Encyclopedia (last version)",
   "read_all_button_y_offset": 0,
   "right_frame_overlay": {
     "frame_height": 70,
