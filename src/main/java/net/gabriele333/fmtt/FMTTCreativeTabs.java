@@ -20,6 +20,7 @@ public class FMTTCreativeTabs {
                         pOutput.accept(FMTTItems.CRY_MAGIC.get());
                         pOutput.accept(FMTTItems.CRY_CHANCE.get());
                         pOutput.accept(FMTTItems.CRY_COSMOS.get());
+                        pOutput.accept(FMTTItems.CRY_EMPTY.get());
                     })
                     .build());
 

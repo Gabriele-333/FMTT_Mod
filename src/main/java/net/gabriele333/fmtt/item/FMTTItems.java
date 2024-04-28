@@ -27,6 +27,8 @@ public class FMTTItems {
 
     public static final RegistryObject<Item> CRY_COSMOS = ITEMS.register("crystal_of_cosmos",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+    public static final RegistryObject<Item> CRY_EMPTY = ITEMS.register("empty_crystal",
+            () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
 
 
