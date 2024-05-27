@@ -3,11 +3,11 @@
     "icon": {
       "item": "fmtt:fmtt_xp_item"
     },
-    "title": "30 XP",
+    "title": "FMTT XP",
     "description": "",
     "frame": "task",
     "announce_to_chat": true
-  },"parent": "fmtt:20_fmtt_xp",
+  },
   "criteria": {
     "": {
       "trigger": "minecraft:impossible"

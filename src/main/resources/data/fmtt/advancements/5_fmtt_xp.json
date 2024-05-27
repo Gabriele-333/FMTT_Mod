@@ -7,7 +7,7 @@
     "description": "",
     "frame": "task",
     "announce_to_chat": true
-  },
+  }, "parent": "fmtt:fmtt_xp",
   "criteria": {
     "": {
       "trigger": "minecraft:impossible"

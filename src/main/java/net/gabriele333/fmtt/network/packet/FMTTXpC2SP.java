@@ -1,5 +1,6 @@
 package net.gabriele333.fmtt.network.packet;
 
+import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXp;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
@@ -10,6 +11,7 @@ import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
@@ -37,14 +39,7 @@ public class FMTTXpC2SP {
             });
 
             player.getCapability(PlayerFMTTXpProvider.player_fmtt_xp).ifPresent(playerfmttxp -> {
-                int xp = playerfmttxp.getPlayerFMTTXP();
-                ResourceLocation id = null;
-
-                if (xp >= 20) {
-                    id = new ResourceLocation("fmtt", "20_fmtt_xp");
-                } else if (xp >= 10) {
-                    id = new ResourceLocation("fmtt", "10_fmtt_xp");
-                }
+                ResourceLocation id = getResourceLocation(playerfmttxp);
 
                 if (id != null) {
                     Advancement advancement = player.getServer().getAdvancements().getAdvancement(id);
@@ -62,5 +57,24 @@ public class FMTTXpC2SP {
 
         });
         return true;
+    }
+
+    @Nullable
+    private static ResourceLocation getResourceLocation(PlayerFMTTXp playerfmttxp) {
+        int xp = playerfmttxp.getPlayerFMTTXP();
+        ResourceLocation id = null;
+
+        if (xp >= 30){
+            id = new ResourceLocation("fmtt", "30_fmtt_xp");
+        } else if (xp >= 20) {
+            id = new ResourceLocation("fmtt", "20_fmtt_xp");
+        } else if (xp >= 10) {
+            id = new ResourceLocation("fmtt", "10_fmtt_xp");
+        } else if (xp >= 5) {
+            id = new ResourceLocation("fmtt", "5_fmtt_xp");
+        } else if (xp >= 1) {
+            id = new ResourceLocation("fmtt", "fmtt_xp");
+        }
+        return id;
     }
 }
