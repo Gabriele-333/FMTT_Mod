@@ -3,7 +3,7 @@
     "icon": {
       "item": "fmtt:fmtt_xp_item"
     },
-    "title": "20 XP",
+    "title": "30 XP",
     "description": "",
     "frame": "task",
     "announce_to_chat": true
