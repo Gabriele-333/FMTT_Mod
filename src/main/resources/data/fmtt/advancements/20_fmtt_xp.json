@@ -1,0 +1,16 @@
+{
+  "display": {
+    "icon": {
+      "item": "fmtt:fmtt_xp_item"
+    },
+    "title": "20 XP",
+    "description": "",
+    "frame": "task",
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
