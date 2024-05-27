@@ -11,9 +11,9 @@
       "type": "modonomicon:text",
       "anchor": "",
       "show_title_separator": true,
-      "text": "",
+      "text": "In the beginning, after the creation of the universe, everything that was created divided under the influence of five mysterious crystals \n",
       "title": "From Magic to Tech",
-      "use_markdown_in_title": false
+      "use_markdown_in_title": true
     }
   ]
 
