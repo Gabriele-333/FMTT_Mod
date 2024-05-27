@@ -2,9 +2,8 @@ package net.gabriele333.fmtt.event;
 
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXp;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
-import net.gabriele333.fmtt.commands.FMTTXpAdd;
 import net.gabriele333.fmtt.commands.FMTTXpGet;
-import net.gabriele333.fmtt.commands.FMTTXpSet;
+
 import net.gabriele333.fmtt.fmtt;
 import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -57,8 +56,8 @@ public class ModEvents {
     @SubscribeEvent
     public static void onCommandsRegister(RegisterCommandsEvent event) {
         new FMTTXpGet(event.getDispatcher());
-        new FMTTXpAdd(event.getDispatcher());
-        new FMTTXpSet(event.getDispatcher());
+        //new FMTTXpAdd(event.getDispatcher());
+        //new FMTTXpSet(event.getDispatcher());
         ConfigCommand.register(event.getDispatcher());
     }
 
