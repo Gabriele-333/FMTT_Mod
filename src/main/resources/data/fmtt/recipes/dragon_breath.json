@@ -1,0 +1,15 @@
+{
+  "type": "mekanism:nucleosynthesizing",
+  "itemInput": {"ingredient": {
+    "item": "minecraft:glass_bottle"
+  }, "amount": 1},
+  "gasInput": {
+    "gas": "mekanism:antimatter",
+    "amount": 10
+  },
+  "output": {
+    "item": "minecraft:dragon_breath",
+    "count": 1
+  },
+  "duration": 1250
+}
