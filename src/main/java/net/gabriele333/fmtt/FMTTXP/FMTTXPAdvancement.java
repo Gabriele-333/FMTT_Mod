@@ -1,4 +1,4 @@
-package net.gabriele333.fmtt.FMTTXP;
+/*package net.gabriele333.fmtt.FMTTXP;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.resources.ResourceLocation;
@@ -36,3 +36,4 @@ public class FMTTXPAdvancement {
         });
     }
 }
+*/
