@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "___",
+    "IHI",
+    "PNP"
+  ],
+  "key": {
+    "_": {
+      "item": "minecraft:quartz_slab"
+    },
+    "I": {
+      "item": "minecraft:iron_bars"
+    },
+    "H": {
+      "item": "minecraft:hay_block"
+    },
+    "P": {
+      "item": "minecraft:polished_blackstone"
+    },
+    "N": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "result": {
+    "item": "pylons:harvester_pylon",
+    "count": 1
+  }
+}
