@@ -11,8 +11,16 @@
       "type": "modonomicon:text",
       "anchor": "",
       "show_title_separator": true,
-      "text": "In the beginning, after the creation of the universe, everything that was created divided under the influence of five mysterious crystals \n",
+      "text": "In the beginning, after the creation of the universe, everything that was created divided under the influence of five crystals. No one knows where these crystals are.  \n",
       "title": "From Magic to Tech",
+      "use_markdown_in_title": true
+    },
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "show_title_separator": true,
+      "text": "Many have tried to find them or create them, but no one has succeeded. Everyone has lost hope, except a few men called ***** \n",
+      "title" : "",
       "use_markdown_in_title": true
     }
   ]
