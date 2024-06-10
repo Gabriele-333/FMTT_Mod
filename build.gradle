@@ -73,8 +73,8 @@ dependencies {
 
     compileOnly fg.deobf("com.klikli_dev:modonomicon-${minecraft_version}-common:${modonomicon_version}")
     implementation fg.deobf("com.klikli_dev:modonomicon-${minecraft_version}-forge:${modonomicon_version}") { transitive = false }
-    //compileOnly fg.deobf("curse.maven:applied-energistics-2-223794:5330978")
-    //implementation fg.deobf("curse.maven:applied-energistics-2-223794:5330978")
+    compileOnly fg.deobf("curse.maven:applied-energistics-2-223794:5330978")
+    implementation fg.deobf("curse.maven:applied-energistics-2-223794:5330978")
 
 
 // Example for how to get properties into the manifest for reading at runtime.
