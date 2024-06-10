@@ -20,6 +20,7 @@
  *
  * THIS CODE IS COPIED AND MODIFIED FROM https://github.com/AppliedEnergistics/Applied-Energistics-2/blob/main/src/main/java/appeng/client/render/BasicUnbakedModel.java
  */
+
 package net.gabriele333.fmtt.client.render;
 
 import java.util.Collection;
@@ -43,3 +44,4 @@ public interface BasicUnbakedModel extends UnbakedModel {
         }
     }
 }
+
