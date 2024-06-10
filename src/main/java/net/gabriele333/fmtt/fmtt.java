@@ -17,8 +17,10 @@
  */
 package net.gabriele333.fmtt;
 
+
 import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.block.FMTTBlock;
+import net.gabriele333.fmtt.client.render.InitModel;
 import net.gabriele333.fmtt.config.FMTTClientConfig;
 import net.gabriele333.fmtt.config.FMTTCommonConfig;
 import net.gabriele333.fmtt.item.FMTTItems;
@@ -50,6 +52,7 @@ public class fmtt {
 
     public fmtt() {
         INSTANCE = this;
+        InitModel.init();
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, COMMON_CONFIG.spec);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CLIENT_CONFIG.spec);
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
