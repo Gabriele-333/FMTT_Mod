@@ -27,6 +27,11 @@ package net.gabriele333.fmtt.client.render.compass;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
+import appeng.thirdparty.fabric.RenderContext;
+import appeng.thirdparty.fabric.MutableQuadView;
+
 import net.gabriele333.fmtt.compass.CompassManager;
 import net.gabriele333.fmtt.compass.CompassResult;
 import net.minecraftforge.client.model.IDynamicBakedModel;
@@ -91,7 +96,8 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
 
         // This is used to render a compass pointing in a specific direction when being
         // held in hand
-        // Set up the rotation around the Y-axis for the pointer
+        // Set up the rotation around the Y-axis for the pointe
+
         RenderContext.QuadTransform transform = quad -> {
             Quaternionf quaternion = new Quaternionf().rotationY(this.fallbackRotation);
             Vector3f pos = new Vector3f();
@@ -118,6 +124,7 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
         }
 
         return quads;
+
     }
 
     @Override
@@ -152,10 +159,7 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
 
     @Override
     public ItemOverrides getOverrides() {
-        /*
-         * This handles setting the rotation of the compass when being held in hand. If it's not held in hand, it'll
-         * animate using the spinning animation.
-         */
+
         return new ItemOverrides() {
             @Override
             public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel level,
@@ -178,9 +182,7 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
         };
     }
 
-    /**
-     * Gets the effective, animated rotation for the compass given the current position of the compass.
-     */
+
     public static float getAnimatedRotation(@Nullable BlockPos pos, boolean prefetch, float playerRotation) {
 
         // Only query for a meteor position if we know our own position
@@ -216,4 +218,7 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
         timeMillis %= 3000;
         return timeMillis / 3000.f * (float) Math.PI * 2;
     }
+
+
 }
+

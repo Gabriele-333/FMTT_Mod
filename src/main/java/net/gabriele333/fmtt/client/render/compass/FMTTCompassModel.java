@@ -39,16 +39,14 @@ import net.minecraft.resources.ResourceLocation;
 
 
 
-/**
- * The parent model for the compass baked model. Declares the dependencies for the base and pointer submodels mostly.
- */
+
 public class FMTTCompassModel implements BasicUnbakedModel {
 
     private static final ResourceLocation MODEL_BASE = new ResourceLocation(
-            "fmtt:item/meteorite_compass_base");
+            "fmtt:item/fmtt_compass_base");
 
     private static final ResourceLocation MODEL_POINTER = new ResourceLocation(
-            "fmtt:item/meteorite_compass_pointer");
+            "fmtt:item/fmtt_compass_pointer");
 
     @Nullable
     @Override
@@ -65,3 +63,4 @@ public class FMTTCompassModel implements BasicUnbakedModel {
     }
 
 }
+
