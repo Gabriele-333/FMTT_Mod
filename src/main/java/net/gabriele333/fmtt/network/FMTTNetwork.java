@@ -33,7 +33,7 @@ public class FMTTNetwork {
     private static SimpleChannel INSTANCE;
 
     private static int packetId = 0;
-    private static int id() {
+    public static int id() {
         return packetId++;
     }
 
