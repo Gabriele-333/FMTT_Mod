@@ -17,7 +17,9 @@
  */
 package net.gabriele333.fmtt.item;
 
+import net.gabriele333.fmtt.block.FMTTBlock;
 import net.gabriele333.fmtt.fmtt;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -59,6 +61,8 @@ public class FMTTItems {
     public static final RegistryObject<Item> FMTT_ITEM = ITEMS.register("fmtt_item",
             ()-> new Item(new Item.Properties())
     );
+
+    public static final RegistryObject<BlockItem> FMTT_BLOCK = ITEMS.register("fmtt_block",  () -> new BlockItem(FMTTBlock.FMTT_BLOCK.get(), new Item.Properties() ));
 
 
     public static void register(IEventBus eventBus) {
