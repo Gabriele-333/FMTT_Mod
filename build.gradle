@@ -5,7 +5,7 @@ plugins {
     id 'net.neoforged.gradle' version '[6.0.18,6.2)'
     id 'org.spongepowered.mixin' version '0.7.+'
 }
-
+apply plugin: 'org.spongepowered.mixin'
 
 group = mod_version
 version = mod_version + "-" + minecraft_version
@@ -15,7 +15,9 @@ mod_version = "${mod_version}." + (System.getenv("BUILD_NUMBER") ?: "9999")
 version = "${minecraft_version}-${mod_version}"
 println "Starting build of ${archivesBaseName}, Version: ${mod_version}"
 println "Using Forge: ${neo_version}, for Minecraft: ${minecraft_version}"
-
+def commonRunProperties = {
+    property 'mixin.env.remapRefMap', 'true'
+}
 base {
     archivesName = mod_id.toUpperCase()
 }
@@ -30,14 +32,17 @@ minecraft {
 
     runs {
         client {
+            with commonRunProperties
             workingDirectory file('run')
             mods { fmtt { source sourceSets.main } }
         }
         server {
+            with commonRunProperties
             workingDirectory file('run')
             mods { fmtt { source sourceSets.main } }
         }
         data {
+            with commonRunProperties
             workingDirectory file('run')
             args '--mod', 'fmtt', '--all', '--output', file("src/main/generated"), '--existing', file("src/main/resources")
             mods { fmtt { source sourceSets.main } }
@@ -67,6 +72,7 @@ repositories {
     }
 }
 
+
 dependencies {
 
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
@@ -75,6 +81,7 @@ dependencies {
     implementation fg.deobf("com.klikli_dev:modonomicon-${minecraft_version}-forge:${modonomicon_version}") { transitive = false }
     compileOnly fg.deobf("curse.maven:applied-energistics-2-223794:5330978")
     implementation fg.deobf("curse.maven:applied-energistics-2-223794:5330978")
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
 
 // Example for how to get properties into the manifest for reading at runtime.
@@ -87,6 +94,7 @@ dependencies {
                     "Implementation-Title"    : project.name,
                     "Implementation-Version"  : project.jar.archiveVersion,
                     "Implementation-Vendor"   : mod_authors,
+                    "MixinConfigs"          : "fmtt.mixins.json"
             ])
         }
 
@@ -118,4 +126,9 @@ dependencies {
         }
     }
 
+}
+
+mixin {
+
+    add sourceSets.main, "fmtt.mixins.refmap.json"
 }
