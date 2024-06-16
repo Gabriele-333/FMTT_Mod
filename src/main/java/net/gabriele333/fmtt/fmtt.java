@@ -72,7 +72,7 @@ public class fmtt {
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-        event.enqueueWork(FMTTNetwork::register);
+        FMTTNetwork.init(new ResourceLocation(MOD_ID, "main"));
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
