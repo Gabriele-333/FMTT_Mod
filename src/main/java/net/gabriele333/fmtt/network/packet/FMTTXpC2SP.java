@@ -20,19 +20,22 @@ package net.gabriele333.fmtt.network.packet;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXp;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
 import net.gabriele333.fmtt.item.FMTTItems;
+import net.gabriele333.fmtt.network.BasePacket;
 import net.gabriele333.fmtt.network.FMTTNetwork;
+import net.gabriele333.fmtt.server.services.CompassService;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ChunkPos;
 import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Supplier;
 
-public class FMTTXpC2SP {
+public class FMTTXpC2SP extends BasePacket {
     public FMTTXpC2SP() {
 
     }
@@ -41,39 +44,33 @@ public class FMTTXpC2SP {
     public  void toBytes(FriendlyByteBuf buf) {
     }
 
-    public boolean handle(Supplier<NetworkEvent.Context> supplier) {
-        NetworkEvent.Context context = supplier.get();
-        context.enqueueWork(() ->{
-            //FMTTNetwork.register();
-            ServerPlayer player = context.getSender();
-            assert player != null;
-            ItemStack itemStack = player.getMainHandItem();
-            if (itemStack.getItem() == FMTTItems.FMTT_XP_ITEM.get()) {
-                itemStack.shrink(1);
-            }
-            player.getCapability(PlayerFMTTXpProvider.player_fmtt_xp).ifPresent(playerfmttxp -> {
-                playerfmttxp.addPlayerFMTTXP(1);
-            });
+    @Override
+    public void serverPacketData(ServerPlayer player) {
+        assert player != null;
+        ItemStack itemStack = player.getMainHandItem();
+        if (itemStack.getItem() == FMTTItems.FMTT_XP_ITEM.get()) {
+            itemStack.shrink(1);
+        }
+        player.getCapability(PlayerFMTTXpProvider.player_fmtt_xp).ifPresent(playerfmttxp -> {
+            playerfmttxp.addPlayerFMTTXP(1);
+        });
 
-            player.getCapability(PlayerFMTTXpProvider.player_fmtt_xp).ifPresent(playerfmttxp -> {
-                ResourceLocation id = getResourceLocation(playerfmttxp);
+        player.getCapability(PlayerFMTTXpProvider.player_fmtt_xp).ifPresent(playerfmttxp -> {
+            ResourceLocation id = getResourceLocation(playerfmttxp);
 
-                if (id != null) {
-                    Advancement advancement = player.getServer().getAdvancements().getAdvancement(id);
-                    if (advancement != null) {
-                        PlayerAdvancements playerAdvancements = player.getAdvancements();
-                        if (!playerAdvancements.getOrStartProgress(advancement).isDone()) {
-                            for (String criterion : playerAdvancements.getOrStartProgress(advancement).getRemainingCriteria()) {
-                                playerAdvancements.award(advancement, criterion);
-                            }
+            if (id != null) {
+                Advancement advancement = player.getServer().getAdvancements().getAdvancement(id);
+                if (advancement != null) {
+                    PlayerAdvancements playerAdvancements = player.getAdvancements();
+                    if (!playerAdvancements.getOrStartProgress(advancement).isDone()) {
+                        for (String criterion : playerAdvancements.getOrStartProgress(advancement).getRemainingCriteria()) {
+                            playerAdvancements.award(advancement, criterion);
                         }
                     }
                 }
-            });
-
-
+            }
         });
-        return true;
+
     }
 
     @Nullable
