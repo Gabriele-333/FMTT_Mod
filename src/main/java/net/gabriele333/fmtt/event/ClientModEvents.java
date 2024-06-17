@@ -64,15 +64,13 @@ public class ClientModEvents {
             if (event.getSide() == LogicalSide.CLIENT) {
                 ItemStack itemStack = event.getItemStack();
                 if (itemStack.getItem() == FMTTItems.FMTT_XP_ITEM.get()) {
-                    FMTTNetwork.sendToServer(new FMTTXpC2SP());
+                    FMTTNetwork.instance().sendToServer(new FMTTXpC2SP());
                     event.setCancellationResult(InteractionResult.SUCCESS);
                     event.setCanceled(true);
                 }
             }
+
+
         }
-
-
-
-
     }
 }
