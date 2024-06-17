@@ -17,32 +17,32 @@
  */
 package net.gabriele333.fmtt.network.packet;
 
+import io.netty.buffer.Unpooled;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXp;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.BasePacket;
-import net.gabriele333.fmtt.network.FMTTNetwork;
-import net.gabriele333.fmtt.server.services.CompassService;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.PlayerAdvancements;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ChunkPos;
-import net.minecraftforge.network.NetworkEvent;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.function.Supplier;
+
 
 public class FMTTXpC2SP extends BasePacket {
-    public FMTTXpC2SP() {
 
+    public FMTTXpC2SP(FriendlyByteBuf buf) {}
+
+    public FMTTXpC2SP() {
+        final FriendlyByteBuf data = new FriendlyByteBuf(Unpooled.buffer());
+        data.writeInt(this.getPacketID());
+        this.configureWrite(data);
     }
-    public FMTTXpC2SP(FriendlyByteBuf buf) {
-    }
-    public  void toBytes(FriendlyByteBuf buf) {
-    }
+
+
 
     @Override
     public void serverPacketData(ServerPlayer player) {
