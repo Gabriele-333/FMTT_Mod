@@ -69,7 +69,7 @@ public class CompassManager {
     }
 
     private void requestUpdate(CompassRequest r) {
-        FMTTNetwork.sendToServer(new CompassRequestPacket(r.attunement, r.cx, r.cz, r.cdy));
+        FMTTNetwork.instance().sendToServer(new CompassRequestPacket(r.attunement, r.cx, r.cz, r.cdy));
     }
 
     private static class CompassRequest {
