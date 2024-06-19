@@ -1,7 +1,6 @@
 {
   "pack": {
-    "description": "fmtt_mod_1_20_1 resources",
-    "pack_format": 15,
-    "forge:server_data_pack_format": 12
+    "description": "fmtt_mod_1_21 resources",
+    "pack_format": 34
   }
 }

@@ -16,6 +16,13 @@ group = mod_group_id
 
 repositories {
     mavenLocal()
+    maven {
+        name "Modmaven"
+        url "https://modmaven.dev/"
+        content {
+            includeGroup 'appeng'
+        }
+    }
 }
 
 base {
@@ -88,6 +95,8 @@ configurations {
 dependencies {
 
     implementation "net.neoforged:neoforge:${neo_version}"
+    compileOnly "appeng:appliedenergistics2-neoforge:19.0.4-alpha"
+    runtimeOnly "appeng:appliedenergistics2-neoforge:19.0.4-alpha"
 
 
 
