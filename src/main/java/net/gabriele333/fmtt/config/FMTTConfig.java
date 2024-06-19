@@ -17,62 +17,26 @@
  */
 package net.gabriele333.fmtt.config;
 
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.ForgeConfigSpec;
 
-public class FMTTClientConfig {
+import net.neoforged.neoforge.common.ModConfigSpec;
 
-    public final MiscSettings misc;
-    public final ForgeConfigSpec spec;
+public class FMTTConfig {
 
-    public FMTTClientConfig() {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
-        this.misc = new MiscSettings(builder);
-        this.spec = builder.build();
+    public FMTTConfig() {
+        final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
     }
+
     public static class MiscSettings {
-        public final BooleanValue NewVersionMsg;
-        public static ForgeConfigSpec.ConfigValue<String> Version = null;
+        public final ModConfigSpec.BooleanValue NewVersionMsg;
+        public static ModConfigSpec.ConfigValue<String> Version;
 
-
-        public MiscSettings(ForgeConfigSpec.Builder builder) {
+        public MiscSettings(ModConfigSpec.Builder builder) {
             builder.comment("Misc Settings").push("misc");
 
             this.NewVersionMsg = builder.comment("Receive a message in chat when a new version of the Modpack is released")
                     .define("NewVersionMsg", true);
             Version = builder.comment("The version of the modpack    !DON'T TOUCH!")
-                    .define("Version", "1.0.0");
-
-            builder.pop();
+                    .define("Version", "1.21"); // Update version to 1.21
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*public static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
-    public static final ForgeConfigSpec SPEC;
-    public static final ForgeConfigSpec.ConfigValue<String> Version;
-
-    static {
-        BUILDER.push("FMTT config file");
-        Version = BUILDER.comment("This is the version of the modpack").define("Version", "1.2.45");
-
-        BUILDER.pop();
-        SPEC = BUILDER.build();
-    }
-*/
 }

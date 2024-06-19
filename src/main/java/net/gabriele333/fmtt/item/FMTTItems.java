@@ -22,35 +22,35 @@ import net.gabriele333.fmtt.fmtt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 public class FMTTItems {
-    public static final DeferredRegister<Item> ITEMS =
-            DeferredRegister.create(ForgeRegistries.ITEMS, fmtt.MOD_ID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(fmtt.MOD_ID);
+
 
     //Crystals items
-    public static final RegistryObject<Item> CRY_TIME = ITEMS.register("crystal_of_time",
+    public static final Supplier<Item> CRY_TIME = ITEMS.register("crystal_of_time",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> CRY_TECH = ITEMS.register("crystal_of_tech",
+    public static final Supplier<Item> CRY_TECH = ITEMS.register("crystal_of_tech",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> CRY_MAGIC = ITEMS.register("crystal_of_magic",
+    public static final Supplier<Item> CRY_MAGIC = ITEMS.register("crystal_of_magic",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> CRY_CHANCE = ITEMS.register("crystal_of_chance",
+    public static final Supplier<Item> CRY_CHANCE = ITEMS.register("crystal_of_chance",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
 
-    public static final RegistryObject<Item> CRY_COSMOS = ITEMS.register("crystal_of_cosmos",
+    public static final Supplier<Item> CRY_COSMOS = ITEMS.register("crystal_of_cosmos",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
-    public static final RegistryObject<Item> CRY_EMPTY = ITEMS.register("empty_crystal",
+    public static final Supplier<Item> CRY_EMPTY = ITEMS.register("empty_crystal",
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
-    public static final RegistryObject<Item> FMTT_XP_ITEM = ITEMS.register("fmtt_xp_item",
+    public static final Supplier<Item> FMTT_XP_ITEM = ITEMS.register("fmtt_xp_item",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
-    public static final RegistryObject<Item> FMTT_COMPASS = ITEMS.register("fmtt_compass",
+    public static final Supplier<Item> FMTT_COMPASS = ITEMS.register("fmtt_compass",
             () -> new Item(new Item.Properties().rarity(Rarity.COMMON).fireResistant()));
 
 
@@ -58,11 +58,11 @@ public class FMTTItems {
 
 
 
-    public static final RegistryObject<Item> FMTT_ITEM = ITEMS.register("fmtt_item",
+    public static final Supplier<Item> FMTT_ITEM = ITEMS.register("fmtt_item",
             ()-> new Item(new Item.Properties())
     );
 
-    public static final RegistryObject<BlockItem> FMTT_BLOCK = ITEMS.register("fmtt_block",  () -> new BlockItem(FMTTBlock.FMTT_BLOCK.get(), new Item.Properties() ));
+    public static final Supplier<BlockItem> FMTT_BLOCK = ITEMS.register("fmtt_block",  () -> new BlockItem(FMTTBlock.FMTT_BLOCK.get(), new Item.Properties() ));
 
 
     public static void register(IEventBus eventBus) {

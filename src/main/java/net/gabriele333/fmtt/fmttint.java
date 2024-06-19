@@ -16,6 +16,7 @@ package net.gabriele333.fmtt;/*
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 
+
 import net.minecraft.resources.ResourceLocation;
 
 public interface fmttint {
@@ -23,6 +24,6 @@ public interface fmttint {
     String MOD_ID = fmtt.MOD_ID;
 
     static ResourceLocation makeId(String id) {
-        return new ResourceLocation(MOD_ID, id);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
     }
 }
