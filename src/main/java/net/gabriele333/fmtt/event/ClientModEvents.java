@@ -16,23 +16,24 @@
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 package net.gabriele333.fmtt.event;
-//import net.gabriele333.fmtt.FMTTXP.FMTTXPAdvancement;
 import net.gabriele333.fmtt.client.ModpackVersion;
-import net.gabriele333.fmtt.config.FMTTClientConfig;
+import net.gabriele333.fmtt.config.FMTTConfig;
 import net.gabriele333.fmtt.fmtt;
 import net.gabriele333.fmtt.item.FMTTItems;
-import net.gabriele333.fmtt.network.FMTTNetwork;
-import net.gabriele333.fmtt.network.packet.FMTTXpC2SP;
+import net.gabriele333.fmtt.network.ServerboundPacket;
+import net.gabriele333.fmtt.network.serverbound.FMTTXpPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.event.entity.player.PlayerEvent;
-import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.eventbus.api.EventPriority;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.LogicalSide;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.LogicalSide;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
+import net.neoforged.neoforge.network.PacketDistributor;
+
 
 import java.util.Objects;
 
@@ -41,7 +42,7 @@ public class ClientModEvents {
     private static boolean versionMessageSent = false;
 
 
-    @Mod.EventBusSubscriber(modid = fmtt.MOD_ID, value = Dist.CLIENT)
+    @EventBusSubscriber(modid = fmtt.MOD_ID, value = Dist.CLIENT)
     public static class ForgeEvents {
 
 
@@ -49,7 +50,7 @@ public class ClientModEvents {
         @SubscribeEvent(priority = EventPriority.LOW)
         public static void onPlayerJoinClient(PlayerEvent.PlayerLoggedInEvent event) {
             try {
-                if (!versionMessageSent && !Objects.equals(ModpackVersion.main(), FMTTClientConfig.MiscSettings.Version.get())) {
+                if (!versionMessageSent && !Objects.equals(ModpackVersion.main(), FMTTConfig.MiscSettings.Version.get())) {
                     event.getEntity().sendSystemMessage(Component.literal("§bThere is a newer version of the modpack: " + ModpackVersion.main()));
                     versionMessageSent = true;
                 }
@@ -64,7 +65,8 @@ public class ClientModEvents {
             if (event.getSide() == LogicalSide.CLIENT) {
                 ItemStack itemStack = event.getItemStack();
                 if (itemStack.getItem() == FMTTItems.FMTT_XP_ITEM.get()) {
-                    FMTTNetwork.instance().sendToServer(new FMTTXpC2SP());
+                    ServerboundPacket message = new FMTTXpPacket();
+                    PacketDistributor.sendToServer(message);
                     event.setCancellationResult(InteractionResult.SUCCESS);
                     event.setCanceled(true);
                 }
