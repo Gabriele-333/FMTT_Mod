@@ -15,49 +15,33 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
+
 package net.gabriele333.fmtt.FMTTXP;
 
-import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.CapabilityManager;
-import net.minecraftforge.common.capabilities.CapabilityToken;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.INBTSerializable;
-import net.minecraftforge.common.util.LazyOptional;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public class PlayerFMTTXpProvider implements ICapabilityProvider, INBTSerializable<CompoundTag> {
-    public static Capability<PlayerFMTTXp> player_fmtt_xp = CapabilityManager.get(new CapabilityToken<PlayerFMTTXp>() {});
-    private PlayerFMTTXp playerfmttxp = null;
-    private final LazyOptional<PlayerFMTTXp> optional = LazyOptional.of(this::createplayerfmttxp);
-    private PlayerFMTTXp createplayerfmttxp() {
-        if(this.playerfmttxp == null) {
-            this.playerfmttxp = new PlayerFMTTXp();
-        }
-        return this.playerfmttxp;
-    }
+import com.mojang.serialization.Codec;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.attachment.AttachmentType;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
+import java.util.function.Supplier;
 
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if(cap == player_fmtt_xp) {
-            return optional.cast();
-        }
-        return LazyOptional.empty();
-    }
+import static net.gabriele333.fmtt.fmtt.MOD_ID;
 
-    @Override
-    public CompoundTag serializeNBT() {
-        CompoundTag nbt = new CompoundTag();
-        createplayerfmttxp().saveNBTData(nbt);
-        return nbt;
-    }
+public class PlayerFMTTXpProvider {
+    // Create the DeferredRegister for attachment types
+    private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 
-    @Override
-    public void deserializeNBT(CompoundTag nbt) {
-        createplayerfmttxp().loadNBTData(nbt);
+    // Serialization via INBTSerializable
 
+    // Serialization via codec
+    public static final Supplier<AttachmentType<Integer>> PLAYERFMTTXP = ATTACHMENT_TYPES.register(
+            "playerfmttxp", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+    // No serialization
+
+    public static void register(IEventBus eventBus) {
+        ATTACHMENT_TYPES.register(eventBus);
     }
 }
