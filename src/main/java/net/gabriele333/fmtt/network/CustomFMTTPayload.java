@@ -1,4 +1,4 @@
-/*
+package net.gabriele333.fmtt.network;/*
  * This file is part of From Magic To Tech.
  * Copyright (c) 2024, Gabriele_333, All rights reserved.
  *
@@ -15,15 +15,13 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
-package net.gabriele333.fmtt.config;
 
-import net.minecraftforge.common.ForgeConfigSpec;
 
-public class FMTTCommonConfig {
-    public final ForgeConfigSpec spec;
+import net.gabriele333.fmtt.fmttint;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-    public FMTTCommonConfig() {
-        ForgeConfigSpec.Builder builder = new ForgeConfigSpec.Builder();
-        this.spec = builder.build();
+public interface CustomFMTTPayload extends CustomPacketPayload {
+    static <T extends CustomPacketPayload> CustomPacketPayload.Type<T> createType(String name) {
+        return new CustomPacketPayload.Type<>(fmttint.makeId(name));
     }
 }

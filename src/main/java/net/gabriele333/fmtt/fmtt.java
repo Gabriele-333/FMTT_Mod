@@ -66,6 +66,7 @@ public class fmtt {
         modEventBus.addListener(FMTTNetwork::init);
 
         LOGGER.info("ciao");
+        LOGGER.info("Dm me on Discord if you find this");
         FMTTItems.register(modEventBus);
         FMTTBlock.register(modEventBus);
         PlayerFMTTXpProvider.register(modEventBus);
