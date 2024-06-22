@@ -44,4 +44,3 @@ public interface BasicUnbakedModel extends UnbakedModel {
         }
     }
 }
-
