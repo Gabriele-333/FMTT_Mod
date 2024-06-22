@@ -18,7 +18,9 @@
 package net.gabriele333.fmtt;
 
 
+
 import com.mojang.logging.LogUtils;
+import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
 import net.gabriele333.fmtt.block.FMTTBlock;
 import net.gabriele333.fmtt.client.render.InitModel;
 import net.gabriele333.fmtt.config.FMTTConfig;
@@ -61,9 +63,12 @@ public class fmtt {
 
 
         //IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        modEventBus.addListener(FMTTNetwork::init);
+
         LOGGER.info("ciao");
         FMTTItems.register(modEventBus);
         FMTTBlock.register(modEventBus);
+        PlayerFMTTXpProvider.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         NeoForge.EVENT_BUS.register(this);
 
@@ -74,13 +79,13 @@ public class fmtt {
 
     }
 
-
 /*
+
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         FMTTNetwork.init(ResourceLocation.fromNamespaceAndPath(MOD_ID, "main"));
-    }
-*/
+    }*/
+
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
     }
 
