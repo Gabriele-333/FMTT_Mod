@@ -43,6 +43,7 @@ public class FMTTCreativeTabs {
                         pOutput.accept(FMTTItems.CRY_EMPTY.get());
                         pOutput.accept(FMTTItems.FMTT_XP_ITEM.get());
                         pOutput.accept(FMTTItems.FMTT_COMPASS.get());
+                        pOutput.accept(FMTTItems.STAR_PIECE_BLOCK.get());
                     })
                     .build());
 
