@@ -19,51 +19,30 @@ package net.gabriele333.fmtt;
 
 
 
+
+
 import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
-import net.gabriele333.fmtt.block.FMTTBlock;
-import net.gabriele333.fmtt.client.render.InitModel;
-import net.gabriele333.fmtt.config.FMTTConfig;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
-import net.minecraft.resources.ResourceLocation;
 
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.ModLoadingContext;
-import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
-import static net.gabriele333.fmtt.FMTTCreativeTabs.CREATIVE_MODE_TABS;
+import static net.gabriele333.fmtt.item.FMTTCreativeTabs.CREATIVE_MODE_TABS;
 import static net.gabriele333.fmtt.block.FMTTBlock.BLOCKS;
 
 
-@Mod(fmtt.MOD_ID)
-public class fmtt {
+
+public abstract class fmtt {
     public static final String MOD_ID = "fmtt";
     public static final Logger LOGGER = LogUtils.getLogger();
     public static fmtt INSTANCE;
 
 
-
-    public fmtt(IEventBus modEventBus, ModContainer container) {
+    public fmtt(IEventBus modEventBus) {
         INSTANCE = this;
-        InitModel.init();
 
-        //container.registerConfig(ModConfig.Type.COMMON, FMTTConfig);
-
-
-        //IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(FMTTNetwork::init);
 
         LOGGER.info("ciao");
@@ -72,35 +51,8 @@ public class fmtt {
         PlayerFMTTXpProvider.register(modEventBus);
         BLOCKS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
-        NeoForge.EVENT_BUS.register(this);
+        modEventBus.addListener(FMTTNetwork::init);
 
 
-        //modEventBus.addListener(this::commonSetup);
-        //MinecraftForge.EVENT_BUS.register(this);
-        modEventBus.addListener(this::addCreative);
-
-    }
-
-/*
-
-    private void commonSetup(final FMLCommonSetupEvent event)
-    {
-        FMTTNetwork.init(ResourceLocation.fromNamespaceAndPath(MOD_ID, "main"));
-    }*/
-
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-    }
-
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-    }
-
-
-    @EventBusSubscriber(modid = MOD_ID, bus = EventBusSubscriber.Bus.MOD)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-        }
     }
 }
