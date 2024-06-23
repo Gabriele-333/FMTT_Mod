@@ -18,6 +18,7 @@
 package net.gabriele333.fmtt.item;
 
 import net.gabriele333.fmtt.block.FMTTBlock;
+import net.gabriele333.fmtt.block.StarPieceBlock;
 import net.gabriele333.fmtt.fmtt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -62,7 +63,7 @@ public class FMTTItems {
             ()-> new Item(new Item.Properties())
     );
 
-    public static final Supplier<BlockItem> FMTT_BLOCK = ITEMS.register("fmtt_block",  () -> new BlockItem(FMTTBlock.FMTT_BLOCK.get(), new Item.Properties() ));
+    public static final Supplier<BlockItem> STAR_PIECE_BLOCK = ITEMS.register("star_piece_block",  () -> new BlockItem(StarPieceBlock.STAR_PIECE_BLOCK.get(), new Item.Properties() ));
 
 
     public static void register(IEventBus eventBus) {
