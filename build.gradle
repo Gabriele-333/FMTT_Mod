@@ -97,6 +97,8 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     compileOnly "appeng:appliedenergistics2-neoforge:19.0.4-alpha"
     runtimeOnly "appeng:appliedenergistics2-neoforge:19.0.4-alpha"
+   // annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
 
 
 
@@ -163,3 +165,8 @@ idea {
         downloadJavadoc = true
     }
 }
+/*mixin {
+    add sourceSets.main, "fmtt.mixins.refmap.json"
+    config 'fmtt.mixins.json'
+
+}*/
