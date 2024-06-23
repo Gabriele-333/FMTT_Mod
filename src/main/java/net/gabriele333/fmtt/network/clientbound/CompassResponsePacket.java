@@ -44,7 +44,7 @@ public record CompassResponsePacket(long attunement,
             CompassResponsePacket::write,
             CompassResponsePacket::decode);
 
-    public static final Type<CompassResponsePacket> TYPE = CustomFMTTPayload.createType("compass_response");
+    public static final Type<CompassResponsePacket> TYPE = CustomFMTTPayload.createType("fmtt_compass_response");
 
     @Override
     public Type<CompassResponsePacket> type() {

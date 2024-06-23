@@ -28,6 +28,7 @@ public class fmttBootstrap {
                 new fmttClient(modEventBus);
             }
             case DEDICATED_SERVER -> {
+                new fmttServer(modEventBus);
 
             }
         }
