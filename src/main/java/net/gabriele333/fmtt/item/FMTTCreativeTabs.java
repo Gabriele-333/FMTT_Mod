@@ -15,9 +15,8 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
-package net.gabriele333.fmtt;
+package net.gabriele333.fmtt.item;
 
-import net.gabriele333.fmtt.item.FMTTItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
