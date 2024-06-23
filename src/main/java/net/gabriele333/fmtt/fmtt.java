@@ -45,6 +45,7 @@ import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 
 import static net.gabriele333.fmtt.FMTTCreativeTabs.CREATIVE_MODE_TABS;
+import static net.gabriele333.fmtt.block.FMTTBlock.BLOCKS;
 
 
 @Mod(fmtt.MOD_ID)
@@ -68,8 +69,8 @@ public class fmtt {
         LOGGER.info("ciao");
         LOGGER.info("Dm me on Discord if you find this");
         FMTTItems.register(modEventBus);
-        FMTTBlock.register(modEventBus);
         PlayerFMTTXpProvider.register(modEventBus);
+        BLOCKS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         NeoForge.EVENT_BUS.register(this);
 
