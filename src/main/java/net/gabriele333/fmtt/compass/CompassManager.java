@@ -24,8 +24,11 @@ package net.gabriele333.fmtt.compass;/*
 
 
 
-import net.gabriele333.fmtt.network.FMTTNetwork;
-//import net.gabriele333.fmtt.network.serverbound.CompassRequestPacket;
+
+import net.gabriele333.fmtt.network.ServerboundPacket;
+import net.gabriele333.fmtt.network.serverbound.CompassRequestPacket;
+import net.neoforged.neoforge.network.PacketDistributor;
+
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -69,7 +72,8 @@ public class CompassManager {
     }
 
     private void requestUpdate(CompassRequest r) {
-        //FMTTNetwork.instance().sendToServer(new CompassRequestPacket(r.attunement, r.cx, r.cz, r.cdy));
+        ServerboundPacket message = new CompassRequestPacket(r.attunement, r.cx, r.cz, r.cdy);
+        PacketDistributor.sendToServer(message);
     }
 
     private static class CompassRequest {
