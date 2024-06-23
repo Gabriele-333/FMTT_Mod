@@ -1,4 +1,4 @@
-package net.gabriele333.fmtt.network.packet;/*
+package net.gabriele333.fmtt.network;/*
  * This file is part of From Magic To Tech.
  * Copyright (c) 2024, Gabriele_333, All rights reserved.
  *
@@ -14,7 +14,22 @@ package net.gabriele333.fmtt.network.packet;/*
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
+
+ COPIED AND MODIFIED FROM: https://github.com/AppliedEnergistics/Applied-Energistics-2/blob/main/src/main/java/appeng/core/network/ClientboundPacket.java
  */
 
-public class CompassRequestPacket {
+import net.minecraft.world.entity.player.Player;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
+
+
+public interface ClientboundPacket extends CustomFMTTPayload {
+    default void handleOnClient(IPayloadContext context) {
+        context.enqueueWork(() -> {
+            handleOnClient(context.player());
+        });
+    }
+
+    default void handleOnClient(Player player) {
+        throw new AbstractMethodError("Unimplemented method on " + getClass());
+    }
 }
