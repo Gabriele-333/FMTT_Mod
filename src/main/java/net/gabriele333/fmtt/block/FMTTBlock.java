@@ -26,15 +26,18 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 
-public class FMTTBlock {
+public abstract class FMTTBlock extends Block {
+    protected FMTTBlock(Properties props) {
+        super(props);
+    }
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(fmtt.MOD_ID);
 
+    public static final DeferredBlock<Block> STAR_PIECE_BLOCK = BLOCKS.registerBlock("star_piece_block", StarPieceBlock::new, BlockBehaviour.Properties.of());
 
 
-    public static final DeferredBlock<Block> FMTT_BLOCK = BLOCKS.registerBlock("fmtt_block", Block::new, BlockBehaviour.Properties.of());
 
 
-    public static void register(IEventBus eventBus) {
-        BLOCKS.register(eventBus);
-    }
+
+
+
 }
