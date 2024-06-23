@@ -14,60 +14,52 @@
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
+  *
+ *
+ * THIS CODE IS COPIED AND MODIFIED FROM: https://github.com/AppliedEnergistics/Applied-Energistics-2/blob/main/src/main/java/appeng/core/network/InitNetwork.java
  */
 package net.gabriele333.fmtt.network;
 
 
-import net.gabriele333.fmtt.fmtt;
+import net.gabriele333.fmtt.network.clientbound.CompassResponsePacket;
+import net.gabriele333.fmtt.network.serverbound.CompassRequestPacket;
+import net.gabriele333.fmtt.network.serverbound.FMTTXpPacket;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 
-import net.gabriele333.fmtt.network.packet.FMTTXpC2SP;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.network.NetworkDirection;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+
+import static net.gabriele333.fmtt.fmtt.LOGGER;
+import static net.gabriele333.fmtt.fmtt.MOD_ID;
 
 
 public class FMTTNetwork {
-    private static SimpleChannel INSTANCE;
+    public static void init(RegisterPayloadHandlersEvent event) {
+        var registrar = event.registrar(MOD_ID);
 
-    private static int packetId = 0;
-    public static int id() {
-        return packetId++;
-    }
+        // Clientbound
+        clientbound(registrar, CompassResponsePacket.TYPE, CompassResponsePacket.STREAM_CODEC);
 
 
-    public static void register() {
-        SimpleChannel net = NetworkRegistry.ChannelBuilder
-                .named(new ResourceLocation(fmtt.MOD_ID, "fmtt_net"))
-                .networkProtocolVersion(() -> "1.0")
-                .clientAcceptedVersions(s -> true)
-                .serverAcceptedVersions(s -> true)
-                .simpleChannel();
-
-        INSTANCE = net;
-
-        net.messageBuilder(FMTTXpC2SP.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(FMTTXpC2SP::new)
-                .encoder(FMTTXpC2SP::toBytes)
-                .consumerMainThread(FMTTXpC2SP::handle)
-                .add();
-        /*net.messageBuilder(FMTTXpRequestC2SP.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(FMTTXpRequestC2SP::new)
-                .encoder(FMTTXpRequestC2SP::toBytes)
-                .consumerMainThread(FMTTXpRequestC2SP::handle)
-                .add();
-*/
+        // Serverbound
+        serverbound(registrar, FMTTXpPacket.TYPE, FMTTXpPacket.STREAM_CODEC);
+        serverbound(registrar, CompassRequestPacket.TYPE, CompassRequestPacket.STREAM_CODEC);
 
     }
 
-    public static <MSG> void sendToServer(MSG message) {
-        INSTANCE.sendToServer(message);
+    private static <T extends ClientboundPacket> void clientbound(PayloadRegistrar registrar,
+                                                                  CustomPacketPayload.Type<T> type,
+                                                                  StreamCodec<RegistryFriendlyByteBuf, T> codec) {
+        registrar.playToClient(type, codec, ClientboundPacket::handleOnClient);
     }
 
-    public static <MSG> void sendToPlayer(MSG message, ServerPlayer player) {
-        INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), message);
+    private static <T extends ServerboundPacket> void serverbound(PayloadRegistrar registrar,
+                                                                  CustomPacketPayload.Type<T> type,
+                                                                  StreamCodec<RegistryFriendlyByteBuf, T> codec) {
+        registrar.playToServer(type, codec, ServerboundPacket::handleOnServer);
+        LOGGER.info("Belin 2");
     }
+
 }
-
