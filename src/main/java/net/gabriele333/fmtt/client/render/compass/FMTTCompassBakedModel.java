@@ -34,9 +34,10 @@ import appeng.thirdparty.fabric.MutableQuadView;
 
 import net.gabriele333.fmtt.compass.CompassManager;
 import net.gabriele333.fmtt.compass.CompassResult;
-import net.minecraftforge.client.model.IDynamicBakedModel;
-import net.minecraftforge.client.model.data.ModelData;
-import net.minecraftforge.client.model.data.ModelProperty;
+
+import net.neoforged.neoforge.client.model.IDynamicBakedModel;
+import net.neoforged.neoforge.client.model.data.ModelData;
+import net.neoforged.neoforge.client.model.data.ModelProperty;
 import org.jetbrains.annotations.Nullable;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
@@ -96,8 +97,7 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
 
         // This is used to render a compass pointing in a specific direction when being
         // held in hand
-        // Set up the rotation around the Y-axis for the pointe
-
+        // Set up the rotation around the Y-axis for the pointer
         RenderContext.QuadTransform transform = quad -> {
             Quaternionf quaternion = new Quaternionf().rotationY(this.fallbackRotation);
             Vector3f pos = new Vector3f();
@@ -124,7 +124,6 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
         }
 
         return quads;
-
     }
 
     @Override
@@ -159,7 +158,10 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
 
     @Override
     public ItemOverrides getOverrides() {
-
+        /*
+         * This handles setting the rotation of the compass when being held in hand. If it's not held in hand, it'll
+         * animate using the spinning animation.
+         */
         return new ItemOverrides() {
             @Override
             public BakedModel resolve(BakedModel originalModel, ItemStack stack, @Nullable ClientLevel level,
@@ -182,7 +184,9 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
         };
     }
 
-
+    /**
+     * Gets the effective, animated rotation for the compass given the current position of the compass.
+     */
     public static float getAnimatedRotation(@Nullable BlockPos pos, boolean prefetch, float playerRotation) {
 
         // Only query for a meteor position if we know our own position
@@ -218,7 +222,4 @@ public class FMTTCompassBakedModel implements IDynamicBakedModel {
         timeMillis %= 3000;
         return timeMillis / 3000.f * (float) Math.PI * 2;
     }
-
-
 }
-

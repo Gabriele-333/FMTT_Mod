@@ -42,16 +42,16 @@ import net.minecraft.resources.ResourceLocation;
 
 public class FMTTCompassModel implements BasicUnbakedModel {
 
-    private static final ResourceLocation MODEL_BASE = new ResourceLocation(
+    private static final ResourceLocation MODEL_BASE = ResourceLocation.parse(
             "fmtt:item/fmtt_compass_base");
 
-    private static final ResourceLocation MODEL_POINTER = new ResourceLocation(
+    private static final ResourceLocation MODEL_POINTER = ResourceLocation.parse(
             "fmtt:item/fmtt_compass_pointer");
 
     @Nullable
     @Override
     public BakedModel bake(ModelBaker loader, Function<Material, TextureAtlasSprite> textureGetter,
-                           ModelState rotationContainer, ResourceLocation modelId) {
+                           ModelState rotationContainer) {
         BakedModel baseModel = loader.bake(MODEL_BASE, rotationContainer);
         BakedModel pointerModel = loader.bake(MODEL_POINTER, rotationContainer);
         return new FMTTCompassBakedModel(baseModel, pointerModel);
