@@ -30,7 +30,7 @@ import static net.gabriele333.fmtt.fmtt.MOD_ID;
 
 public class FMTTCreativeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MOD_ID);
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FMTT_CREATIVE_TAB = CREATIVE_MODE_TABS.register("example", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> FMTT_CREATIVE_TAB = CREATIVE_MODE_TABS.register("fmtt_creative_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(FMTTItems.FMTT_ITEM.get()))
             .title(Component.translatable("creativetab.fmtt_creative_tab"))
             .displayItems((pParameters, pOutput) -> {
