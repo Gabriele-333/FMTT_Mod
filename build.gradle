@@ -24,9 +24,21 @@ repositories {
         }
     }
     maven {
+        url "https://dl.cloudsmith.io/public/klikli-dev/mods/maven/"
+        content {
+            includeGroup "com.klikli_dev"
+        }
+    }
+    maven {
         url = "https://maven.blamejared.com/"
         content {
             includeGroup "mezz.jei"
+        }
+    }
+    maven {
+        url "https://cursemaven.com"
+        content {
+            includeGroup "curse.maven"
         }
     }
 }
@@ -103,6 +115,7 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     compileOnly "appeng:appliedenergistics2-neoforge:19.0.4-alpha"
     runtimeOnly "appeng:appliedenergistics2-neoforge:19.0.4-alpha"
+    implementation "curse.maven:modonomicon-538392:5466812"
    // annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
 
