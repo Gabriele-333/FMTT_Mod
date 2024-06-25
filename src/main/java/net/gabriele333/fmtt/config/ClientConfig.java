@@ -20,10 +20,16 @@ package net.gabriele333.fmtt.config;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public class FMTTConfig {
+public class ClientConfig {
 
-    public FMTTConfig() {
-        final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    public final MiscSettings misc;
+    public final ModConfigSpec spec;
+
+    public ClientConfig() {
+        ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
+
+        this.misc = new MiscSettings(builder);
+        this.spec = builder.build();
     }
 
     public static class MiscSettings {
@@ -36,7 +42,8 @@ public class FMTTConfig {
             this.NewVersionMsg = builder.comment("Receive a message in chat when a new version of the Modpack is released")
                     .define("NewVersionMsg", true);
             Version = builder.comment("The version of the modpack    !DON'T TOUCH!")
-                    .define("Version", "1.21"); // Update version to 1.21
+                    .define("Version", "0.0.0.0");
+            builder.pop();
         }
     }
 }

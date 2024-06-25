@@ -17,9 +17,10 @@ package net.gabriele333.fmtt;/*
  */
 
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 
 public class fmttServer extends fmtt{
-    public fmttServer(IEventBus modEventBus) {
-        super(modEventBus);
+    public fmttServer(IEventBus modEventBus, ModContainer modContainer) {
+        super(modEventBus, modContainer);
     }
 }

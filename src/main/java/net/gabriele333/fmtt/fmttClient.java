@@ -17,18 +17,20 @@ package net.gabriele333.fmtt;/*
  */
 
 import net.gabriele333.fmtt.client.render.InitModel;
+import net.gabriele333.fmtt.config.ClientConfig;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.config.ModConfig;
 
 
 @OnlyIn(Dist.CLIENT)
 public class fmttClient extends fmtt{
-    public fmttClient(IEventBus modEventBus) {
-        super(modEventBus);
+    public fmttClient(IEventBus modEventBus, ModContainer modContainer) {
+        super(modEventBus, modContainer);
 
+        modContainer.registerConfig(ModConfig.Type.CLIENT, new ClientConfig().spec);
         InitModel.init();
     }
-
-
 }

@@ -23,10 +23,13 @@ package net.gabriele333.fmtt;
 
 import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
+import net.gabriele333.fmtt.config.ClientConfig;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
 
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.config.ModConfig;
 import org.slf4j.Logger;
 
 import static net.gabriele333.fmtt.item.FMTTCreativeTabs.CREATIVE_MODE_TABS;
@@ -40,10 +43,12 @@ public abstract class fmtt {
     public static fmtt INSTANCE;
 
 
-    public fmtt(IEventBus modEventBus) {
+    public fmtt(IEventBus modEventBus, ModContainer modContainer) {
         INSTANCE = this;
 
+
         modEventBus.addListener(FMTTNetwork::init);
+
 
         LOGGER.info("ciao");
         LOGGER.info("Dm me on Discord if you find this");

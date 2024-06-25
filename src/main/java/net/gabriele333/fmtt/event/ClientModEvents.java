@@ -17,7 +17,7 @@
  */
 package net.gabriele333.fmtt.event;
 import net.gabriele333.fmtt.client.ModpackVersion;
-import net.gabriele333.fmtt.config.FMTTConfig;
+import net.gabriele333.fmtt.config.ClientConfig;
 import net.gabriele333.fmtt.fmtt;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.ServerboundPacket;
@@ -50,7 +50,7 @@ public class ClientModEvents {
         @SubscribeEvent(priority = EventPriority.LOW)
         public static void onPlayerJoinClient(PlayerEvent.PlayerLoggedInEvent event) {
             try {
-                if (!versionMessageSent && !Objects.equals(ModpackVersion.main(), FMTTConfig.MiscSettings.Version.get())) {
+                if (!versionMessageSent && !Objects.equals(ModpackVersion.main(), ClientConfig.MiscSettings.Version.get())) {
                     event.getEntity().sendSystemMessage(Component.literal("§bThere is a newer version of the modpack: " + ModpackVersion.main()));
                     versionMessageSent = true;
                 }

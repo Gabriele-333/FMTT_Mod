@@ -17,19 +17,19 @@ package net.gabriele333.fmtt;/*
  */
 
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
 
 @Mod(fmtt.MOD_ID)
 public class fmttBootstrap {
-    public fmttBootstrap(IEventBus modEventBus) {
+    public fmttBootstrap(IEventBus modEventBus, ModContainer modContainer) {
         switch (FMLEnvironment.dist) {
             case CLIENT -> {
-                new fmttClient(modEventBus);
+                new fmttClient(modEventBus, modContainer);
             }
             case DEDICATED_SERVER -> {
-                new fmttServer(modEventBus);
-
+                new fmttServer(modEventBus, modContainer);
             }
         }
     }
