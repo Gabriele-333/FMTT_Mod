@@ -20,9 +20,7 @@ package net.gabriele333.fmtt;/*
 import net.minecraft.resources.ResourceLocation;
 
 public interface fmttint {
-
     String MOD_ID = fmtt.MOD_ID;
-
     static ResourceLocation makeId(String id) {
         return ResourceLocation.fromNamespaceAndPath(MOD_ID, id);
     }

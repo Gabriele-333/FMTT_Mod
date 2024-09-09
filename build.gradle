@@ -11,7 +11,7 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.ALL
 }
 
-version = mod_version
+version = "${minecraft_version}-${mod_version}"
 group = mod_group_id
 
 repositories {
@@ -44,7 +44,7 @@ repositories {
 }
 
 base {
-    archivesName = mod_id
+    archivesName = mod_id.toUpperCase()
 }
 
 // Mojang ships Java 21 to end users starting in 1.20.5, so mods should target Java 21.
