@@ -66,7 +66,7 @@ public record FMTTRewardPacket() implements ServerboundPacket {
         Random random = new Random();
         do {
             randomItem = BuiltInRegistries.ITEM.byId(random.nextInt(BuiltInRegistries.ITEM.size()));
-        } while (!hasRecipe(randomItem, recipeManager)); //fuck
+        } while (!hasRecipe(randomItem, recipeManager)); //fuck :(
 
         assert player != null;
         ItemStack itemStack = player.getMainHandItem();
