@@ -51,6 +51,8 @@ public class FMTTItems {
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
     public static final Supplier<Item> FMTT_XP_ITEM = ITEMS.register("fmtt_xp_item",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
+    public static final Supplier<Item> FMTT_REWARD_ITEM = ITEMS.register("fmtt_reward_item",
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
     public static final Supplier<Item> FMTT_COMPASS = ITEMS.register("fmtt_compass",
             () -> new Item(new Item.Properties().rarity(Rarity.COMMON).fireResistant()));
 
