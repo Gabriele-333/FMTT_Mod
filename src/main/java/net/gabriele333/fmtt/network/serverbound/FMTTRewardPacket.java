@@ -23,15 +23,19 @@ import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.CustomFMTTPayload;
 import net.gabriele333.fmtt.network.ServerboundPacket;
 import net.minecraft.ChatFormatting;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeType;
 
@@ -50,29 +54,39 @@ public record FMTTRewardPacket() implements ServerboundPacket {
 
     public static final Type<FMTTRewardPacket> TYPE = CustomFMTTPayload.createType("fmtt_reward_packet");
 
-
     @Override
     public Type<FMTTRewardPacket> type() {
         return TYPE;
     }
+
     public static FMTTRewardPacket decode(RegistryFriendlyByteBuf stream) {
         return new FMTTRewardPacket();
     }
+
     public void write(RegistryFriendlyByteBuf data) {
     }
+
     public void handleOnServer(ServerPlayer player) {
+
         RecipeManager recipeManager = player.getServer().getRecipeManager();
+
+        HolderLookup.Provider registries = player.getServer().registryAccess();
+
         Item randomItem;
         Random random = new Random();
+
+
         do {
             randomItem = BuiltInRegistries.ITEM.byId(random.nextInt(BuiltInRegistries.ITEM.size()));
-        } while (!hasRecipe(randomItem, recipeManager)); //fuck :(
+        } while (!hasRecipe(randomItem, recipeManager, registries));
+
 
         assert player != null;
         ItemStack itemStack = player.getMainHandItem();
 
         ItemStack randomItemStack = new ItemStack(randomItem);
-        player.addItem(randomItemStack);
+
+
         if (player.getInventory().add(randomItemStack)) {
             if (itemStack.getItem() == FMTTItems.FMTT_REWARD_ITEM.get()) {
                 itemStack.shrink(1);
@@ -81,7 +95,20 @@ public record FMTTRewardPacket() implements ServerboundPacket {
             player.sendSystemMessage(Component.literal("Your inventory is full").withStyle(ChatFormatting.RED));
         }
 
+        // Log di debug
         LOGGER.info("Belin");
+    }
 
+
+    private boolean hasRecipe(Item item, RecipeManager recipeManager, HolderLookup.Provider registries) {
+
+        for (RecipeHolder<?> recipeHolder : recipeManager.getRecipes()) {
+            Recipe<?> recipe = recipeHolder.value();
+
+            if (recipe.getResultItem(registries).getItem() == item) {
+                return true;
+            }
+        }
+        return false;
     }
 }
