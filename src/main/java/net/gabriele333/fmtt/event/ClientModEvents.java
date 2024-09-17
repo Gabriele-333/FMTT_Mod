@@ -21,6 +21,7 @@ import net.gabriele333.fmtt.config.ClientConfig;
 import net.gabriele333.fmtt.fmtt;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.ServerboundPacket;
+import net.gabriele333.fmtt.network.serverbound.FMTTRewardPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTXpPacket;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionResult;
@@ -64,8 +65,18 @@ public class ClientModEvents {
         public static void onItemRightClick(PlayerInteractEvent.RightClickItem event) {
             if (event.getSide() == LogicalSide.CLIENT) {
                 ItemStack itemStack = event.getItemStack();
+
+                //FMTT XP Item
                 if (itemStack.getItem() == FMTTItems.FMTT_XP_ITEM.get()) {
                     ServerboundPacket message = new FMTTXpPacket();
+                    PacketDistributor.sendToServer(message);
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                    event.setCanceled(true);
+                }
+
+                //FMTT REWARD ITEM
+                if (itemStack.getItem() == FMTTItems.FMTT_REWARD_ITEM.get()) {
+                    ServerboundPacket message = new FMTTRewardPacket();
                     PacketDistributor.sendToServer(message);
                     event.setCancellationResult(InteractionResult.SUCCESS);
                     event.setCanceled(true);
