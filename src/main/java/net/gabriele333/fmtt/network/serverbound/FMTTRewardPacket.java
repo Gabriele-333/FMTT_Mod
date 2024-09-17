@@ -100,6 +100,7 @@ public record FMTTRewardPacket() implements ServerboundPacket {
     }
 
 
+
     private boolean hasRecipe(Item item, RecipeManager recipeManager, HolderLookup.Provider registries) {
 
         for (RecipeHolder<?> recipeHolder : recipeManager.getRecipes()) {
