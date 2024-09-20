@@ -19,27 +19,64 @@ package net.gabriele333.fmtt.event;
 
 
 
-
 import net.gabriele333.fmtt.commands.FMTTXpGet;
 import net.gabriele333.fmtt.fmtt;
+import net.gabriele333.fmtt.tags.FMTTBlockTagsProvider;
+import net.gabriele333.fmtt.tags.FMTTItemTagsProvider;
+import net.minecraft.client.Minecraft;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingRecipe;
+import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.RecipeManager;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.server.command.ConfigCommand;
 
+import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
 
+import static net.gabriele333.fmtt.fmtt.LOGGER;
+import static net.gabriele333.fmtt.tags.FMTTTags.Items.CRAFTABLE;
+import static net.minecraft.tags.TagEntry.tag;
 
 
 @EventBusSubscriber(modid = fmtt.MOD_ID)
 public class ModEvents {
 
 
-
-
     @SubscribeEvent
     public static void onCommandsRegister(RegisterCommandsEvent event) {
         new FMTTXpGet(event.getDispatcher());
         ConfigCommand.register(event.getDispatcher());
+    }
+
+    @SubscribeEvent
+    public static void onRecipesUpdatedEvent(RecipesUpdatedEvent event) {
+
+        RecipeManager recipeManager = event.getRecipeManager();
+        Collection<RecipeHolder<?>> recipes = recipeManager.getRecipes();
+
+
+        FMTTItemTagsProvider itemTagsProvider = fmtt.getItemTagsProvider();
+
+        for (RecipeHolder<?> recipeHolder : recipes) {
+            Recipe<?> recipe = recipeHolder.value();
+            if (recipe instanceof CraftingRecipe) {
+
+                ItemStack resultItem = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
+                LOGGER.info(String.valueOf(resultItem));
+
+                itemTagsProvider.addItemToTagCraft(resultItem.getItem());
+            }
+        }
+
     }
 
 }
