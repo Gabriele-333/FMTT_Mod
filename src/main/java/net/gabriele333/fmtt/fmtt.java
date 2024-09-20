@@ -27,10 +27,18 @@ import net.gabriele333.fmtt.config.ClientConfig;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
 
+import net.gabriele333.fmtt.tags.FMTTBlockTagsProvider;
+import net.gabriele333.fmtt.tags.FMTTItemTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
+
+import java.util.concurrent.CompletableFuture;
 
 import static net.gabriele333.fmtt.item.FMTTCreativeTabs.CREATIVE_MODE_TABS;
 import static net.gabriele333.fmtt.block.FMTTBlock.BLOCKS;
@@ -48,7 +56,7 @@ public abstract class fmtt {
 
 
         modEventBus.addListener(FMTTNetwork::init);
-
+        modEventBus.addListener(this::onGatherData);
 
         LOGGER.info("ciao");
         LOGGER.info("Dm me on Discord if you find this");
@@ -57,7 +65,19 @@ public abstract class fmtt {
         BLOCKS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
+    }
+    private static FMTTItemTagsProvider itemTagsProvider;
+    public void onGatherData(GatherDataEvent event) {
 
+        PackOutput packOutput = event.getGenerator().getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+        var b = new FMTTBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
 
+        itemTagsProvider = new FMTTItemTagsProvider(packOutput, lookupProvider, b.contentsGetter(), existingFileHelper);
+
+    }
+    public static FMTTItemTagsProvider getItemTagsProvider() {
+        return itemTagsProvider;
     }
 }
