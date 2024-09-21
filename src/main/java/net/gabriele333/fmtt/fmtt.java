@@ -23,17 +23,16 @@ package net.gabriele333.fmtt;
 
 import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
-import net.gabriele333.fmtt.config.ClientConfig;
+import net.gabriele333.fmtt.data.FMTTDataProvider;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
-
 import net.gabriele333.fmtt.tags.FMTTBlockTagsProvider;
 import net.gabriele333.fmtt.tags.FMTTItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
@@ -56,28 +55,42 @@ public abstract class fmtt {
 
 
         modEventBus.addListener(FMTTNetwork::init);
-        modEventBus.addListener(this::onGatherData);
+
 
         LOGGER.info("ciao");
-        LOGGER.info("Dm me on Discord if you find this");
         FMTTItems.register(modEventBus);
         PlayerFMTTXpProvider.register(modEventBus);
         BLOCKS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
 
+
+        modEventBus.addListener(EventPriority.LOWEST, this::onGatherData);
+
     }
+
     private static FMTTItemTagsProvider itemTagsProvider;
     public void onGatherData(GatherDataEvent event) {
+        LOGGER.info("GatherDataEvent triggered.");
 
         PackOutput packOutput = event.getGenerator().getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+
+        FMTTDataProvider provider = new FMTTDataProvider("fmtt");
+
         var b = new FMTTBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
 
-        itemTagsProvider = new FMTTItemTagsProvider(packOutput, lookupProvider, b.contentsGetter(), existingFileHelper);
+        provider.addSubProvider(event.includeServer(), b);
+        provider.addSubProvider(event.includeServer(), new FMTTItemTagsProvider(packOutput, lookupProvider, b.contentsGetter(), existingFileHelper));
+
+
+
+        fmtt.itemTagsProvider = new FMTTItemTagsProvider(packOutput, lookupProvider, b.contentsGetter(), existingFileHelper);
+
 
     }
     public static FMTTItemTagsProvider getItemTagsProvider() {
         return itemTagsProvider;
     }
+
 }
