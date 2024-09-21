@@ -21,6 +21,7 @@ package net.gabriele333.fmtt.event;
 
 import net.gabriele333.fmtt.commands.FMTTXpGet;
 import net.gabriele333.fmtt.fmtt;
+import net.gabriele333.fmtt.fmttClient;
 import net.gabriele333.fmtt.tags.FMTTBlockTagsProvider;
 import net.gabriele333.fmtt.tags.FMTTItemTagsProvider;
 import net.minecraft.client.Minecraft;
@@ -57,6 +58,8 @@ public class ModEvents {
         ConfigCommand.register(event.getDispatcher());
     }
 
+
+
     @SubscribeEvent
     public static void onRecipesUpdatedEvent(RecipesUpdatedEvent event) {
 
@@ -68,15 +71,19 @@ public class ModEvents {
 
         for (RecipeHolder<?> recipeHolder : recipes) {
             Recipe<?> recipe = recipeHolder.value();
-            if (recipe instanceof CraftingRecipe) {
+
 
                 ItemStack resultItem = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
                 LOGGER.info(String.valueOf(resultItem));
 
                 itemTagsProvider.addItemToTagCraft(resultItem.getItem());
-            }
+
         }
 
     }
+
+
+
+
 
 }

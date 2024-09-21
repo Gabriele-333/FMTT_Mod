@@ -21,6 +21,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
@@ -42,6 +43,7 @@ public class FMTTItemTagsProvider extends ItemTagsProvider {
 
     @Override
     public void addTags(HolderLookup.Provider pProvider) {
+        tag(CRAFTABLE).add(Items.STONE);
 
     }
 }
