@@ -25,12 +25,16 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
 
 
+
 @OnlyIn(Dist.CLIENT)
 public class fmttClient extends fmtt{
     public fmttClient(IEventBus modEventBus, ModContainer modContainer) {
         super(modEventBus, modContainer);
 
+
         modContainer.registerConfig(ModConfig.Type.CLIENT, new ClientConfig().spec);
         InitModel.init();
     }
+
+
 }
