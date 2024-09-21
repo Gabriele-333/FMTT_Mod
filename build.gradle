@@ -114,7 +114,10 @@ dependencies {
 
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "curse.maven:applied-energistics-2-223794:5662490"
-    implementation "curse.maven:modonomicon-538392:5706788"
+    implementation "curse.maven:modonomicon-538392:5717209"
+    implementation "curse.maven:crafttweaker-239197:5708234"
+    implementation "curse.maven:jei-238222:5718399"
+
    // annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
 
