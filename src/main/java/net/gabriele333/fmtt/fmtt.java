@@ -28,8 +28,12 @@ import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
 import net.gabriele333.fmtt.tags.FMTTBlockTagsProvider;
 import net.gabriele333.fmtt.tags.FMTTItemTagsProvider;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -37,6 +41,11 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import org.slf4j.Logger;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 
 import static net.gabriele333.fmtt.item.FMTTCreativeTabs.CREATIVE_MODE_TABS;
@@ -79,18 +88,10 @@ public abstract class fmtt {
         FMTTDataProvider provider = new FMTTDataProvider("fmtt");
 
         var b = new FMTTBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
-
         provider.addSubProvider(event.includeServer(), b);
         provider.addSubProvider(event.includeServer(), new FMTTItemTagsProvider(packOutput, lookupProvider, b.contentsGetter(), existingFileHelper));
 
 
-
-        fmtt.itemTagsProvider = new FMTTItemTagsProvider(packOutput, lookupProvider, b.contentsGetter(), existingFileHelper);
-
-
-    }
-    public static FMTTItemTagsProvider getItemTagsProvider() {
-        return itemTagsProvider;
     }
 
 }

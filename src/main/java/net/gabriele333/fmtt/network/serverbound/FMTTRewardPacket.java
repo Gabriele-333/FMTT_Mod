@@ -25,11 +25,19 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeManager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.Random;
 
 import static net.gabriele333.fmtt.fmtt.LOGGER;
@@ -83,10 +91,24 @@ public record FMTTRewardPacket() implements ServerboundPacket {
 
     }
 
-    private boolean isValid(Item item) {
-        return BuiltInRegistries.ITEM.getOrCreateTag(CRAFTABLE).stream().anyMatch(e -> e == item);
+    private boolean isValid(Item itemV) {
+
+        Path configFile = Paths.get(System.getProperty("user.dir"), "config", "FMTTRewardItems.txt");
+        List<String> validItems;
+
+
+        try {
+            validItems = Files.readAllLines(configFile);
+        } catch (IOException e) {
+            LOGGER.error("Errore durante la lettura del file di configurazione: {}", configFile, e);
+            return false;
+        }
+
+        // Ottieni il nome o l'ID dell'item
+        String itemName = BuiltInRegistries.ITEM.getKey(itemV).toString();
+
+        // Verifica se l'item è presente nella lista degli item validi
+        return validItems.stream().anyMatch(line -> line.trim().equalsIgnoreCase(itemName));
     }
-
-
 
 }
