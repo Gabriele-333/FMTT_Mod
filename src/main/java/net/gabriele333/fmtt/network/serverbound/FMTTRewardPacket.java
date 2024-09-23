@@ -27,6 +27,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -75,16 +76,16 @@ public record FMTTRewardPacket() implements ServerboundPacket {
         } while (!isValid(randomItem));
 
         assert player != null;
-        ItemStack itemStack = player.getMainHandItem();
-
         ItemStack randomItemStack = new ItemStack(randomItem);
-        player.addItem(randomItemStack);
-        if (player.getInventory().add(randomItemStack)) {
-            if (itemStack.getItem() == FMTTItems.FMTT_REWARD_ITEM.get()) {
-                itemStack.shrink(1);
-            }
-        } else {
+
+
+        if (isInventoryFull(player)) {
             player.sendSystemMessage(Component.literal("Your inventory is full").withStyle(ChatFormatting.RED));
+        } else {
+            ItemStack rewardItem = player.getMainHandItem();
+            rewardItem.shrink(1);
+            player.addItem(randomItemStack);
+
         }
 
         LOGGER.info("Belin");
@@ -100,15 +101,31 @@ public record FMTTRewardPacket() implements ServerboundPacket {
         try {
             validItems = Files.readAllLines(configFile);
         } catch (IOException e) {
-            LOGGER.error("Errore durante la lettura del file di configurazione: {}", configFile, e);
+            LOGGER.error("Error while reading the file: {}", configFile, e);
             return false;
         }
 
-        // Ottieni il nome o l'ID dell'item
+
         String itemName = BuiltInRegistries.ITEM.getKey(itemV).toString();
 
-        // Verifica se l'item è presente nella lista degli item validi
         return validItems.stream().anyMatch(line -> line.trim().equalsIgnoreCase(itemName));
+    }
+
+    public static boolean isInventoryFull(ServerPlayer player) {
+        Inventory inventory = player.getInventory();  // Ottieni l'inventario del giocatore
+
+        // Controlla tutti gli slot dell'inventario
+        for (int i = 0; i < inventory.getContainerSize(); i++) {
+            ItemStack stack = inventory.getItem(i);
+
+            // Se c'è uno slot vuoto, l'inventario non è pieno
+            if (stack.isEmpty()) {
+                return false;
+            }
+        }
+
+        // Se nessuno slot è vuoto, l'inventario è pieno
+        return true;
     }
 
 }
