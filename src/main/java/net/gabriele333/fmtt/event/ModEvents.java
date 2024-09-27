@@ -63,7 +63,6 @@ public class ModEvents {
         RecipeManager recipeManager = event.getRecipeManager();
         Collection<RecipeHolder<?>> recipes = recipeManager.getRecipes();
 
-
         Path configFile = Paths.get(Minecraft.getInstance().gameDirectory.getAbsolutePath(), "config", "FMTTRewardItems.txt");
 
         try (BufferedWriter writer = Files.newBufferedWriter(configFile, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
@@ -72,14 +71,13 @@ public class ModEvents {
                 ItemStack resultItem = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
 
 
-                ResourceLocation itemResourceLocation = BuiltInRegistries.ITEM.getKey(resultItem.getItem());
+                if (resultItem != null && !resultItem.isEmpty()) {
+                    ResourceLocation itemResourceLocation = BuiltInRegistries.ITEM.getKey(resultItem.getItem());
 
-                if (itemResourceLocation != null) {
-
-
-
-                    writer.write(itemResourceLocation.toString());
-                    writer.newLine();
+                    if (itemResourceLocation != null) {
+                        writer.write(itemResourceLocation.toString());
+                        writer.newLine();
+                    }
                 }
             }
             LOGGER.info("FMTTRewardItems.txt updated.");
@@ -87,6 +85,4 @@ public class ModEvents {
             LOGGER.error("Error while writing in FMTTRewardItems.txt", e);
         }
     }
-
-
 }
