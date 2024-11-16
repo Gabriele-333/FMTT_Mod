@@ -31,11 +31,21 @@ public class ModpackVersion {
     }
 
     private static String extractVersion(String svg) {
-        Pattern pattern = Pattern.compile("From Magic to Tech (\\d+\\.\\d+\\.\\d+-\\d+\\.\\d+\\.\\d+(?:\\.\\d+)?)");
+        if (svg == null) {
+            System.out.println("SVG content is null.");
+            return null;
+        }
+
+        System.out.println("SVG Content: " + svg);  // Debugging
+        Pattern pattern = Pattern.compile("From Magic To Tech (\\d+\\.\\d+\\.\\d+-\\d+\\.\\d+\\.\\d+(?:\\.\\d+)?)", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(svg);
+
         if (matcher.find()) {
             return matcher.group(1).trim();
+        } else {
+            System.out.println("Pattern not matched.");
         }
         return null;
     }
+
 }
