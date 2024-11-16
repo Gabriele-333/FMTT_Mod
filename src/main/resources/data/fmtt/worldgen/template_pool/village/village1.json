@@ -1,0 +1,13 @@
+{
+  "name":"fmtt:village1",
+  "fallback":"minecraft_empty",
+  "elements":[{
+    "weight":1,
+    "elements":{
+      "location":"fmtt:village",
+      "processors":"minecraft_empty",
+      "projection":"rigid",
+      "element_type":"minecraft:single_pool_element"
+    }
+  }]
+}
