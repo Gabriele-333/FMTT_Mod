@@ -22,6 +22,7 @@ package net.gabriele333.fmtt.network;
 
 
 import net.gabriele333.fmtt.network.clientbound.CompassResponsePacket;
+import net.gabriele333.fmtt.network.clientbound.ErrorMessagePacket;
 import net.gabriele333.fmtt.network.serverbound.CompassRequestPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTRewardPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTXpPacket;
@@ -42,6 +43,7 @@ public class FMTTNetwork {
 
         // Clientbound
         clientbound(registrar, CompassResponsePacket.TYPE, CompassResponsePacket.STREAM_CODEC);
+        clientbound(registrar, ErrorMessagePacket.TYPE, ErrorMessagePacket.STREAM_CODEC);
 
 
         // Serverbound
