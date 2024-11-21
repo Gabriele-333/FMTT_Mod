@@ -12,6 +12,11 @@ tasks.named('wrapper', Wrapper).configure {
     distributionType = Wrapper.DistributionType.ALL
 }
 
+def at = file('src/main/resources/META-INF/accesstransformer.cfg')
+if (at.exists()) {
+    accessTransformers.add(at.absolutePath)
+}
+
 version = "${minecraft_version}-${mod_version}"
 group = mod_group_id
 
