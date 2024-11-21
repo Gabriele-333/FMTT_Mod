@@ -1,13 +1,16 @@
 {
-  "name":"fmtt:village1",
-  "fallback":"minecraft_empty",
-  "elements":[{
-    "weight":1,
-    "elements":{
-      "location":"fmtt:village",
-      "processors":"minecraft_empty",
-      "projection":"rigid",
-      "element_type":"minecraft:single_pool_element"
+  "elements": [
+    {
+      "element": {
+        "element_type": "minecraft:legacy_single_pool_element",
+        "location": "fmtt:village/village1",
+        "processors": {
+          "processors": []
+        },
+        "projection": "rigid"
+      },
+      "weight": 1
     }
-  }]
+  ],
+  "fallback": "minecraft:village/plains/houses"
 }
