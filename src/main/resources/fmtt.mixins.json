@@ -6,7 +6,8 @@
   "mixins": [
   ],
   "client": [
-    "ModelBakeryMixin"
+    "ModelBakeryMixin",
+    "StructureTemplatePoolAccessor"
   ],
   "server": [],
   "injectors": {
