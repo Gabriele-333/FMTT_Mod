@@ -59,6 +59,6 @@ public class FMTTVillage {
     @SubscribeEvent
     public static void addNewVillageBuilding(final ServerAboutToStartEvent event) {
         RegistryAccess registryAccess = event.getServer().registryAccess();
-        addBuildingToPool(registryAccess, "village/plains/houses", "fmtt:village/village1", 250);
+        addBuildingToPool(registryAccess, "village/taiga/houses", "fmtt:village/village1", 10);
     }
 }
