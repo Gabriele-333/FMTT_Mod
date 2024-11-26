@@ -1,4 +1,4 @@
-package net.gabriele333.fmtt.worldgem;
+package net.gabriele333.fmtt.worldgen;
 
 import com.mojang.datafixers.util.Pair;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
@@ -19,7 +19,6 @@ import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import static net.gabriele333.fmtt.fmttint.MOD_ID;
 import static net.minecraft.core.registries.Registries.TEMPLATE_POOL;
 import static net.minecraft.core.registries.Registries.PROCESSOR_LIST;
 
