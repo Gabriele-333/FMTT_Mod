@@ -1,4 +1,5 @@
 {
+  "name": "fmtt:village",
   "elements": [
     {
       "element": {
@@ -12,5 +13,5 @@
       "weight": 1
     }
   ],
-  "fallback": "minecraft:village/plains/houses"
+  "fallback": "minecraft:empty"
 }
