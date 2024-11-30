@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import net.gabriele333.fmtt.FMTTSavedData;
+import net.gabriele333.fmtt.data.FMTTSavedData;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -31,18 +31,14 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.saveddata.SavedData;
 
 
-/**
- * A compass region stores information about the occurrence of skystone blocks in a region of 1024x1024 chunks.
- */
+
 final class FMTTCompassRegion extends FMTTSavedData {
 
     private static final SavedData.Factory<FMTTCompassRegion> FACTORY = new Factory<>(
             FMTTCompassRegion::new,
             null);
 
-    /**
-     * The number of chunks that get saved in a region on each axis.
-     */
+
     private static final int CHUNKS_PER_REGION = 1024;
 
     private static final int BITMAP_LENGTH = CHUNKS_PER_REGION * CHUNKS_PER_REGION;
@@ -50,9 +46,7 @@ final class FMTTCompassRegion extends FMTTSavedData {
     // Key is the section index, see ChunkAccess.getSections()
     private final Map<Integer, BitSet> sections = new HashMap<>();
 
-    /**
-     * Gets the name of the save data for a region that has the given coordinates.
-     */
+
     private static String getRegionSaveName(int regionX, int regionZ) {
         return "fmtt_compass_" + regionX + "_" + regionZ;
     }
