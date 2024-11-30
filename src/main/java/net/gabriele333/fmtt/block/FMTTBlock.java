@@ -21,7 +21,6 @@ import net.gabriele333.fmtt.fmtt;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -33,11 +32,5 @@ public abstract class FMTTBlock extends Block {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(fmtt.MOD_ID);
 
     public static final DeferredBlock<Block> STAR_PIECE_BLOCK = BLOCKS.registerBlock("star_piece_block", StarPieceBlock::new, BlockBehaviour.Properties.of());
-
-
-
-
-
-
 
 }
