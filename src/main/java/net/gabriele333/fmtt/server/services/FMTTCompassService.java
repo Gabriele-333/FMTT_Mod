@@ -149,9 +149,7 @@ public final class FMTTCompassService {
         }
     }
 
-    /**
-     * Notifies the compass service that a skystone block has either been placed or replaced at the give position.
-     */
+
     public static void notifyBlockChange(ServerLevel level, BlockPos pos) {
         ChunkAccess chunk = level.getChunk(pos);
         var compassRegion = FMTTCompassRegion.get(level, chunk.getPos());
@@ -168,7 +166,7 @@ public final class FMTTCompassService {
             return;
         }
 
-        // Count how many skystone blocks there are
+
         var desiredState = StarPieceBlock.STAR_PIECE_BLOCK.get().defaultBlockState();
         var blockCount = new AtomicInteger(0);
         section.getStates().count((state, count) -> {
