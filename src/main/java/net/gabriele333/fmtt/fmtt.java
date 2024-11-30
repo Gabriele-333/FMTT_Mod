@@ -19,33 +19,25 @@ package net.gabriele333.fmtt;
 
 
 
-
-
 import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
 import net.gabriele333.fmtt.data.FMTTDataProvider;
+import net.gabriele333.fmtt.entity.FMTTVillager;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
 import net.gabriele333.fmtt.tags.FMTTBlockTagsProvider;
 import net.gabriele333.fmtt.tags.FMTTItemTagsProvider;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
 
 import static net.gabriele333.fmtt.item.FMTTCreativeTabs.CREATIVE_MODE_TABS;
@@ -66,13 +58,19 @@ public abstract class fmtt {
         modEventBus.addListener(FMTTNetwork::init);
 
 
+
         LOGGER.info("ciao");
         FMTTItems.register(modEventBus);
         PlayerFMTTXpProvider.register(modEventBus);
         BLOCKS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
+        modEventBus.addListener((RegisterEvent event) -> {
+            if (event.getRegistryKey() == Registries.VILLAGER_PROFESSION) {
+                FMTTVillager.initProfession(event.getRegistry(Registries.VILLAGER_PROFESSION));
+            }
+        });
 
-
+        NeoForge.EVENT_BUS.addListener(FMTTVillager::initTrades);
         modEventBus.addListener(EventPriority.LOWEST, this::onGatherData);
 
     }
