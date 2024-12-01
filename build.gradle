@@ -48,6 +48,9 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
+    maven {
+        url = "https://maven.latmod.com"
+    }
 
 }
 
@@ -144,6 +147,7 @@ dependencies {
     implementation "curse.maven:applied-energistics-2-223794:5662490"
     implementation "curse.maven:modonomicon-538392:5717209"
     implementation "curse.maven:crafttweaker-239197:5708234"
+    implementation "curse.maven:ftb-quests-forge-289412:5882270"
 
     compileOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"
