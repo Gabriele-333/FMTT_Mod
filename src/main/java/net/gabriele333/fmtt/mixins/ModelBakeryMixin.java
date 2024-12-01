@@ -36,7 +36,7 @@ public class ModelBakeryMixin {
     @Inject(at = @At("HEAD"), method = "getModel", cancellable = true)
     private void getModelHook(ResourceLocation id, CallbackInfoReturnable<UnbakedModel> cir) {
         var model = BuiltInModelHooks.getBuiltInModel(id);
-        //LOGGER.info("Belin Mixin");
+
 
         if (model != null) {
             cir.setReturnValue(model);
