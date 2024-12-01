@@ -37,13 +37,13 @@ public class FMTTItemTagsProvider extends ItemTagsProvider {
     }
 
 
-    public void addItemToTagCraft(Item item) {
-        tag(CRAFTABLE).add(item);
-    }
+
 
     @Override
     public void addTags(HolderLookup.Provider pProvider) {
         tag(CRAFTABLE).add(Items.STONE);
-
+    }
+    public void addItemToTagReward(Item item) {
+        tag(CRAFTABLE).add(item);
     }
 }
