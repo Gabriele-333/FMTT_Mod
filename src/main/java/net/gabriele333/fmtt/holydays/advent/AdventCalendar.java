@@ -25,6 +25,7 @@ import net.gabriele333.fmtt.fmtt;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 @EventBusSubscriber(modid = fmtt.MOD_ID)
@@ -32,9 +33,13 @@ public class AdventCalendar {
 
     @SubscribeEvent
     public static void onPlayerJoinServer(PlayerEvent.PlayerLoggedInEvent event) {
+        ServerPlayer player = (ServerPlayer) event.getPlayer();
         int day = getCurrentDayOfMonth();
+        for (int i = 1; i <= day; i++) {
+            long qID = QuestID.IDS[i];
+            triggerQuest(player, qID);
 
-
+        }
     }
 
 
