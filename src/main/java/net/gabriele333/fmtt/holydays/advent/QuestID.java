@@ -15,6 +15,10 @@ package net.gabriele333.fmtt.holydays.advent;/*
  * You should have received a copy of the GNU Lesser General Public License
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
-
+import java.util.*;
 public interface QuestID {
+    long[] IDS ={
+
+    };
+
 }
