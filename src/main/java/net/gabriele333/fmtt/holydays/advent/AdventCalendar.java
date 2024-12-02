@@ -18,16 +18,16 @@ package net.gabriele333.fmtt.holydays.advent;/*
 
 
 
-
 import java.time.LocalDate;
-import java.util.Date;
-import dev.ftb.mods.ftbquests.quest.TeamData;
+import net.gabriele333.fmtt.util.ftbquest.FTBQuestTrigger;
+import net.gabriele333.fmtt.util.ftbquest.QuestID;
 import net.minecraft.server.level.ServerPlayer;
 import net.gabriele333.fmtt.fmtt;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+
 
 @EventBusSubscriber(modid = fmtt.MOD_ID)
 public class AdventCalendar {
@@ -38,8 +38,7 @@ public class AdventCalendar {
             int day = getCurrentDayOfMonth();
             try {
                 for (int i = 0; i <= (day-1); i++) {
-                    long qID = (IDS[i].hashCode() & 0xFFFFFFFFL);
-                    triggerQuest(player, qID);
+                    FTBQuestTrigger.triggerQuest(player, QuestID.AdventIDS[i]);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -47,20 +46,8 @@ public class AdventCalendar {
         }
     }
 
-
     public static int getCurrentDayOfMonth() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getDayOfMonth();
     }
-
-    public static void triggerQuest(ServerPlayer player, long questId) {
-        Date time = new Date();
-        TeamData teamData = TeamData.get(player);
-        teamData.setCompleted(questId, time);
-
-    }
-
-    static String[] IDS ={
-            "63C468928F66E664"
-    };
 }
