@@ -20,9 +20,10 @@ package net.gabriele333.fmtt.holydays.advent;/*
 
 
 import java.time.LocalDate;
-
-import net.gabriele333.fmtt.fmtt;
+import java.util.Date;
+import dev.ftb.mods.ftbquests.quest.TeamData;
 import net.minecraft.server.level.ServerPlayer;
+import net.gabriele333.fmtt.fmtt;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 
@@ -33,15 +34,18 @@ public class AdventCalendar {
 
     @SubscribeEvent
     public static void onPlayerJoinServer(PlayerEvent.PlayerLoggedInEvent event) {
-        ServerPlayer player = (ServerPlayer) event.getPlayer();
-        int day = getCurrentDayOfMonth();
-        for (int i = 1; i <= day; i++) {
-            long qID = QuestID.IDS[i];
-            triggerQuest(player, qID);
-
+        if (event.getEntity() instanceof ServerPlayer player) {
+            int day = getCurrentDayOfMonth();
+            try {
+                for (int i = 0; i <= (day-1); i++) {
+                    long qID = (IDS[i].hashCode() & 0xFFFFFFFFL);
+                    triggerQuest(player, qID);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-
 
 
     public static int getCurrentDayOfMonth() {
@@ -49,8 +53,14 @@ public class AdventCalendar {
         return currentDate.getDayOfMonth();
     }
 
-    public static void triggerQuest(ServerPlayer player, long questID) {
-        //Shit to trigger the quest
+    public static void triggerQuest(ServerPlayer player, long questId) {
+        Date time = new Date();
+        TeamData teamData = TeamData.get(player);
+        teamData.setCompleted(questId, time);
+
     }
 
+    static String[] IDS ={
+            "63C468928F66E664"
+    };
 }
