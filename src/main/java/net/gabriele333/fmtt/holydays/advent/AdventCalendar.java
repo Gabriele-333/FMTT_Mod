@@ -34,14 +34,16 @@ public class AdventCalendar {
 
     @SubscribeEvent
     public static void onPlayerJoinServer(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player) {
-            int day = getCurrentDayOfMonth();
-            try {
-                for (int i = 0; i <= (day-1); i++) {
-                    FTBQuestTrigger.triggerQuest(player, QuestID.AdventIDS[i]);
+        if(getCurrentMonthOfMonth() == 12){
+            if (event.getEntity() instanceof ServerPlayer player) {
+                int day = getCurrentDayOfMonth();
+                try {
+                    for (int i = 0; i <= (day-1); i++) {
+                        FTBQuestTrigger.triggerQuest(player, QuestID.AdventIDS[i]);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
@@ -49,5 +51,9 @@ public class AdventCalendar {
     public static int getCurrentDayOfMonth() {
         LocalDate currentDate = LocalDate.now();
         return currentDate.getDayOfMonth();
+    }
+    public static int getCurrentMonthOfMonth() {
+        LocalDate currentDate = LocalDate.now();
+        return currentDate.getMonthValue();
     }
 }
