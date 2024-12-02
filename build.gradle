@@ -148,6 +148,9 @@ dependencies {
     implementation "curse.maven:modonomicon-538392:5717209"
     implementation "curse.maven:crafttweaker-239197:5708234"
     implementation "curse.maven:ftb-quests-forge-289412:5882270"
+    implementation "curse.maven:architectury-api-419699:5786327"
+    implementation "curse.maven:ftb-teams-forge-404468:5882217"
+    implementation "curse.maven:ftb-library-forge-404465:5893689"
 
     compileOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"
