@@ -6,10 +6,9 @@
   "mixins": [
   ],
   "client": [
-    "ModelBakeryMixin",
-    "StructureTemplatePoolAccessor"
+    "ModelBakeryMixin"
   ],
-  "server": [],
+  "server": ["StructureTemplatePoolAccessor"],
   "injectors": {
     "defaultRequire": 1
   }
