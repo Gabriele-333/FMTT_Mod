@@ -40,6 +40,8 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 import static net.gabriele333.fmtt.fmtt.LOGGER;
@@ -59,24 +61,28 @@ public class ModEvents {
 
 
     @SubscribeEvent
-    public static void onRecipesUpdatedEvent(RecipesUpdatedEvent event) {
+    public static void onServerAboutToStart(final RecipesUpdatedEvent event) {
         RecipeManager recipeManager = event.getRecipeManager();
         Collection<RecipeHolder<?>> recipes = recipeManager.getRecipes();
-
         Path configFile = Paths.get(Minecraft.getInstance().gameDirectory.getAbsolutePath(), "config", "FMTTRewardItems.txt");
+
+        Set<String> writtenItems = new HashSet<>();
 
         try (BufferedWriter writer = Files.newBufferedWriter(configFile, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
             for (RecipeHolder<?> recipeHolder : recipes) {
                 Recipe<?> recipe = recipeHolder.value();
                 ItemStack resultItem = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
 
-
-                if (resultItem != null && !resultItem.isEmpty()) {
+                if (!resultItem.isEmpty()) {
                     ResourceLocation itemResourceLocation = BuiltInRegistries.ITEM.getKey(resultItem.getItem());
 
-                    if (itemResourceLocation != null) {
-                        writer.write(itemResourceLocation.toString());
-                        writer.newLine();
+                    if (itemResourceLocation != null && !itemResourceLocation.equals("minecraft:air")) {
+                        String itemString = itemResourceLocation.toString();
+
+                        if (writtenItems.add(itemString)) {
+                            writer.write(itemString);
+                            writer.newLine();
+                        }
                     }
                 }
             }
@@ -85,4 +91,5 @@ public class ModEvents {
             LOGGER.error("Error while writing in FMTTRewardItems.txt", e);
         }
     }
+
 }
