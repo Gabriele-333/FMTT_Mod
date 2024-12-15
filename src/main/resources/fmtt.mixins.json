@@ -4,9 +4,11 @@
   "package": "net.gabriele333.fmtt.mixins",
   "compatibilityLevel": "JAVA_11",
   "mixins": [
+    "FTBQuestsTeamDataMixin"
   ],
   "client": [
-    "ModelBakeryMixin"
+    "ModelBakeryMixin",
+    "StructureTemplatePoolAccessor"
   ],
   "server": ["StructureTemplatePoolAccessor"],
   "injectors": {
