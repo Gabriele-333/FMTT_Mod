@@ -44,6 +44,10 @@ public class QuestID {
             "3C63D48D02055B16", //day 24
 
             "169893E1C16ACEFF"  //day 25
+    };
 
+    public static String[] AE2IDS = {
+            "4405015FC980145D", //Mysterious cube
+            ""
     };
 }
