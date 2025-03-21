@@ -19,11 +19,15 @@ package net.gabriele333.fmtt.event;
 
 
 
+import appeng.core.definitions.AEBlocks;
 import net.gabriele333.fmtt.commands.FMTTXpGet;
 import net.gabriele333.fmtt.fmtt;
+import net.gabriele333.fmtt.util.ftbquest.FTBQuestTrigger;
+import net.gabriele333.fmtt.util.ftbquest.QuestID;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -32,7 +36,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RecipesUpdatedEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
+import net.neoforged.neoforge.event.level.BlockEvent;
 import net.neoforged.neoforge.server.command.ConfigCommand;
+import org.checkerframework.checker.units.qual.A;
+
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -58,6 +65,13 @@ public class ModEvents {
         ConfigCommand.register(event.getDispatcher());
     }
 
+    @SubscribeEvent
+    public static void onBlockBreak(BlockEvent.BreakEvent event) {
+        if (event.getPlayer() instanceof ServerPlayer player && event.getState().getBlock() == AEBlocks.MYSTERIOUS_CUBE.block()) {
+            FTBQuestTrigger.triggerQuest(player, QuestID.AE2IDS[0]);
+        }
+    }
+
 
 
     @SubscribeEvent
@@ -71,12 +85,13 @@ public class ModEvents {
         try (BufferedWriter writer = Files.newBufferedWriter(configFile, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING)) {
             for (RecipeHolder<?> recipeHolder : recipes) {
                 Recipe<?> recipe = recipeHolder.value();
+                assert Minecraft.getInstance().level != null;
                 ItemStack resultItem = recipe.getResultItem(Minecraft.getInstance().level.registryAccess());
 
-                if (!resultItem.isEmpty()) {
+                if (resultItem == null || resultItem.isEmpty()) { continue; }
                     ResourceLocation itemResourceLocation = BuiltInRegistries.ITEM.getKey(resultItem.getItem());
 
-                    if (itemResourceLocation != null && !itemResourceLocation.equals("minecraft:air")) {
+                    if (!itemResourceLocation.equals("minecraft:air")) {
                         String itemString = itemResourceLocation.toString();
 
                         if (writtenItems.add(itemString)) {
@@ -84,7 +99,7 @@ public class ModEvents {
                             writer.newLine();
                         }
                     }
-                }
+
             }
             LOGGER.info("FMTTRewardItems.txt updated.");
         } catch (IOException e) {
