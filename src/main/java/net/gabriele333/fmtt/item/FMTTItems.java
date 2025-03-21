@@ -20,6 +20,7 @@ package net.gabriele333.fmtt.item;
 import net.gabriele333.fmtt.block.FMTTBlock;
 import net.gabriele333.fmtt.block.StarPieceBlock;
 import net.gabriele333.fmtt.fmtt;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -44,13 +45,12 @@ public class FMTTItems {
 
     public static final Supplier<Item> CRY_CHANCE = ITEMS.register("crystal_of_chance",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
-
     public static final Supplier<Item> CRY_COSMOS = ITEMS.register("crystal_of_cosmos",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
     public static final Supplier<Item> CRY_EMPTY = ITEMS.register("empty_crystal",
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
     public static final Supplier<Item> FMTT_XP_ITEM = ITEMS.register("fmtt_xp_item",
-            () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
+            () -> new Item(new Item.Properties().rarity(Rarity.RARE).component(DataComponents.ENCHANTMENT_GLINT_OVERRIDE, true).fireResistant()));
     public static final Supplier<Item> FMTT_REWARD_ITEM = ITEMS.register("fmtt_reward_item",
             () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
     public static final Supplier<Item> FMTT_COMPASS = ITEMS.register("fmtt_compass",
