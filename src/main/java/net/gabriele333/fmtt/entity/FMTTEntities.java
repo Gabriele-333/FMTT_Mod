@@ -19,6 +19,7 @@ package net.gabriele333.fmtt.entity;/*
  */
 
 
+import net.gabriele333.fmtt.entity.crystals.Crystal;
 import net.minecraft.SharedConstants;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.Entity;
@@ -31,6 +32,7 @@ import net.minecraft.world.entity.EntityType.Builder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+
 
 import static net.gabriele333.fmtt.fmtt.MOD_ID;
 

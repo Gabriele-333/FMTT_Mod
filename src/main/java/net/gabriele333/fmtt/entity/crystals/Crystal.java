@@ -1,4 +1,4 @@
-package net.gabriele333.fmtt.entity;/*
+package net.gabriele333.fmtt.entity.crystals;/*
  * This file is part of From Magic To Tech.
  * Copyright (c) 2024, Gabriele_333, All rights reserved.
  *

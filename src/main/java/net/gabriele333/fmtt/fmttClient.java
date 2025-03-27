@@ -17,13 +17,17 @@ package net.gabriele333.fmtt;/*
  */
 
 import net.gabriele333.fmtt.client.render.InitModel;
+import net.gabriele333.fmtt.client.render.crystals.CrystalRenderer;
 import net.gabriele333.fmtt.config.ClientConfig;
+import net.gabriele333.fmtt.entity.FMTTEntities;
+import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
-
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
 
 @OnlyIn(Dist.CLIENT)
@@ -34,6 +38,11 @@ public class fmttClient extends fmtt{
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, new ClientConfig().spec);
         InitModel.init();
+
+    }
+    @SubscribeEvent
+    public static void onClientSetup(FMLClientSetupEvent event) {
+        EntityRenderers.register(FMTTEntities.CRYSTAL.get(), CrystalRenderer::new);
     }
 
 
