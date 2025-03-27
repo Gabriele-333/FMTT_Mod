@@ -22,6 +22,7 @@ package net.gabriele333.fmtt;
 import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
 import net.gabriele333.fmtt.data.FMTTDataProvider;
+import net.gabriele333.fmtt.entity.FMTTEntities;
 import net.gabriele333.fmtt.entity.FMTTVillager;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
@@ -63,6 +64,7 @@ public abstract class fmtt {
         FMTTItems.register(modEventBus);
         PlayerFMTTXpProvider.register(modEventBus);
         BLOCKS.register(modEventBus);
+        FMTTEntities.DR.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         modEventBus.addListener((RegisterEvent event) -> {
             if (event.getRegistryKey() == Registries.VILLAGER_PROFESSION) {
