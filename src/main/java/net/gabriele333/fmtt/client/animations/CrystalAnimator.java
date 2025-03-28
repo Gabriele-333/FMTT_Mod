@@ -18,7 +18,7 @@ package net.gabriele333.fmtt.client.animations;/*
  * File created on: 28/03/2025
  */
 
-import net.gabriele333.fmtt.client.models.CrystalModel;
+import net.gabriele333.fmtt.client.models.CrystalModelBase;
 import net.minecraft.world.entity.Entity;
 
 public class CrystalAnimator {
@@ -29,7 +29,7 @@ public class CrystalAnimator {
     private float bobSpeed = 0.1f;
     private float bobHeight = 0.0f;
 
-    public void animate(CrystalModel<?> model, Entity entity, float partialTicks) {
+    public void animate(CrystalModelBase<?> model, Entity entity, float partialTicks) {
         float ageInTicks = entity.tickCount + partialTicks;
 
         // Calcola le rotazioni

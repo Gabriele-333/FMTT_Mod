@@ -16,7 +16,7 @@ package net.gabriele333.fmtt;/*
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 
-import net.gabriele333.fmtt.client.models.CrystalModel;
+import net.gabriele333.fmtt.client.models.CrystalModelBase;
 import net.gabriele333.fmtt.client.models.FMTTModelLayers;
 import net.gabriele333.fmtt.client.render.InitModel;
 import net.gabriele333.fmtt.client.render.crystals.CrystalRenderer;
@@ -42,11 +42,15 @@ public class fmttClient extends fmtt{
 
     }
     private void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(FMTTEntities.CRYSTAL.get(), CrystalRenderer::new);
+        event.registerEntityRenderer(FMTTEntities.TIME_CRYSTAL.get(), CrystalRenderer::new);
+        event.registerEntityRenderer(FMTTEntities.TECH_CRYSTAL.get(), CrystalRenderer::new);
+        event.registerEntityRenderer(FMTTEntities.COSMOS_CRYSTAL.get(), CrystalRenderer::new);
+        event.registerEntityRenderer(FMTTEntities.MAGIC_CRYSTAL.get(), CrystalRenderer::new);
+        event.registerEntityRenderer(FMTTEntities.CHANCE_CRYSTAL.get(), CrystalRenderer::new);
     }
 
     public void onRegisterEntityRendererLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(FMTTModelLayers.CRYSTAL, CrystalModel::createBodyLayer);
+        event.registerLayerDefinition(FMTTModelLayers.CRYSTAL, CrystalModelBase::createBodyLayer);
     }
 
 

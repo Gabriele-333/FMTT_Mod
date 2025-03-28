@@ -21,7 +21,8 @@ package net.gabriele333.fmtt.client.render.crystals;/*
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.gabriele333.fmtt.client.animations.CrystalAnimator;
-import net.gabriele333.fmtt.client.models.CrystalModel;
+import net.gabriele333.fmtt.client.models.CrystalModelBase;
+import net.gabriele333.fmtt.entity.crystals.BaseCrystal;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
@@ -32,38 +33,37 @@ import net.minecraft.world.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 
 
-
-public class CrystalRenderer<T extends Entity> extends EntityRenderer<T> {
-    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/crystal.png");
-    private final CrystalModel<T> model;
-    private final CrystalAnimator animator = new CrystalAnimator();
+public class CrystalRenderer<T extends BaseCrystal> extends EntityRenderer<T> {
+    private final CrystalModelBase<T> model;
 
     public CrystalRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new CrystalModel<>(context.bakeLayer(CrystalModel.LAYER_LOCATION));
-        animator.setRotationSpeedMain(3.0f);
-        animator.setRotationSpeedFrame1(3.2f);
-        animator.setRotationSpeedFrame2(2.8f);
-        animator.setBobSpeed(0.1f);
+        this.model = new CrystalModelBase<>(context.bakeLayer(CrystalModelBase.LAYER_LOCATION));
     }
 
     @Override
-    public void render(@NotNull T entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
+    public void render(T crystal, float entityYaw, float partialTicks,
+                       PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
-        animator.animate(model, entity, partialTicks);
 
-        VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityTranslucent(TEXTURE));
 
-        model.setupAnim(entity, 0.0F, 0.0F, partialTicks, 0.0F, 0.0F);
+        float scale = crystal.getScale();
+        poseStack.scale(scale, scale, scale);
 
+        poseStack.translate(0.0F, 1.5F, 0.0F);
+
+
+        crystal.getAnimator().animate(model, crystal, partialTicks);
+
+        VertexConsumer vertexConsumer = bufferSource.getBuffer(
+                RenderType.entityTranslucent(getTextureLocation(crystal)));
         model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
 
         poseStack.popPose();
-        super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLight);
     }
 
     @Override
-    public @NotNull ResourceLocation getTextureLocation(@NotNull T entity) {
-        return TEXTURE;
+    public ResourceLocation getTextureLocation(T crystal) {
+        return crystal.getTexture();
     }
 }
