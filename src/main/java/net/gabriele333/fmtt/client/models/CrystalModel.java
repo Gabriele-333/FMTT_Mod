@@ -62,9 +62,11 @@ public class CrystalModel<T extends Entity> extends EntityModel<T> {
     }
 
     @Override
-    public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, int packedColor) {
-        // Render each part with the packed color
-        maincube.render(poseStack, vertexConsumer, packedLight, packedOverlay, packedColor);
-        frame1.render(poseStack, vertexConsumer, packedLight, packedOverlay, packedColor);
+    public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer,
+                               int packedLight, int packedOverlay, int packedColor) {
+
+
+        maincube.render(poseStack, buffer, packedLight, packedOverlay);
+        frame1.render(poseStack, buffer, packedLight, packedOverlay);
     }
 }

@@ -17,31 +17,64 @@ package net.gabriele333.fmtt.entity.crystals;/*
  */
 
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.AABB;
 
 
 public class Crystal extends Entity {
+    private static final EntityDataAccessor<Boolean> SHOW_BOTTOM = SynchedEntityData.defineId(Crystal.class, EntityDataSerializers.BOOLEAN);
 
-    public Crystal(EntityType<?> entityType, Level level) {
-        super(entityType, level);
+
+    public Crystal(EntityType<? extends Crystal> type, Level level) {
+        super(type, level);
+    }
+
+
+    public boolean showsBottom() {
+        return this.entityData.get(SHOW_BOTTOM);
+    }
+
+    public void setShowBottom(boolean show) {
+        this.entityData.set(SHOW_BOTTOM, show);
     }
 
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
-
+        builder.define(SHOW_BOTTOM, true);
     }
 
     @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-
+    public void tick() {
+        super.tick();
+        if (level().isClientSide) {
+            for (int i = 0; i < 4; i++) {
+                double dx = (random.nextDouble() - 0.5) * 0.2;
+                double dy = random.nextDouble() * 0.2;
+                double dz = (random.nextDouble() - 0.5) * 0.2;
+                level().addParticle(ParticleTypes.END_ROD, getX(), getY(), getZ(), dx, dy, dz);
+            }
+        }
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
+    protected void readAdditionalSaveData(CompoundTag tag) {
+        setShowBottom(tag.getBoolean("ShowBottom"));
+    }
 
+    @Override
+    protected void addAdditionalSaveData(CompoundTag tag) {
+        tag.putBoolean("ShowBottom", showsBottom());
+    }
+
+    @Override
+    public AABB getBoundingBoxForCulling() {
+        return this.getBoundingBox().inflate(1.0);
     }
 }

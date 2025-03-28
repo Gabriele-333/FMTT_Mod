@@ -21,19 +21,19 @@ package net.gabriele333.fmtt.client.render.crystals;/*
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.gabriele333.fmtt.client.models.CrystalModel;
-import net.gabriele333.fmtt.entity.crystals.Crystal;
-import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.Entity;
+import org.jetbrains.annotations.NotNull;
 
-public class CrystalRenderer extends EntityRenderer<Crystal> {
+
+
+public class CrystalRenderer<T extends Entity> extends EntityRenderer<T> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/crystal.png");
-    private final CrystalModel<Crystal> model;
+    private final CrystalModel<T> model;
 
     public CrystalRenderer(EntityRendererProvider.Context context) {
         super(context);
@@ -41,20 +41,21 @@ public class CrystalRenderer extends EntityRenderer<Crystal> {
     }
 
     @Override
-    public void render(Crystal entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int packedLight) {
+    public void render(@NotNull T entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
-        poseStack.scale(1.0F, 1.0F, 1.0F);
-        poseStack.translate(0.0F, -1.5F, 0.0F);
 
-        VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
-        this.model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY, 0xFFFFFFFF);
+        VertexConsumer vertexConsumer = bufferSource.getBuffer(model.renderType(TEXTURE));
+
+        model.setupAnim(entity, 0.0F, 0.0F, partialTicks, 0.0F, 0.0F);
+
+        model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
 
         poseStack.popPose();
-        super.render(entity, entityYaw, partialTicks, poseStack, buffer, packedLight);
+        super.render(entity, entityYaw, partialTicks, poseStack, bufferSource, packedLight);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Crystal entity) {
+    public @NotNull ResourceLocation getTextureLocation(@NotNull T entity) {
         return TEXTURE;
     }
 }

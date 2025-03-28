@@ -16,33 +16,37 @@ package net.gabriele333.fmtt;/*
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 
+import net.gabriele333.fmtt.client.models.CrystalModel;
+import net.gabriele333.fmtt.client.models.FMTTModelLayers;
 import net.gabriele333.fmtt.client.render.InitModel;
 import net.gabriele333.fmtt.client.render.crystals.CrystalRenderer;
 import net.gabriele333.fmtt.config.ClientConfig;
 import net.gabriele333.fmtt.entity.FMTTEntities;
-import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 
 @OnlyIn(Dist.CLIENT)
 public class fmttClient extends fmtt{
     public fmttClient(IEventBus modEventBus, ModContainer modContainer) {
         super(modEventBus, modContainer);
-
+        modEventBus.addListener(this::registerEntityRenderers);
+        modEventBus.addListener(this::onRegisterEntityRendererLayerDefinitions);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, new ClientConfig().spec);
         InitModel.init();
 
     }
-    @SubscribeEvent
-    public static void onClientSetup(FMLClientSetupEvent event) {
-        EntityRenderers.register(FMTTEntities.CRYSTAL.get(), CrystalRenderer::new);
+    private void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(FMTTEntities.CRYSTAL.get(), CrystalRenderer::new);
+    }
+
+    public void onRegisterEntityRendererLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
+        event.registerLayerDefinition(FMTTModelLayers.CRYSTAL, CrystalModel::createBodyLayer);
     }
 
 

@@ -64,7 +64,7 @@ public abstract class fmtt {
         FMTTItems.register(modEventBus);
         PlayerFMTTXpProvider.register(modEventBus);
         BLOCKS.register(modEventBus);
-        FMTTEntities.DR.register(modEventBus);
+        FMTTEntities.REGISTER.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         modEventBus.addListener((RegisterEvent event) -> {
             if (event.getRegistryKey() == Registries.VILLAGER_PROFESSION) {
