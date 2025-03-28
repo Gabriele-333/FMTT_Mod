@@ -20,8 +20,10 @@ package net.gabriele333.fmtt.client.render.crystals;/*
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import net.gabriele333.fmtt.client.animations.CrystalAnimator;
 import net.gabriele333.fmtt.client.models.CrystalModel;
 import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -34,17 +36,23 @@ import org.jetbrains.annotations.NotNull;
 public class CrystalRenderer<T extends Entity> extends EntityRenderer<T> {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/crystal.png");
     private final CrystalModel<T> model;
+    private final CrystalAnimator animator = new CrystalAnimator();
 
     public CrystalRenderer(EntityRendererProvider.Context context) {
         super(context);
         this.model = new CrystalModel<>(context.bakeLayer(CrystalModel.LAYER_LOCATION));
+        animator.setRotationSpeedMain(3.0f);
+        animator.setRotationSpeedFrame1(3.2f);
+        animator.setRotationSpeedFrame2(2.8f);
+        animator.setBobSpeed(0.1f);
     }
 
     @Override
     public void render(@NotNull T entity, float entityYaw, float partialTicks, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
+        animator.animate(model, entity, partialTicks);
 
-        VertexConsumer vertexConsumer = bufferSource.getBuffer(model.renderType(TEXTURE));
+        VertexConsumer vertexConsumer = bufferSource.getBuffer(RenderType.entityTranslucent(TEXTURE));
 
         model.setupAnim(entity, 0.0F, 0.0F, partialTicks, 0.0F, 0.0F);
 
