@@ -49,7 +49,7 @@ public class Crystal extends Entity {
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(SHOW_BOTTOM, true);
     }
-
+/*
     @Override
     public void tick() {
         super.tick();
@@ -62,7 +62,7 @@ public class Crystal extends Entity {
             }
         }
     }
-
+*/
     @Override
     protected void readAdditionalSaveData(CompoundTag tag) {
         setShowBottom(tag.getBoolean("ShowBottom"));
