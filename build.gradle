@@ -224,8 +224,3 @@ idea {
         downloadJavadoc = true
     }
 }
-/*mixin {
-    add sourceSets.main, "fmtt.mixins.refmap.json"
-    config 'fmtt.mixins.json'
-
-}*/
