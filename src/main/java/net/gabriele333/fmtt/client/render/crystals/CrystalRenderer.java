@@ -20,7 +20,6 @@ package net.gabriele333.fmtt.client.render.crystals;/*
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.gabriele333.fmtt.client.animations.CrystalAnimator;
 import net.gabriele333.fmtt.client.models.CrystalModelBase;
 import net.gabriele333.fmtt.entity.crystals.BaseCrystal;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -29,8 +28,7 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import org.jetbrains.annotations.NotNull;
+
 
 
 public class CrystalRenderer<T extends BaseCrystal> extends EntityRenderer<T> {
@@ -46,20 +44,25 @@ public class CrystalRenderer<T extends BaseCrystal> extends EntityRenderer<T> {
                        PoseStack poseStack, MultiBufferSource bufferSource, int packedLight) {
         poseStack.pushPose();
 
-
         float scale = crystal.getScale();
         poseStack.scale(scale, scale, scale);
-
         poseStack.translate(0.0F, 1.5F, 0.0F);
 
-
         crystal.getAnimator().animate(model, crystal, partialTicks);
-
         VertexConsumer vertexConsumer = bufferSource.getBuffer(
                 RenderType.entityTranslucent(getTextureLocation(crystal)));
         model.renderToBuffer(poseStack, vertexConsumer, packedLight, OverlayTexture.NO_OVERLAY);
 
+        VertexConsumer emissiveConsumer = bufferSource.getBuffer(
+                RenderType.eyes(getEmissiveTextureLocation(crystal)));
+        model.renderEmissive(poseStack, emissiveConsumer, packedLight, OverlayTexture.NO_OVERLAY);
+
         poseStack.popPose();
+    }
+
+
+    public ResourceLocation getEmissiveTextureLocation(T crystal) {
+        return ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/crystal_emissive.png");
     }
 
     @Override
