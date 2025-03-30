@@ -66,4 +66,12 @@ public class CrystalModelBase<T extends Entity> extends EntityModel<T> {
         frame1.render(poseStack, buffer, packedLight, packedOverlay);
         frame2.render(poseStack, buffer, packedLight, packedOverlay);
     }
+
+    public void renderEmissive(PoseStack poseStack, VertexConsumer buffer,
+                               int packedLight, int packedOverlay) {
+
+        maincube.render(poseStack, buffer, 15728640, packedOverlay); // 15728640 è il valore di luce massimo
+        frame1.render(poseStack, buffer, 15728640, packedOverlay);
+        frame2.render(poseStack, buffer, 15728640, packedOverlay);
+    }
 }
