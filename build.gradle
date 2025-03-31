@@ -90,6 +90,7 @@ runs {
         systemProperty 'forge.logging.markers', 'REGISTRIES'
 
         // Recommended logging level for the console
+        // SS 52104715b3ff61460e37d3ae10747b487149a831e701dc1160c9dc3aceebfc4b
         // You can set various levels here.
         // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
         systemProperty 'forge.logging.console.level', 'debug'

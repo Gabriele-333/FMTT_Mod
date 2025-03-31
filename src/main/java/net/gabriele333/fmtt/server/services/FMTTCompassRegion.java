@@ -43,7 +43,7 @@ final class FMTTCompassRegion extends FMTTSavedData {
 
     private static final int BITMAP_LENGTH = CHUNKS_PER_REGION * CHUNKS_PER_REGION;
 
-    // Key is the section index, see ChunkAccess.getSections()
+
     private final Map<Integer, BitSet> sections = new HashMap<>();
 
 
