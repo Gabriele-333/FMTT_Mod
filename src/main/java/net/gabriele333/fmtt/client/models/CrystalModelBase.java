@@ -44,7 +44,15 @@ public class CrystalModelBase<T extends Entity> extends EntityModel<T> {
         MeshDefinition meshdefinition = new MeshDefinition();
         PartDefinition partdefinition = meshdefinition.getRoot();
 
-        PartDefinition maincube = partdefinition.addOrReplaceChild("maincube", CubeListBuilder.create().texOffs(0, 96).addBox(-8.0F, -8.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 8.0F, 0.0F));
+        PartDefinition maincube = partdefinition.addOrReplaceChild("maincube", CubeListBuilder.create().texOffs(0, 96).addBox(-8.0F, -8.0F, -8.0F, 16.0F, 16.0F, 16.0F, new CubeDeformation(0.0F))
+                .texOffs(96, 0).addBox(6.5F, -8.6F, 6.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(96, 4).addBox(6.5F, -8.6F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(96, 12).addBox(6.5F, 6.4F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(96, 8).addBox(6.5F, 6.4F, 6.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(96, 28).addBox(-8.5F, 6.4F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(96, 24).addBox(-8.5F, 6.4F, 6.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(96, 20).addBox(-8.5F, -8.6F, 6.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F))
+                .texOffs(96, 16).addBox(-8.5F, -8.6F, -8.5F, 2.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 8.0F, 0.0F));
 
         PartDefinition frame1 = partdefinition.addOrReplaceChild("frame1", CubeListBuilder.create().texOffs(0, 0).addBox(-12.0F, -12.0F, -12.0F, 24.0F, 24.0F, 24.0F, new CubeDeformation(-2.0F)), PartPose.offset(0.0F, 8.0F, 0.0F));
 
