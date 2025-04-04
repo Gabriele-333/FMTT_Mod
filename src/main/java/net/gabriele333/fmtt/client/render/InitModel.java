@@ -22,6 +22,7 @@ package net.gabriele333.fmtt.client.render;/*
 
 
 import net.gabriele333.fmtt.client.render.compass.FMTTCompassModel;
+import net.gabriele333.fmtt.client.render.crystal_item.CrystalItemModel;
 import net.gabriele333.fmtt.fmttint;
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.neoforged.api.distmarker.Dist;
@@ -39,6 +40,7 @@ public final class InitModel {
 
     public static void init() {
         addBuiltInModel("item/fmtt_compass", FMTTCompassModel::new);
+        addBuiltInModel("item/crystal_of_time", CrystalItemModel::new);
     }
 
     private static <T extends UnbakedModel> void addBuiltInModel(String id, Supplier<T> modelFactory) {
