@@ -23,7 +23,7 @@ import net.minecraft.world.entity.Entity;
 
 public class CrystalAnimator {
     // Variabili di animazione
-    private float rotationSpeedMain = 4.0f;
+    private float rotationSpeedMain = 6.0f;
     private float rotationSpeedFrame1 = 8.2f;
     private float rotationSpeedFrame2 = 7.8f;
     private float bobSpeed = 0.1f;
