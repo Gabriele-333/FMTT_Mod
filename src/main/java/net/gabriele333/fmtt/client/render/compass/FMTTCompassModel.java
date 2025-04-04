@@ -43,10 +43,10 @@ import net.minecraft.resources.ResourceLocation;
 public class FMTTCompassModel implements BasicUnbakedModel {
 
     private static final ResourceLocation MODEL_BASE = ResourceLocation.parse(
-            "fmtt:item/fmtt_compass_base");
+            "fmtt:item/compass/fmtt_compass_base");
 
     private static final ResourceLocation MODEL_POINTER = ResourceLocation.parse(
-            "fmtt:item/fmtt_compass_pointer");
+            "fmtt:item/compass/fmtt_compass_pointer");
 
     @Nullable
     @Override
