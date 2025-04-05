@@ -26,6 +26,7 @@ import net.gabriele333.fmtt.network.clientbound.ErrorMessagePacket;
 import net.gabriele333.fmtt.network.serverbound.CompassRequestPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTRewardPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTXpPacket;
+import net.gabriele333.fmtt.network.serverbound.SpawnCrystalPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -50,6 +51,7 @@ public class FMTTNetwork {
         serverbound(registrar, FMTTXpPacket.TYPE, FMTTXpPacket.STREAM_CODEC);
         serverbound(registrar, FMTTRewardPacket.TYPE, FMTTRewardPacket.STREAM_CODEC);
         serverbound(registrar, CompassRequestPacket.TYPE, CompassRequestPacket.STREAM_CODEC);
+        serverbound(registrar, SpawnCrystalPacket.TYPE, SpawnCrystalPacket.STREAM_CODEC);
 
     }
 
