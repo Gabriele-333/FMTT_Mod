@@ -40,7 +40,7 @@ public final class InitModel {
 
     public static void init() {
         addBuiltInModel("item/fmtt_compass", FMTTCompassModel::new);
-        addBuiltInModel("item/crystal_of_time", () -> new CrystalItemModel("fmtt:item/crystal/maincube_time"));
+        addBuiltInModel("item/crystal", () -> new CrystalItemModel("fmtt:item/crystal/maincube"));
     }
 
     private static <T extends UnbakedModel> void addBuiltInModel(String id, Supplier<T> modelFactory) {
