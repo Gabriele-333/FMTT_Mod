@@ -32,9 +32,13 @@ import java.util.Collection;
 import java.util.function.Function;
 
 public class CrystalItemModel implements BasicUnbakedModel {
-    private static final ResourceLocation MAINCUBE = ResourceLocation.parse("fmtt:item/crystal/maincube");
+    private static ResourceLocation MAINCUBE;
     private static final ResourceLocation FRAME1 = ResourceLocation.parse("fmtt:item/crystal/frame1");
     private static final ResourceLocation FRAME2 = ResourceLocation.parse("fmtt:item/crystal/frame2");
+
+    public CrystalItemModel(String mainCube) {
+        this.MAINCUBE = ResourceLocation.parse(mainCube);
+    }
 
 
     @Nullable
