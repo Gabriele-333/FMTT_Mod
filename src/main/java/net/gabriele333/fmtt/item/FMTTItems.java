@@ -20,6 +20,9 @@ package net.gabriele333.fmtt.item;
 import net.gabriele333.fmtt.block.FMTTBlock;
 import net.gabriele333.fmtt.block.StarPieceBlock;
 import net.gabriele333.fmtt.fmtt;
+import net.gabriele333.fmtt.item.crystals.BaseCrystalItem;
+import net.gabriele333.fmtt.item.crystals.CosmosCrystalItem;
+import net.gabriele333.fmtt.item.crystals.TimeCrystalItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -35,7 +38,10 @@ public class FMTTItems {
 
     //Crystals items
     public static final Supplier<Item> CRY_TIME = ITEMS.register("crystal_of_time",
-            () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+            () -> new TimeCrystalItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
+    public static final Supplier<Item> CRY_COSMOS = ITEMS.register("crystal_of_cosmos",
+            () -> new CosmosCrystalItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
+//FIXME: Fix this shit
 
     public static final Supplier<Item> CRY_TECH = ITEMS.register("crystal_of_tech",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
@@ -45,8 +51,7 @@ public class FMTTItems {
 
     public static final Supplier<Item> CRY_CHANCE = ITEMS.register("crystal_of_chance",
             () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
-    public static final Supplier<Item> CRY_COSMOS = ITEMS.register("crystal_of_cosmos",
-            () -> new Item(new Item.Properties().rarity(Rarity.EPIC).fireResistant()));
+
     public static final Supplier<Item> CRY_EMPTY = ITEMS.register("empty_crystal",
             () -> new Item(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
     public static final Supplier<Item> FMTT_XP_ITEM = ITEMS.register("fmtt_xp_item",
