@@ -19,32 +19,18 @@ package net.gabriele333.fmtt.entity.crystals;/*
  */
 
 import net.gabriele333.fmtt.client.animations.CrystalAnimator;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 
-public class TimeCrystal extends BaseCrystal{
+
+public class TimeCrystal extends BaseCrystal {
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/time_crystal.png");
     private static final ResourceLocation EMISSIVE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/emissive_time_crystal.png");
 
-    public TimeCrystal(EntityType<?> type, Level level) {
-        super(type, level);
-    }
-
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
+    public TimeCrystal(EntityType<?> type, Level level) {super(type, level);
     }
 
     @Override
@@ -65,6 +51,7 @@ public class TimeCrystal extends BaseCrystal{
     public ResourceLocation getTexture() {
         return TEXTURE;
     }
+
     @Override
     public ResourceLocation getEmissiveTexture() {
         return EMISSIVE_TEXTURE;
