@@ -33,17 +33,7 @@ public class TechCrystal extends BaseCrystal{
         super(type, level);
     }
 
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-    }
 
-    @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
-    }
 
     @Override
     protected CrystalAnimator createAnimator() {

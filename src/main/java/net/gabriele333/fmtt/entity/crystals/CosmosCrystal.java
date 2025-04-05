@@ -30,22 +30,10 @@ public class CosmosCrystal extends BaseCrystal {
             ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/cosmos_crystal.png");
     private static final ResourceLocation EMISSIVE_TEXTURE =
             ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/emissive_cosmos_crystal.png");
-
     public CosmosCrystal(EntityType<?> type, Level level) {
         super(type, level);
     }
 
-    @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
-    }
-
-    @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
-    }
 
     @Override
     protected CrystalAnimator createAnimator() {
