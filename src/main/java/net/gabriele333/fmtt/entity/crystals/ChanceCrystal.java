@@ -26,8 +26,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 
 public class ChanceCrystal extends BaseCrystal{
-    private static final ResourceLocation TEXTURE =
-            ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/chance_crystal.png");
+    private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/chance_crystal.png");
+    //private static final ResourceLocation EMISSIVE_TEXTURE = ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/emissive_chance_crystal.png");
 
     public ChanceCrystal(EntityType<?> type, Level level) {
         super(type, level);
@@ -62,5 +62,10 @@ public class ChanceCrystal extends BaseCrystal{
     @Override
     public ResourceLocation getTexture() {
         return TEXTURE;
+    }
+
+    @Override
+    public ResourceLocation getEmissiveTexture() {
+        return null;
     }
 }

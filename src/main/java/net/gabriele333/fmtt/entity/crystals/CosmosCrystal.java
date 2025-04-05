@@ -28,6 +28,8 @@ import net.minecraft.world.level.Level;
 public class CosmosCrystal extends BaseCrystal {
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/cosmos_crystal.png");
+    private static final ResourceLocation EMISSIVE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/emissive_cosmos_crystal.png");
 
     public CosmosCrystal(EntityType<?> type, Level level) {
         super(type, level);
@@ -62,5 +64,9 @@ public class CosmosCrystal extends BaseCrystal {
     @Override
     public ResourceLocation getTexture() {
         return TEXTURE;
+    }
+    @Override
+    public ResourceLocation getEmissiveTexture() {
+        return EMISSIVE_TEXTURE;
     }
 }

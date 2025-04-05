@@ -28,6 +28,7 @@ import net.minecraft.world.level.Level;
 public abstract class BaseCrystal extends Entity {
     protected final CrystalAnimator animator;
 
+
     public BaseCrystal(EntityType<?> type, Level level) {
         super(type, level);
         this.animator = createAnimator();
@@ -41,4 +42,5 @@ public abstract class BaseCrystal extends Entity {
 
     public abstract float getScale();
     public abstract ResourceLocation getTexture();
+    public abstract ResourceLocation getEmissiveTexture();
 }

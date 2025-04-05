@@ -63,4 +63,8 @@ public class TechCrystal extends BaseCrystal{
     public ResourceLocation getTexture() {
         return TEXTURE;
     }
+    @Override
+    public ResourceLocation getEmissiveTexture() {
+        return null;
+    }
 }

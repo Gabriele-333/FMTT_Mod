@@ -28,6 +28,8 @@ import net.minecraft.world.level.Level;
 public class TimeCrystal extends BaseCrystal{
     private static final ResourceLocation TEXTURE =
             ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/time_crystal.png");
+    private static final ResourceLocation EMISSIVE_TEXTURE =
+            ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/emissive_time_crystal.png");
 
     public TimeCrystal(EntityType<?> type, Level level) {
         super(type, level);
@@ -62,5 +64,9 @@ public class TimeCrystal extends BaseCrystal{
     @Override
     public ResourceLocation getTexture() {
         return TEXTURE;
+    }
+    @Override
+    public ResourceLocation getEmissiveTexture() {
+        return EMISSIVE_TEXTURE;
     }
 }

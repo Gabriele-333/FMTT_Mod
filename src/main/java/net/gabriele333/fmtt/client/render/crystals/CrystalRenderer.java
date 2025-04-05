@@ -62,7 +62,10 @@ public class CrystalRenderer<T extends BaseCrystal> extends EntityRenderer<T> {
 
 
     public ResourceLocation getEmissiveTextureLocation(T crystal) {
-        return ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/crystal_emissive.png");
+        if (crystal.getEmissiveTexture() == null){
+            return ResourceLocation.fromNamespaceAndPath("fmtt", "textures/entity/crystal_emissive.png");
+        }
+        return crystal.getEmissiveTexture();
     }
 
     @Override
