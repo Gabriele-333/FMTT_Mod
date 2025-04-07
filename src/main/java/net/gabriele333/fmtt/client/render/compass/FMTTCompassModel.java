@@ -23,11 +23,13 @@
 package net.gabriele333.fmtt.client.render.compass;
 
 import java.util.Collection;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import com.google.common.collect.ImmutableSet;
 
 import net.gabriele333.fmtt.client.render.BasicUnbakedModel;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.Nullable;
 
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -60,6 +62,11 @@ public class FMTTCompassModel implements BasicUnbakedModel {
     @Override
     public Collection<ResourceLocation> getDependencies() {
         return ImmutableSet.of(MODEL_BASE, MODEL_POINTER);
+    }
+
+    @Override
+    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
+
     }
 
 }

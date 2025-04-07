@@ -41,9 +41,7 @@ import java.util.List;
 
 
 public abstract class BaseCrystalItem extends Item {
-    private final String crystalType;
-    private static final String HAS_ENTITY_KEY = "HasEntity";
-    private static final String CRYSTAL_TYPE_KEY = "CrystalType";
+    protected final String crystalType;
 
     public BaseCrystalItem(Properties properties, String crystalType) {
         super(properties);
@@ -61,8 +59,8 @@ public abstract class BaseCrystalItem extends Item {
 
         if (!level.isClientSide && context.getPlayer() instanceof ServerPlayer serverPlayer) {
             BlockPos pos = context.getClickedPos().above();
-            // Passa il tipo specifico del cristallo
             PacketDistributor.sendToServer(new SpawnCrystalPacket(pos, this.crystalType, itemStack));
+            setEntity(itemStack, true);
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
@@ -70,29 +68,12 @@ public abstract class BaseCrystalItem extends Item {
 
     public static boolean hasEntity(ItemStack stack) {
         CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-        return data != null && data.copyTag().getBoolean(HAS_ENTITY_KEY);
+        return data != null && data.copyTag().getBoolean("HasEntity");
     }
 
     public static void setEntity(ItemStack stack, boolean hasEntity) {
         CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        tag.putBoolean(HAS_ENTITY_KEY, hasEntity);
+        tag.putBoolean("HasEntity", hasEntity);
         stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-    }
-
-    public static String getCrystalType(ItemStack stack) {
-        CustomData data = stack.get(DataComponents.CUSTOM_DATA);
-        return data != null ? data.copyTag().getString(CRYSTAL_TYPE_KEY) : "unknown";
-    }
-
-    public static void setCrystalType(ItemStack stack, String type) {
-        CompoundTag tag = stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY).copyTag();
-        tag.putString(CRYSTAL_TYPE_KEY, type);
-        stack.set(DataComponents.CUSTOM_DATA, CustomData.of(tag));
-    }
-
-    @Override
-    public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
-        super.appendHoverText(stack, context, tooltip, flag);
-        tooltip.add(Component.translatable("tooltip.fmtt.crystal_type", getCrystalType(stack)));
     }
 }

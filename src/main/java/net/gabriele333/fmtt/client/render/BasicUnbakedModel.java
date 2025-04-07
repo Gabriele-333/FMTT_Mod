@@ -25,10 +25,12 @@ package net.gabriele333.fmtt.client.render;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 
 public interface BasicUnbakedModel extends UnbakedModel {
@@ -43,4 +45,6 @@ public interface BasicUnbakedModel extends UnbakedModel {
             function.apply(dependency).resolveParents(function);
         }
     }
+
+    void initializeClient(Consumer<IClientItemExtensions> consumer);
 }
