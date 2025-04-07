@@ -55,9 +55,6 @@ public abstract class BaseCrystalItem extends Item {
         Level level = context.getLevel();
         ItemStack itemStack = context.getItemInHand();
 
-        if (hasEntity(itemStack)) {
-            return InteractionResult.PASS;
-        }
 
         if (!level.isClientSide && context.getPlayer() instanceof ServerPlayer serverPlayer) {
             BlockPos pos = context.getClickedPos().above();
