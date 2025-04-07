@@ -16,7 +16,6 @@ package net.gabriele333.fmtt.entity.crystals;/*
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 
-
 import net.gabriele333.fmtt.client.animations.CrystalAnimator;
 import net.gabriele333.fmtt.item.crystals.BaseCrystalItem;
 import net.minecraft.nbt.CompoundTag;
@@ -31,10 +30,14 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
+
+import java.util.UUID;
 
 
 public abstract class BaseCrystal extends Entity {
     protected final CrystalAnimator animator;
+
     private static final EntityDataAccessor<ItemStack> ITEM_STACK = SynchedEntityData.defineId(BaseCrystal.class, EntityDataSerializers.ITEM_STACK);
     private Player owner;
 
@@ -43,67 +46,68 @@ public abstract class BaseCrystal extends Entity {
         this.animator = createAnimator();
     }
 
+
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder builder) {
         builder.define(ITEM_STACK, ItemStack.EMPTY);
     }
 
-    @Override
-    protected void readAdditionalSaveData(CompoundTag compound) {
-        if (compound.contains("ItemStack")) {
-            ItemStack stack = ItemStack.parseOptional(this.registryAccess(), compound.getCompound("ItemStack"));
-            setItemStack(stack);
-        }
-    }
-
-    @Override
-    protected void addAdditionalSaveData(CompoundTag compound) {
-        if (!getItemStack().isEmpty()) {
-            compound.put("ItemStack", getItemStack().save(this.registryAccess(), new CompoundTag()));
-        }
-    }
-    protected abstract CrystalAnimator createAnimator();
-    public abstract float getScale();
-    public abstract ResourceLocation getTexture();
-    public abstract ResourceLocation getEmissiveTexture();
-
-    public CrystalAnimator getAnimator() {
-        return animator;
-    }
-
-    public void setOwner(Player player) {
-        this.owner = player;
-    }
-
-    public Player getOwner() {
-        return owner;
-    }
-
-    public ItemStack getItemStack() {
-        return this.entityData.get(ITEM_STACK);
-    }
-
-    public void setItemStack(ItemStack stack) {
-        this.entityData.set(ITEM_STACK, stack.copy());
-    }
-
-    @Override
-    public InteractionResult interact(Player player, InteractionHand hand) {
-        if (player == this.owner && hand == InteractionHand.MAIN_HAND) {
-            if (!this.level().isClientSide) {
-                ItemStack stack = getItemStack().copy();
-                BaseCrystalItem.setEntity(stack, false);
-
-                if (player.getInventory().add(stack)) {
-                    player.inventoryMenu.broadcastChanges();
-                } else {
-                    player.drop(stack, false);
-                }
-
-                this.discard();
+        @Override
+        protected void readAdditionalSaveData(CompoundTag compound) {
+            if (compound.contains("ItemStack")) {
+                ItemStack stack = ItemStack.parseOptional(this.registryAccess(), compound.getCompound("ItemStack"));
+                setItemStack(stack);
             }
-            return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
-        return super.interact(player, hand);
+
+        @Override
+        protected void addAdditionalSaveData(CompoundTag compound) {
+            if (!getItemStack().isEmpty()) {
+                compound.put("ItemStack", getItemStack().save(this.registryAccess(), new CompoundTag()));
+            }
+        }
+        protected abstract CrystalAnimator createAnimator();
+        public abstract float getScale();
+        public abstract ResourceLocation getTexture();
+        public abstract ResourceLocation getEmissiveTexture();
+
+        public CrystalAnimator getAnimator() {
+            return animator;
+        }
+
+        public void setOwner(Player player) {
+            this.owner = player;
+        }
+
+        public Player getOwner() {
+            return owner;
+        }
+
+        public ItemStack getItemStack() {
+            return this.entityData.get(ITEM_STACK);
+        }
+
+        public void setItemStack(ItemStack stack) {
+            this.entityData.set(ITEM_STACK, stack.copy());
+        }
+
+        @Override
+        public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
+            if (player == this.owner && hand == InteractionHand.MAIN_HAND) {
+                if (!this.level().isClientSide) {
+                    ItemStack stack = getItemStack().copy();
+                    BaseCrystalItem.setEntity(stack, false);
+
+                    if (player.getInventory().add(stack)) {
+                        player.inventoryMenu.broadcastChanges();
+                    } else {
+                        player.drop(stack, false);
+                    }
+
+                    this.discard();
+                }
+                return InteractionResult.sidedSuccess(this.level().isClientSide);
+            }
+            return super.interactAt(player, vec, hand);
+        }
     }
-}

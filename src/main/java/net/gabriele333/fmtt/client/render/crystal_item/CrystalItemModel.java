@@ -39,7 +39,6 @@ import java.util.function.Function;
 
 
 public class CrystalItemModel implements BasicUnbakedModel {
-    public static final ModelProperty<Boolean> HAS_ENTITY_PROPERTY = new ModelProperty<>();
     private static ResourceLocation MAINCUBE;
     private static final ResourceLocation FRAME1 = ResourceLocation.parse("fmtt:item/crystal/frame1");
     private static final ResourceLocation FRAME2 = ResourceLocation.parse("fmtt:item/crystal/frame2");
@@ -58,26 +57,8 @@ public class CrystalItemModel implements BasicUnbakedModel {
         return new CrystalItemBakedModel(maincube,frame1,frame2);
 
     }
-
     @Override
     public Collection<ResourceLocation> getDependencies() {
         return ImmutableSet.of(MAINCUBE, FRAME1, FRAME2);
-    }
-
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            public @Nullable ModelData getModelData(ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed) {
-                return ModelData.builder()
-                        .with(HAS_ENTITY_PROPERTY, hasEntity(stack))
-                        .build();
-            }
-        });
-    }
-
-    private static boolean hasEntity(ItemStack stack) {
-        return stack.getOrDefault(DataComponents.CUSTOM_DATA, CustomData.EMPTY)
-                .copyTag()
-                .getBoolean("HasEntity");
     }
 }

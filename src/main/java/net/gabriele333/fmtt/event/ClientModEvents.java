@@ -45,9 +45,6 @@ public class ClientModEvents {
 
     @EventBusSubscriber(modid = fmtt.MOD_ID, value = Dist.CLIENT)
     public static class ForgeEvents {
-
-
-
         @SubscribeEvent(priority = EventPriority.LOW)
         public static void onPlayerJoinClient(PlayerEvent.PlayerLoggedInEvent event) {
             try {

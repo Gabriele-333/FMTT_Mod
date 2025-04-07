@@ -64,10 +64,7 @@ public class FMTTCompassModel implements BasicUnbakedModel {
         return ImmutableSet.of(MODEL_BASE, MODEL_POINTER);
     }
 
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
 
-    }
 
 }
 

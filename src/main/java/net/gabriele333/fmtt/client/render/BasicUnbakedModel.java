@@ -46,5 +46,4 @@ public interface BasicUnbakedModel extends UnbakedModel {
         }
     }
 
-    void initializeClient(Consumer<IClientItemExtensions> consumer);
 }

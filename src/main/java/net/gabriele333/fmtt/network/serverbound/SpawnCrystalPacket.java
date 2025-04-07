@@ -87,5 +87,5 @@ public record SpawnCrystalPacket(BlockPos pos, String crystalType, ItemStack ite
             itemStack.shrink(1);
         }
     }
-//FIXME: mancano gli altri cristalli
+    //FIXME: mancano gli altri cristalli
 }
