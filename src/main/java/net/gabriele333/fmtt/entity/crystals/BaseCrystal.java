@@ -19,7 +19,6 @@ package net.gabriele333.fmtt.entity.crystals;/*
 
 import net.gabriele333.fmtt.client.animations.CrystalAnimator;
 import net.gabriele333.fmtt.item.crystals.BaseCrystalItem;
-import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -32,9 +31,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
-
-import java.util.UUID;
 
 
 public abstract class BaseCrystal extends Entity {
@@ -92,7 +88,7 @@ public abstract class BaseCrystal extends Entity {
     }
 
     @Override
-    public InteractionResult interactAt(Player player, Vec3 vec, InteractionHand hand) {
+    public InteractionResult interact(Player player, InteractionHand hand) {
         if (player == this.owner && hand == InteractionHand.MAIN_HAND) {
             if (!this.level().isClientSide) {
                 ItemStack stack = getItemStack().copy();
@@ -108,6 +104,6 @@ public abstract class BaseCrystal extends Entity {
             }
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         }
-        return super.interactAt(player, vec, hand);
+        return super.interact(player, hand);
     }
 }
