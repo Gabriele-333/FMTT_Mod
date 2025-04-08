@@ -20,31 +20,25 @@ package net.gabriele333.fmtt.client.render.crystal_item;/*
 
 import com.google.common.collect.ImmutableSet;
 import net.gabriele333.fmtt.client.render.BasicUnbakedModel;
-import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
-import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.component.CustomData;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
-import net.neoforged.neoforge.client.model.data.ModelData;
-import net.neoforged.neoforge.client.model.data.ModelProperty;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 
 public class CrystalItemModel implements BasicUnbakedModel {
-    private static ResourceLocation MAINCUBE;
+    private final String textureName;
+    private final ResourceLocation MAINCUBE;
     private static final ResourceLocation FRAME1 = ResourceLocation.parse("fmtt:item/crystal/frame1");
     private static final ResourceLocation FRAME2 = ResourceLocation.parse("fmtt:item/crystal/frame2");
 
-    public CrystalItemModel(String mainCube) {
+    public CrystalItemModel(String mainCube, String textureName) {
         this.MAINCUBE = ResourceLocation.parse(mainCube);
+        this.textureName = textureName;
     }
 
 
@@ -54,9 +48,9 @@ public class CrystalItemModel implements BasicUnbakedModel {
         BakedModel maincube = loader.bake(MAINCUBE, rotationContainer);
         BakedModel frame1 = loader.bake(FRAME1, rotationContainer);
         BakedModel frame2 = loader.bake(FRAME2, rotationContainer);
-        return new CrystalItemBakedModel(maincube,frame1,frame2);
-
+        return new CrystalItemBakedModel(maincube, frame1, frame2);
     }
+
     @Override
     public Collection<ResourceLocation> getDependencies() {
         return ImmutableSet.of(MAINCUBE, FRAME1, FRAME2);

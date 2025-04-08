@@ -18,7 +18,7 @@ package net.gabriele333.fmtt.item.crystals;/*
  * File created on: 05/04/2025
  */
 
-import net.minecraft.world.item.ItemStack;
+
 
 public class CosmosCrystalItem extends BaseCrystalItem {
     public CosmosCrystalItem(Properties properties) {

@@ -18,7 +18,7 @@ package net.gabriele333.fmtt.item.crystals;/*
  * File created on: 05/04/2025
  */
 
-import net.minecraft.world.item.ItemStack;
+
 
 public class TimeCrystalItem extends BaseCrystalItem {
     public TimeCrystalItem(Properties properties) {

@@ -79,6 +79,7 @@ public class CrystalItemBakedModel implements IDynamicBakedModel {
 
                 quad.pos(i, pos);
             }
+
             return true;
         };
 
