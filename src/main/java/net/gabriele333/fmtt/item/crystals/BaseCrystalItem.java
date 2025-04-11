@@ -21,7 +21,10 @@ package net.gabriele333.fmtt.item.crystals;/*
 
 
 
-import net.gabriele333.fmtt.network.serverbound.SpawnCrystalPacket;
+import net.gabriele333.fmtt.entity.FMTTEntities;
+import net.gabriele333.fmtt.entity.crystals.BaseCrystal;
+import net.gabriele333.fmtt.entity.crystals.CosmosCrystal;
+import net.gabriele333.fmtt.entity.crystals.TimeCrystal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
@@ -34,7 +37,7 @@ import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.network.PacketDistributor;
+
 
 
 import java.util.List;
@@ -55,10 +58,29 @@ public abstract class BaseCrystalItem extends Item {
         Level level = context.getLevel();
         ItemStack itemStack = context.getItemInHand();
 
-
         if (!level.isClientSide && context.getPlayer() instanceof ServerPlayer serverPlayer) {
             BlockPos pos = context.getClickedPos().above();
-            PacketDistributor.sendToServer(new SpawnCrystalPacket(pos, this.crystalType, itemStack));
+            BaseCrystal entity = null;
+
+            switch (crystalType) {
+                case "time" ->
+                        entity = new TimeCrystal(FMTTEntities.TIME_CRYSTAL.get(), serverPlayer.level());
+                case "cosmos" ->
+                        entity = new CosmosCrystal(FMTTEntities.COSMOS_CRYSTAL.get(), serverPlayer.level());
+                default -> throw new IllegalArgumentException("Unknown crystal type: " + crystalType);
+            }
+
+            if (entity != null) {
+                entity.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+                entity.setOwner(serverPlayer);
+                entity.setItemStack(itemStack);
+                serverPlayer.level().addFreshEntity(entity);
+                BaseCrystalItem.setEntity(itemStack, true);
+
+                if (!serverPlayer.getAbilities().instabuild) {
+                    itemStack.shrink(1);
+                }
+            }
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide);
