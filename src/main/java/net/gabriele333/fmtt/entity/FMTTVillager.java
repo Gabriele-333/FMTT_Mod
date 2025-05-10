@@ -21,6 +21,7 @@ package net.gabriele333.fmtt.entity;/*
 
 import com.google.common.collect.ImmutableSet;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import net.gabriele333.fmtt.block.FMTTBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
@@ -36,6 +37,7 @@ import net.neoforged.neoforge.event.village.VillagerTradesEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static net.gabriele333.fmtt.fmttint.MOD_ID;
 
@@ -45,11 +47,17 @@ public class FMTTVillager {
 
     public static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath(MOD_ID, "analyzer" );
 
+    public static PoiType POI_TYPE = new PoiType(
+            Set.copyOf(FMTTBlock.XP_CRYSTALLIZER.get().getStateDefinition().getPossibleStates()), 1, 1);
     public static final ResourceKey<PoiType> POI_KEY = ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, ID);
 
     public static final VillagerProfession PROFESSION = new VillagerProfession(ID.toString(), e -> e.is(POI_KEY),
             e -> e.is(POI_KEY), ImmutableSet.of(), ImmutableSet.of(), SoundEvents.VILLAGER_WORK_LIBRARIAN);
 
+
+    public static void initPointOfInterestType(Registry<PoiType> registry) {
+        Registry.register(registry, ID, POI_TYPE);
+    }
     public static void initTrades(VillagerTradesEvent event) {
         if (!event.getType().name().equals(PROFESSION.name())) {
             return;
