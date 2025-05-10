@@ -41,6 +41,7 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import java.util.concurrent.CompletableFuture;
 
+
 import static net.gabriele333.fmtt.item.FMTTCreativeTabs.CREATIVE_MODE_TABS;
 import static net.gabriele333.fmtt.block.FMTTBlock.BLOCKS;
 
@@ -69,10 +70,13 @@ public abstract class fmtt {
         modEventBus.addListener((RegisterEvent event) -> {
             if (event.getRegistryKey() == Registries.VILLAGER_PROFESSION) {
                 FMTTVillager.initProfession(event.getRegistry(Registries.VILLAGER_PROFESSION));
+            } else if (event.getRegistryKey() == Registries.POINT_OF_INTEREST_TYPE) {
+                FMTTVillager.initPointOfInterestType(event.getRegistry(Registries.POINT_OF_INTEREST_TYPE));
             }
         });
 
         NeoForge.EVENT_BUS.addListener(FMTTVillager::initTrades);
+
         modEventBus.addListener(EventPriority.LOWEST, this::onGatherData);
 
     }
