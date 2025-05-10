@@ -17,6 +17,7 @@
  */
 package net.gabriele333.fmtt.item;
 
+import net.gabriele333.fmtt.block.FMTTBlock;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -43,7 +44,9 @@ public class FMTTCreativeTabs {
                         pOutput.accept(FMTTItems.FMTT_XP_ITEM.get());
                         pOutput.accept(FMTTItems.FMTT_REWARD_ITEM.get());
                         pOutput.accept(FMTTItems.FMTT_COMPASS.get());
-                        pOutput.accept(FMTTItems.STAR_PIECE_BLOCK.get());
+
+
+                        pOutput.accept(FMTTBlock.XP_CRYSTALLIZER.get());
                     })
                     .build());
 

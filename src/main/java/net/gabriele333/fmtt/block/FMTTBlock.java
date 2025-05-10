@@ -16,19 +16,41 @@ package net.gabriele333.fmtt.block;/*
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 
-import net.gabriele333.fmtt.fmtt;
+
+import net.gabriele333.fmtt.item.FMTTItems;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Supplier;
 
-public abstract class FMTTBlock extends Block {
-    protected FMTTBlock(Properties props) {
-        super(props);
+import static net.gabriele333.fmtt.fmtt.MOD_ID;
+
+
+
+public class FMTTBlock {
+
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MOD_ID);
+
+
+    public static final DeferredBlock<Block> XP_CRYSTALLIZER = registerBlock("xp_crystallizer",
+            () -> new XpCrystallizer(BlockBehaviour.Properties.of().noOcclusion()));
+
+
+
+    private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
+        DeferredBlock<T> toReturn = BLOCKS.register(name, block);
+        registerBlockItem(name, toReturn);
+        return toReturn;
     }
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(fmtt.MOD_ID);
-
-    public static final DeferredBlock<Block> STAR_PIECE_BLOCK = BLOCKS.registerBlock("star_piece_block", StarPieceBlock::new, BlockBehaviour.Properties.of());
-
+    private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block) {
+        FMTTItems.ITEMS.register(name, () -> new BlockItem(block.get(), new Item.Properties()));
+    }
+    public static void register(IEventBus eventBus) {
+        BLOCKS.register(eventBus);
+    }
 }

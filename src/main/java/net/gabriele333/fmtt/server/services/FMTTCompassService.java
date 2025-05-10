@@ -167,7 +167,7 @@ public final class FMTTCompassService {
         }
 
 
-        var desiredState = StarPieceBlock.STAR_PIECE_BLOCK.get().defaultBlockState();
+        var desiredState = FMTTBlock.XP_CRYSTALLIZER.get().defaultBlockState();
         var blockCount = new AtomicInteger(0);
         section.getStates().count((state, count) -> {
             if (state == desiredState) {
