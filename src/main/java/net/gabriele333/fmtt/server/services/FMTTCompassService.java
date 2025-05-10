@@ -28,7 +28,6 @@ import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 
 import net.gabriele333.fmtt.block.FMTTBlock;
-import net.gabriele333.fmtt.block.StarPieceBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
