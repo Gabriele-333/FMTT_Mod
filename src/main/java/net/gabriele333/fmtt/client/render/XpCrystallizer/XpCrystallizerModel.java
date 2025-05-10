@@ -1,4 +1,4 @@
-package net.gabriele333.fmtt.client.render.crystal_item;/*
+package net.gabriele333.fmtt.client.render.XpCrystallizer;/*
  * This file is part of From Magic To Tech.
  * Copyright (c) 2025, Gabriele_333, All rights reserved.
  *
@@ -15,28 +15,28 @@ package net.gabriele333.fmtt.client.render.crystal_item;/*
  * You should have received a copy of the GNU Lesser General Public License
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  *
- * File created on: 04/04/2025
+ * File created on: 10/05/2025
  */
 
 import com.google.common.collect.ImmutableSet;
 import net.gabriele333.fmtt.client.render.BasicUnbakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.*;
+import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.ModelBaker;
+import net.minecraft.client.resources.model.ModelState;
 import net.minecraft.resources.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.function.Function;
 
-
-public class CrystalItemModel implements BasicUnbakedModel {
+public class XpCrystallizerModel implements BasicUnbakedModel {
     private final String textureName;
-    private final ResourceLocation MAINCUBE;
-    private static final ResourceLocation FRAME1 = ResourceLocation.parse("fmtt:item/crystal/frame1");
-    private static final ResourceLocation FRAME2 = ResourceLocation.parse("fmtt:item/crystal/frame2");
+    private static final ResourceLocation MAIN = ResourceLocation.parse("fmtt:block/xp_crystallizer/base");
+    private static final ResourceLocation ROT1= ResourceLocation.parse("fmtt:block/xp_crystallizer/rot1");
 
-    public CrystalItemModel(String mainCube, String textureName) {
-        this.MAINCUBE = ResourceLocation.parse(mainCube);
+    public XpCrystallizerModel(String textureName) {
         this.textureName = textureName;
     }
 
@@ -44,14 +44,13 @@ public class CrystalItemModel implements BasicUnbakedModel {
     @Nullable
     @Override
     public BakedModel bake(ModelBaker loader, Function<Material, TextureAtlasSprite> textureGetter, ModelState rotationContainer) {
-        BakedModel maincube = loader.bake(MAINCUBE, rotationContainer);
-        BakedModel frame1 = loader.bake(FRAME1, rotationContainer);
-        BakedModel frame2 = loader.bake(FRAME2, rotationContainer);
-        return new CrystalItemBakedModel(maincube, frame1, frame2);
+        BakedModel main = loader.bake(MAIN, rotationContainer);
+        BakedModel rot1 = loader.bake(ROT1, rotationContainer);
+        return new XpCrystallizerBakedModel(main, rot1);
     }
 
     @Override
     public Collection<ResourceLocation> getDependencies() {
-        return ImmutableSet.of(MAINCUBE, FRAME1, FRAME2);
+        return ImmutableSet.of(MAIN, ROT1);
     }
 }

@@ -21,6 +21,7 @@ package net.gabriele333.fmtt.client.render;/*
 
 
 
+import net.gabriele333.fmtt.client.render.XpCrystallizer.XpCrystallizerModel;
 import net.gabriele333.fmtt.client.render.compass.FMTTCompassModel;
 import net.gabriele333.fmtt.client.render.crystal_item.CrystalItemModel;
 import net.gabriele333.fmtt.fmttint;
@@ -40,9 +41,13 @@ public final class InitModel {
 
     public static void init() {
         addBuiltInModel("item/fmtt_compass", FMTTCompassModel::new);
+
         addBuiltInModel("item/crystal_of_time", () -> new CrystalItemModel("fmtt:item/crystal/maincube","time"));
         addBuiltInModel("item/crystal_of_cosmos", () -> new CrystalItemModel("fmtt:item/crystal/maincube_cosmos","cosmos"));
         addBuiltInModel("item/crystal_of_tech", () -> new CrystalItemModel("fmtt:item/crystal/maincube_tech","tech"));
+
+        addBuiltInModel("block/xp_crystallizer", () -> new XpCrystallizerModel("fmtt:block/xp_crystallizer"));
+
     }
 
     private static <T extends UnbakedModel> void addBuiltInModel(String id, Supplier<T> modelFactory) {

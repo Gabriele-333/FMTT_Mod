@@ -23,10 +23,14 @@ import net.gabriele333.fmtt.server.services.FMTTCompassService;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
 
-public class XpCrystallizer extends HorizontalDirectionalBlock {
+public class XpCrystallizer extends BaseEntityBlock {
+    public static final MapCodec<XpCrystallizer> CODEC = simpleCodec(XpCrystallizer::new);
 
 
     protected XpCrystallizer(Properties props) {
@@ -34,10 +38,14 @@ public class XpCrystallizer extends HorizontalDirectionalBlock {
     }
 
     @Override
-    protected MapCodec<? extends HorizontalDirectionalBlock> codec() {
-        return null;
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
     }
 
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
 
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving) {
@@ -59,4 +67,9 @@ public class XpCrystallizer extends HorizontalDirectionalBlock {
         }
     }
 
+    @Nullable
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return null;
+    }
 }
