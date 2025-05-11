@@ -2,8 +2,8 @@
   "credit": "Made with Blockbench",
   "texture_size": [64, 64],
   "textures": {
-    "0": "block/xp_crystallizer",
-    "particle": "block/xp_crystallizer"
+    "0": "fmtt:block/xp_crystallizer",
+    "particle": "fmtt:block/xp_crystallizer"
   },
   "elements": [
     {

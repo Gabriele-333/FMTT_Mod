@@ -1,4 +1,4 @@
-package net.gabriele333.fmtt.block;/*
+package net.gabriele333.fmtt.block.XpCrystallizer;/*
  * This file is part of From Magic To Tech.
  * Copyright (c) 2024, Gabriele_333, All rights reserved.
  *
@@ -33,7 +33,7 @@ public class XpCrystallizer extends BaseEntityBlock {
     public static final MapCodec<XpCrystallizer> CODEC = simpleCodec(XpCrystallizer::new);
 
 
-    protected XpCrystallizer(Properties props) {
+    public XpCrystallizer(Properties props) {
         super(props);
     }
 
@@ -70,6 +70,6 @@ public class XpCrystallizer extends BaseEntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null;
+        return new XpCrystallizerEntity(pos, state);
     }
 }

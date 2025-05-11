@@ -46,7 +46,7 @@ public final class InitModel {
         addBuiltInModel("item/crystal_of_cosmos", () -> new CrystalItemModel("fmtt:item/crystal/maincube_cosmos","cosmos"));
         addBuiltInModel("item/crystal_of_tech", () -> new CrystalItemModel("fmtt:item/crystal/maincube_tech","tech"));
 
-        addBuiltInModel("block/xp_crystallizer", () -> new XpCrystallizerModel("fmtt:block/xp_crystallizer"));
+        addBuiltInModel("block/xp_crystallizer", () -> new XpCrystallizerModel());
 
     }
 

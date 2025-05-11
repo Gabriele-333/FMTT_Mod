@@ -17,6 +17,7 @@ package net.gabriele333.fmtt.block;/*
  */
 
 
+import net.gabriele333.fmtt.block.XpCrystallizer.XpCrystallizer;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;

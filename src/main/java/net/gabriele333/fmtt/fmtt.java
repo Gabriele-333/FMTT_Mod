@@ -42,6 +42,7 @@ import org.slf4j.Logger;
 import java.util.concurrent.CompletableFuture;
 
 
+import static net.gabriele333.fmtt.block.FMTTBlockEntity.BLOCK_ENTITIES;
 import static net.gabriele333.fmtt.item.FMTTCreativeTabs.CREATIVE_MODE_TABS;
 import static net.gabriele333.fmtt.block.FMTTBlock.BLOCKS;
 
@@ -65,6 +66,7 @@ public abstract class fmtt {
         FMTTItems.register(modEventBus);
         PlayerFMTTXpProvider.register(modEventBus);
         BLOCKS.register(modEventBus);
+        BLOCK_ENTITIES.register(modEventBus);
         FMTTEntities.REGISTER.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         modEventBus.addListener((RegisterEvent event) -> {

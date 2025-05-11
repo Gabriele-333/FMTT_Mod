@@ -32,13 +32,9 @@ import java.util.Collection;
 import java.util.function.Function;
 
 public class XpCrystallizerModel implements BasicUnbakedModel {
-    private final String textureName;
+
     private static final ResourceLocation MAIN = ResourceLocation.parse("fmtt:block/xp_crystallizer/base");
     private static final ResourceLocation ROT1= ResourceLocation.parse("fmtt:block/xp_crystallizer/rot1");
-
-    public XpCrystallizerModel(String textureName) {
-        this.textureName = textureName;
-    }
 
 
     @Nullable
