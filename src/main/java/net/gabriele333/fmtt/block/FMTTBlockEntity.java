@@ -27,6 +27,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
+import static net.gabriele333.fmtt.block.FMTTBlock.XP_CRYSTALLIZER;
 import static net.gabriele333.fmtt.fmtt.MOD_ID;
 
 public class FMTTBlockEntity {
@@ -35,9 +36,11 @@ public class FMTTBlockEntity {
 
     public static final Supplier<BlockEntityType<XpCrystallizerEntity>> XP_CRYSTALLIZER_BE =
             BLOCK_ENTITIES.register("xp_crystallizer", () -> BlockEntityType.Builder.of(
-                    XpCrystallizerEntity::new, FMTTBlock.XP_CRYSTALLIZER.get()).build(null));
+                    XpCrystallizerEntity::new, XP_CRYSTALLIZER.get()).build(null));
+
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
     }
+
 }

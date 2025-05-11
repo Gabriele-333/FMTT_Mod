@@ -35,6 +35,10 @@ public class XpCrystallizerModel implements BasicUnbakedModel {
 
     private static final ResourceLocation MAIN = ResourceLocation.parse("fmtt:block/xp_crystallizer/base");
     private static final ResourceLocation ROT1= ResourceLocation.parse("fmtt:block/xp_crystallizer/rot1");
+    private static final ResourceLocation ROT2= ResourceLocation.parse("fmtt:block/xp_crystallizer/rot2");
+    private static final ResourceLocation RING1= ResourceLocation.parse("fmtt:block/xp_crystallizer/ring1");
+    private static final ResourceLocation RING2= ResourceLocation.parse("fmtt:block/xp_crystallizer/ring2");
+    private static final ResourceLocation RING3= ResourceLocation.parse("fmtt:block/xp_crystallizer/ring3");
 
 
     @Nullable
@@ -42,11 +46,15 @@ public class XpCrystallizerModel implements BasicUnbakedModel {
     public BakedModel bake(ModelBaker loader, Function<Material, TextureAtlasSprite> textureGetter, ModelState rotationContainer) {
         BakedModel main = loader.bake(MAIN, rotationContainer);
         BakedModel rot1 = loader.bake(ROT1, rotationContainer);
-        return new XpCrystallizerBakedModel(main, rot1);
+        BakedModel rot2 = loader.bake(ROT2, rotationContainer);
+        BakedModel ring1 = loader.bake(RING1, rotationContainer);
+        BakedModel ring2 = loader.bake(RING2, rotationContainer);
+        BakedModel ring3 = loader.bake(RING3, rotationContainer);
+        return new XpCrystallizerBakedModel(main, rot1, rot2, ring1, ring2, ring3);
     }
 
     @Override
     public Collection<ResourceLocation> getDependencies() {
-        return ImmutableSet.of(MAIN, ROT1);
+        return ImmutableSet.of(MAIN, ROT1, ROT2, RING1, RING2, RING3);
     }
 }

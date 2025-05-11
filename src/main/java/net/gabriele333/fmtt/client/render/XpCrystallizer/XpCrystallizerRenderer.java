@@ -22,6 +22,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import net.gabriele333.fmtt.block.XpCrystallizer.XpCrystallizerEntity;
+import net.gabriele333.fmtt.client.animations.XpCrystallizerAnimator;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
@@ -48,23 +49,57 @@ public class XpCrystallizerRenderer implements BlockEntityRenderer<XpCrystallize
         BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModel(state);
 
         if (model instanceof XpCrystallizerBakedModel bakedModel) {
+            VertexConsumer consumer = buffer.getBuffer(RenderType.solid());
+
+
+            // base (statica)
+            poseStack.pushPose();
+            renderBakedModel(poseStack, consumer, state, bakedModel.getMain(), packedLight, packedOverlay);
+            poseStack.popPose();
+
+// rot1
             poseStack.pushPose();
             poseStack.translate(0.5, 0.5, 0.5);
-
-            // Animazione rotazione
-            float rotationAngle = (System.currentTimeMillis() % 36000) / 100f;
-            poseStack.mulPose(Axis.YP.rotationDegrees(rotationAngle));
+            XpCrystallizerAnimator.rotateRot1(poseStack, partialTick);
             poseStack.translate(-0.5, -0.5, -0.5);
+            renderBakedModel(poseStack, consumer, state, bakedModel.getRot1(), packedLight, packedOverlay);
+            poseStack.popPose();
 
-            // Rendering
-            VertexConsumer consumer = buffer.getBuffer(RenderType.solid());
-            renderBakedModel(poseStack, consumer, state, bakedModel, packedLight, packedOverlay);
+// rot2
+            poseStack.pushPose();
+            poseStack.translate(0.5, 0.5, 0.5);
+            XpCrystallizerAnimator.rotateRot2(poseStack, partialTick);
+            poseStack.translate(-0.5, -0.5, -0.5);
+            renderBakedModel(poseStack, consumer, state, bakedModel.getRot2(), packedLight, packedOverlay);
+            poseStack.popPose();
 
+// ring1
+            poseStack.pushPose();
+            poseStack.translate(0.5, 0.5, 0.5);
+            XpCrystallizerAnimator.rotateRing(poseStack, partialTick, 0.5f);
+            poseStack.translate(-0.5, -0.5, -0.5);
+            renderBakedModel(poseStack, consumer, state, bakedModel.getRing1(), packedLight, packedOverlay);
+            poseStack.popPose();
+
+// ring2
+            poseStack.pushPose();
+            poseStack.translate(0.5, 0.5, 0.5);
+            XpCrystallizerAnimator.rotateRing(poseStack, partialTick, -0.5f);
+            poseStack.translate(-0.5, -0.5, -0.5);
+            renderBakedModel(poseStack, consumer, state, bakedModel.getRing2(), packedLight, packedOverlay);
+            poseStack.popPose();
+
+// ring3
+            poseStack.pushPose();
+            poseStack.translate(0.5, 0.5, 0.5);
+            XpCrystallizerAnimator.rotateRing(poseStack, partialTick, 0.25f);
+            poseStack.translate(-0.5, -0.5, -0.5);
+            renderBakedModel(poseStack, consumer, state, bakedModel.getRing3(), packedLight, packedOverlay);
             poseStack.popPose();
         }
     }
 
-    private void renderBakedModel(PoseStack poseStack, VertexConsumer consumer, BlockState state, XpCrystallizerBakedModel model, int packedLight, int packedOverlay) {
+    private void renderBakedModel(PoseStack poseStack, VertexConsumer consumer, BlockState state, BakedModel model, int packedLight, int packedOverlay) {
         PoseStack.Pose pose = poseStack.last();
         int[] lightmap = {packedLight, packedLight, packedLight, packedLight};
         float[] brightness = {1.0F, 1.0F, 1.0F, 1.0F};

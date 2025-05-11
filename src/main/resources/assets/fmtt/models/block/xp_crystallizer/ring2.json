@@ -1,0 +1,78 @@
+{
+	"credit": "Made with Blockbench",
+	"texture_size": [64, 64],
+	"textures": {
+		"0": "fmtt:block/xp_crystallizer",
+		"particle": "fmtt:block/xp_crystallizer"
+	},
+	"elements": [
+		{
+			"from": [4, 13, 4],
+			"to": [12, 14, 5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13, 8]},
+			"faces": {
+				"north": {"uv": [11, 3.5, 13, 3.75], "texture": "#0"},
+				"east": {"uv": [0.5, 12.5, 0.75, 12.75], "texture": "#0"},
+				"south": {"uv": [11, 3.75, 13, 4], "texture": "#0"},
+				"west": {"uv": [0.75, 12.5, 1, 12.75], "texture": "#0"},
+				"up": {"uv": [13, 4.25, 11, 4], "texture": "#0"},
+				"down": {"uv": [13, 4.25, 11, 4.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4, 13, 11],
+			"to": [12, 14, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13, 8]},
+			"faces": {
+				"north": {"uv": [11, 4.5, 13, 4.75], "texture": "#0"},
+				"east": {"uv": [1, 12.5, 1.25, 12.75], "texture": "#0"},
+				"south": {"uv": [11, 4.75, 13, 5], "texture": "#0"},
+				"west": {"uv": [1.25, 12.5, 1.5, 12.75], "texture": "#0"},
+				"up": {"uv": [7, 11.25, 5, 11], "texture": "#0"},
+				"down": {"uv": [13, 5, 11, 5.25], "texture": "#0"}
+			}
+		},
+		{
+			"from": [4, 13, 5],
+			"to": [5, 14, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13, 8]},
+			"faces": {
+				"north": {"uv": [1.5, 12.5, 1.75, 12.75], "texture": "#0"},
+				"east": {"uv": [7.5, 11, 9, 11.25], "texture": "#0"},
+				"south": {"uv": [1.75, 12.5, 2, 12.75], "texture": "#0"},
+				"west": {"uv": [11, 9.5, 12.5, 9.75], "texture": "#0"},
+				"up": {"uv": [10.75, 12.5, 10.5, 11], "texture": "#0"},
+				"down": {"uv": [11, 11, 10.75, 12.5], "texture": "#0"}
+			}
+		},
+		{
+			"from": [11, 13, 5],
+			"to": [12, 14, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 13, 8]},
+			"faces": {
+				"north": {"uv": [2, 12.5, 2.25, 12.75], "texture": "#0"},
+				"east": {"uv": [11, 9.75, 12.5, 10], "texture": "#0"},
+				"south": {"uv": [2.25, 12.5, 2.5, 12.75], "texture": "#0"},
+				"west": {"uv": [11, 11, 12.5, 11.25], "texture": "#0"},
+				"up": {"uv": [0.25, 12.75, 0, 11.25], "texture": "#0"},
+				"down": {"uv": [0.5, 11.25, 0.25, 12.75], "texture": "#0"}
+			}
+		}
+	],
+	"display": {
+		"thirdperson_righthand": {
+			"scale": [0.4, 0.4, 0.4]
+		},
+		"gui": {
+			"scale": [0.8, 0.8, 0.8]
+		}
+	},
+	"groups": [
+		{
+			"name": "ring2",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [0, 1, 2, 3]
+		}
+	]
+}
