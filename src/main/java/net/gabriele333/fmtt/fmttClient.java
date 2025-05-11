@@ -16,9 +16,11 @@ package net.gabriele333.fmtt;/*
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 
+import net.gabriele333.fmtt.block.FMTTBlockEntity;
 import net.gabriele333.fmtt.client.models.CrystalModelBase;
 import net.gabriele333.fmtt.client.models.FMTTModelLayers;
 import net.gabriele333.fmtt.client.render.InitModel;
+import net.gabriele333.fmtt.client.render.XpCrystallizer.XpCrystallizerRenderer;
 import net.gabriele333.fmtt.client.render.crystals.CrystalRenderer;
 import net.gabriele333.fmtt.config.ClientConfig;
 import net.gabriele333.fmtt.entity.FMTTEntities;
@@ -31,16 +33,17 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
 
 @OnlyIn(Dist.CLIENT)
-public class fmttClient extends fmtt{
+public class fmttClient extends fmtt {
     public fmttClient(IEventBus modEventBus, ModContainer modContainer) {
         super(modEventBus, modContainer);
         modEventBus.addListener(this::registerEntityRenderers);
+        modEventBus.addListener(this::registerBlockEntityRenderers); // Aggiunto questo
         modEventBus.addListener(this::onRegisterEntityRendererLayerDefinitions);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, new ClientConfig().spec);
         InitModel.init();
-
     }
+
     private void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(FMTTEntities.TIME_CRYSTAL.get(), CrystalRenderer::new);
         event.registerEntityRenderer(FMTTEntities.TECH_CRYSTAL.get(), CrystalRenderer::new);
@@ -49,9 +52,12 @@ public class fmttClient extends fmtt{
         event.registerEntityRenderer(FMTTEntities.CHANCE_CRYSTAL.get(), CrystalRenderer::new);
     }
 
+
+    private void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(FMTTBlockEntity.XP_CRYSTALLIZER_BE.get(), XpCrystallizerRenderer::new);
+    }
+
     public void onRegisterEntityRendererLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(FMTTModelLayers.CRYSTAL, CrystalModelBase::createBodyLayer);
     }
-
-
 }

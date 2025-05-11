@@ -23,7 +23,7 @@ package net.gabriele333.fmtt.client.render;/*
 
 import net.gabriele333.fmtt.client.render.XpCrystallizer.XpCrystallizerModel;
 import net.gabriele333.fmtt.client.render.compass.FMTTCompassModel;
-import net.gabriele333.fmtt.client.render.crystal_item.CrystalItemModel;
+import net.gabriele333.fmtt.client.render.CrystalItem.CrystalItemModel;
 import net.gabriele333.fmtt.fmttint;
 import net.minecraft.client.resources.model.UnbakedModel;
 import net.neoforged.api.distmarker.Dist;

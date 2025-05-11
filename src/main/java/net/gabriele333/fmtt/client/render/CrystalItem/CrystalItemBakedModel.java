@@ -1,4 +1,4 @@
-package net.gabriele333.fmtt.client.render.crystal_item;
+package net.gabriele333.fmtt.client.render.CrystalItem;
 
 import appeng.thirdparty.fabric.MutableQuadView;
 import appeng.thirdparty.fabric.RenderContext;

@@ -1,4 +1,4 @@
-package net.gabriele333.fmtt.client.render.crystal_item;/*
+package net.gabriele333.fmtt.client.render.CrystalItem;/*
  * This file is part of From Magic To Tech.
  * Copyright (c) 2025, Gabriele_333, All rights reserved.
  *
