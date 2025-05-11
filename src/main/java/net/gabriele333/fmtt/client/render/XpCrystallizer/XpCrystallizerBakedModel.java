@@ -37,11 +37,19 @@ public class XpCrystallizerBakedModel implements IDynamicBakedModel {
 
     private final BakedModel main;
     private final BakedModel rot1;
+    private final BakedModel rot2;
+    private final BakedModel ring1;
+    private final BakedModel ring2;
+    private final BakedModel ring3;
 
 
-    public XpCrystallizerBakedModel(BakedModel main, BakedModel rot1) {
+    public XpCrystallizerBakedModel(BakedModel main, BakedModel rot1, BakedModel rot2, BakedModel ring1, BakedModel ring2, BakedModel ring3) {
         this.main = main;
         this.rot1 = rot1;
+        this.rot2 = rot2;
+        this.ring1 = ring1;
+        this.ring2 = ring2;
+        this.ring3 = ring3;
     }
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand, ModelData extraData, @Nullable RenderType renderType) {
@@ -49,7 +57,10 @@ public class XpCrystallizerBakedModel implements IDynamicBakedModel {
 
         quads.addAll(main.getQuads(state, side, rand, extraData, renderType));
         quads.addAll(rot1.getQuads(state, side, rand, extraData, renderType));
-
+        quads.addAll(rot2.getQuads(state, side, rand, extraData, renderType));
+        quads.addAll(ring1.getQuads(state, side, rand, extraData, renderType));
+        quads.addAll(ring2.getQuads(state, side, rand, extraData, renderType));
+        quads.addAll(ring3.getQuads(state, side, rand, extraData, renderType));
         return quads;
     }
 
@@ -57,6 +68,14 @@ public class XpCrystallizerBakedModel implements IDynamicBakedModel {
     public boolean useAmbientOcclusion() {
         return false;
     }
+
+    public BakedModel getMain() {return main;}
+    public BakedModel getRot1() {return rot1;}
+    public BakedModel getRot2() { return rot2; }
+    public BakedModel getRing1() { return ring1; }
+    public BakedModel getRing2() { return ring2; }
+    public BakedModel getRing3() { return ring3; }
+
 
     @Override
     public boolean isGui3d() {
@@ -73,13 +92,14 @@ public class XpCrystallizerBakedModel implements IDynamicBakedModel {
         return false;
     }
 
-    @Override
-    public TextureAtlasSprite getParticleIcon() {
-        return null;
-    }
+
 
     @Override
     public ItemOverrides getOverrides() {
         return null;
+    }
+    @Override
+    public TextureAtlasSprite getParticleIcon() {
+        return main.getParticleIcon();
     }
 }
