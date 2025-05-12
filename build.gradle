@@ -132,6 +132,7 @@ dependencies {
     implementation "curse.maven:ftb-teams-forge-404468:5882217"
     implementation "curse.maven:ftb-library-forge-404465:5893689"
     implementation "curse.maven:codechicken-lib-1-8-242818:6166790"
+    implementation "curse.maven:jade-324717:6291517"
 
     compileOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"
