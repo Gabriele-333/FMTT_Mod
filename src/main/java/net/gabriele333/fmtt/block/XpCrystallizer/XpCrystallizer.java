@@ -39,12 +39,14 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.Nullable;
 
+
 public class XpCrystallizer extends BaseEntityBlock {
     public static final MapCodec<XpCrystallizer> CODEC = simpleCodec(XpCrystallizer::new);
     private static final VoxelShape SHAPE = Block.box(
             0.0D, 0.0D, 0.0D,  // minX, minY, minZ
             16.0D, 22.0D, 16.0D // maxX, maxY, maxZ (in pixel units)
     );
+
 
     public XpCrystallizer(Properties props) {
         super(props);
@@ -54,6 +56,7 @@ public class XpCrystallizer extends BaseEntityBlock {
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
+
 
     @Override
     protected RenderShape getRenderShape(BlockState state) {

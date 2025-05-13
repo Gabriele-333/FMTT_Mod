@@ -61,8 +61,8 @@ public class FMTTJadeIntegration {
         public void appendServerData(CompoundTag data, BlockAccessor accessor) {
             if (accessor.getBlockEntity() instanceof XpCrystallizerEntity crystallizer) {
                 CompoundTag energyData = new CompoundTag();
-                energyData.putInt("energy", crystallizer.getEnergyStorage().getEnergyStored());
-                energyData.putInt("maxEnergy", crystallizer.getEnergyStorage().getMaxEnergyStored());
+                energyData.putInt("energy", crystallizer.getEnergyStorage());
+                energyData.putInt("maxEnergy", crystallizer.getEnergyStorage());
                 data.put("fmtt.xp_crystallizer", energyData);
             }
         }

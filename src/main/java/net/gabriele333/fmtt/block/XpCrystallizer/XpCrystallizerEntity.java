@@ -30,10 +30,14 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.energy.EnergyStorage;
 import net.neoforged.neoforge.items.ItemStackHandler;
+
 import org.jetbrains.annotations.Nullable;
 
-public class XpCrystallizerEntity  extends BlockEntity {
+public class XpCrystallizerEntity extends BlockEntity {
     public final ItemStackHandler inventory = new ItemStackHandler(1) {
         @Override
         protected int getStackLimit(int slot, ItemStack stack) {
@@ -43,9 +47,40 @@ public class XpCrystallizerEntity  extends BlockEntity {
         @Override
         protected void onContentsChanged(int slot) {
             setChanged();
-            if(!level.isClientSide()) {
+            if (!level.isClientSide()) {
                 level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
+        }
+    };
+
+    private final EnergyStorage energyStorage = new EnergyStorage(100000, 1000, 1000) {
+        @Override
+        public int receiveEnergy(int maxReceive, boolean simulate) {
+            int received = super.receiveEnergy(maxReceive, simulate);
+            if (received > 0 && !simulate) {
+                onEnergyChanged();
+            }
+            return received;
+        }
+
+        @Override
+        public int extractEnergy(int maxExtract, boolean simulate) {
+            int extracted = super.extractEnergy(maxExtract, simulate);
+            if (extracted > 0 && !simulate) {
+                onEnergyChanged();
+            }
+            return extracted;
+        }
+
+        protected void onEnergyChanged() {
+            setChanged();
+            if (level != null && !level.isClientSide()) {
+                level.sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+        @Override
+        public int getEnergyStored() {
+            return super.getEnergyStored();
         }
     };
 
@@ -53,29 +88,28 @@ public class XpCrystallizerEntity  extends BlockEntity {
         super(FMTTBlockEntity.XP_CRYSTALLIZER_BE.get(), pos, blockState);
     }
 
-    public void clearContents() {
-        inventory.setStackInSlot(0, ItemStack.EMPTY);
-    }
-
-    public void drops() {
-        SimpleContainer inv = new SimpleContainer(inventory.getSlots());
-        for(int i = 0; i < inventory.getSlots(); i++) {
-            inv.setItem(i, inventory.getStackInSlot(i));
-        }
-
-        Containers.dropContents(this.level, this.worldPosition, inv);
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+                Capabilities.EnergyStorage.BLOCK,
+                FMTTBlockEntity.XP_CRYSTALLIZER_BE.get(),
+                (be, side) -> be.energyStorage
+        );
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         tag.put("inventory", inventory.serializeNBT(registries));
+        tag.putInt("energy", energyStorage.getEnergyStored());
     }
 
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         inventory.deserializeNBT(registries, tag.getCompound("inventory"));
+        if (tag.contains("energy")) {
+            energyStorage.receiveEnergy(tag.getInt("energy"), false);
+        }
     }
 
     @Nullable
@@ -87,5 +121,22 @@ public class XpCrystallizerEntity  extends BlockEntity {
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider pRegistries) {
         return saveWithoutMetadata(pRegistries);
+    }
+
+    public void clearContents() {
+        inventory.setStackInSlot(0, ItemStack.EMPTY);
+    }
+
+    public void drops() {
+        SimpleContainer inv = new SimpleContainer(inventory.getSlots());
+        for (int i = 0; i < inventory.getSlots(); i++) {
+            inv.setItem(i, inventory.getStackInSlot(i));
+        }
+        Containers.dropContents(this.level, this.worldPosition, inv);
+    }
+
+
+    public int getEnergyStorage() {
+        return energyStorage.getEnergyStored();
     }
 }

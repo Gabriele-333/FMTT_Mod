@@ -21,9 +21,11 @@ package net.gabriele333.fmtt;
 
 import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
+import net.gabriele333.fmtt.block.XpCrystallizer.XpCrystallizerEntity;
 import net.gabriele333.fmtt.data.FMTTDataProvider;
 import net.gabriele333.fmtt.entity.FMTTEntities;
 import net.gabriele333.fmtt.entity.FMTTVillager;
+import net.gabriele333.fmtt.integration.FMTTJadeIntegration;
 import net.gabriele333.fmtt.item.FMTTItems;
 import net.gabriele333.fmtt.network.FMTTNetwork;
 import net.gabriele333.fmtt.tags.FMTTBlockTagsProvider;
@@ -69,6 +71,8 @@ public abstract class fmtt {
         BLOCK_ENTITIES.register(modEventBus);
         FMTTEntities.REGISTER.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
+        FMTTJadeIntegration.init(modEventBus);
+        modEventBus.addListener(XpCrystallizerEntity::registerCapabilities);
         modEventBus.addListener((RegisterEvent event) -> {
             if (event.getRegistryKey() == Registries.VILLAGER_PROFESSION) {
                 FMTTVillager.initProfession(event.getRegistry(Registries.VILLAGER_PROFESSION));
