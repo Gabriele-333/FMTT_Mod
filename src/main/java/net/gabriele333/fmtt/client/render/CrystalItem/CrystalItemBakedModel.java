@@ -2,6 +2,7 @@ package net.gabriele333.fmtt.client.render.CrystalItem;
 
 import appeng.thirdparty.fabric.MutableQuadView;
 import appeng.thirdparty.fabric.RenderContext;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
@@ -38,7 +39,7 @@ public class CrystalItemBakedModel implements IDynamicBakedModel {
     public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side,
                                     RandomSource rand, ModelData extraData, RenderType renderType) {
 
-        float time = (System.currentTimeMillis() % 100000) / 50f; // 50ms = 1 tick
+        float time = (System.currentTimeMillis() % 3600000) / 50f;
 
         Quaternionf mainRotation = calculateRotation(time, 0.60f, 0.02f, 0.02f, 0.021f);
         Quaternionf frame1Rotation = calculateRotation(time, 0.82f, 0.03f, 0.03f, 0.03f);
