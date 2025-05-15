@@ -61,7 +61,7 @@ public record SleepDreamPacket() implements ServerboundPacket {
         LOGGER.info("Current dream level (float): {}", dreamLevel);
 
         if (dreamLevel == 0f) {  // Confronta con 0f invece di 0
-            probability = 0.5f;
+            probability = 0.3f;
         } else {
             probability = 0.01f;
         }
@@ -69,10 +69,10 @@ public record SleepDreamPacket() implements ServerboundPacket {
         if (dreamLevel == 0f) {
             player.setData(Attachements.SLEEP_DREAM.get(), 1f);  // Imposta 1f
         }
-        FTBQuestTrigger.triggerQuest(player, QuestID.FMTTIDS[0]);
 
         if (player.getRandom().nextFloat() < probability) {
-            ClientboundPacket response = new SleepDreamResponsePacket();  // Aggiungi parametro
+            FTBQuestTrigger.triggerQuest(player, QuestID.FMTTIDS[0]);
+            ClientboundPacket response = new SleepDreamResponsePacket();
             PacketDistributor.sendToPlayer(player, response);
         }
     }

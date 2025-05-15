@@ -58,7 +58,7 @@ public class ClientModEvents {
     private static final ResourceLocation SLEEP_IMAGE = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/ui/sleep_image.png");
     private static boolean showSleepImage = false;
     private static int fadeTimer = 0;
-    private static final int MAX_FADE_TIME = 15; // 3 secondi (60 tick)
+    private static final int MAX_FADE_TIME = 25; // 3 secondi (60 tick)
     private static float currentExposure = 0.7f;
 
     public static void setShowSleepImage(boolean value) {
