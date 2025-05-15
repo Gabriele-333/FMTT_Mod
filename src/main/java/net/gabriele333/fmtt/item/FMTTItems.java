@@ -22,6 +22,7 @@ import net.gabriele333.fmtt.fmtt;
 import net.gabriele333.fmtt.item.crystals.CosmosCrystalItem;
 import net.gabriele333.fmtt.item.crystals.TechCrystalItem;
 import net.gabriele333.fmtt.item.crystals.TimeCrystalItem;
+import net.gabriele333.fmtt.item.crystals.UnknownCrystalItem;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
@@ -41,6 +42,8 @@ public class FMTTItems {
             () -> new CosmosCrystalItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
     public static final Supplier<Item> CRY_TECH = ITEMS.register("crystal_of_tech",
             () -> new TechCrystalItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
+    public static final Supplier<Item> CRY_UNK = ITEMS.register("unknown_crystal",
+            () -> new UnknownCrystalItem(new Item.Properties().stacksTo(1).rarity(Rarity.EPIC).fireResistant()));
 
 
 //FIXME: Fix this shit
@@ -61,6 +64,7 @@ public class FMTTItems {
             () -> new Item(new Item.Properties().rarity(Rarity.RARE).fireResistant()));
     public static final Supplier<Item> FMTT_COMPASS = ITEMS.register("fmtt_compass",
             () -> new Item(new Item.Properties().rarity(Rarity.COMMON).fireResistant()));
+
 
 
 

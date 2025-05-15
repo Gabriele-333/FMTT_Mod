@@ -41,6 +41,7 @@ public class FMTTCreativeTabs {
                         pOutput.accept(FMTTItems.CRY_CHANCE.get());
                         pOutput.accept(FMTTItems.CRY_COSMOS.get());
                         pOutput.accept(FMTTItems.CRY_EMPTY.get());
+                        pOutput.accept(FMTTItems.CRY_UNK.get());
                         pOutput.accept(FMTTItems.FMTT_XP_ITEM.get());
                         pOutput.accept(FMTTItems.FMTT_REWARD_ITEM.get());
                         pOutput.accept(FMTTItems.FMTT_COMPASS.get());
