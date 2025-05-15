@@ -16,7 +16,7 @@
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 
-package net.gabriele333.fmtt.FMTTXP;
+package net.gabriele333.fmtt.Attachments;
 
 
 import com.mojang.serialization.Codec;
@@ -29,17 +29,20 @@ import java.util.function.Supplier;
 
 import static net.gabriele333.fmtt.fmtt.MOD_ID;
 
-public class PlayerFMTTXpProvider {
-    // Create the DeferredRegister for attachment types
+public class Attachements {
+
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 
-    // Serialization via INBTSerializable
 
-    // Serialization via codec
+
     public static final Supplier<AttachmentType<Integer>> PLAYERFMTTXP = ATTACHMENT_TYPES.register(
             "playerfmttxp", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );
-    // No serialization
+
+    public static final Supplier<AttachmentType<Integer>> SLEEP_DREAM = ATTACHMENT_TYPES.register(
+            "sleep_dream", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    );
+
 
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);

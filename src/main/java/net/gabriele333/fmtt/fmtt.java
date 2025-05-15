@@ -20,7 +20,7 @@ package net.gabriele333.fmtt;
 
 
 import com.mojang.logging.LogUtils;
-import net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider;
+import net.gabriele333.fmtt.Attachments.Attachements;
 import net.gabriele333.fmtt.block.XpCrystallizer.XpCrystallizerEntity;
 import net.gabriele333.fmtt.data.FMTTDataProvider;
 import net.gabriele333.fmtt.entity.FMTTEntities;
@@ -66,7 +66,7 @@ public abstract class fmtt {
 
         LOGGER.info("ciao");
         FMTTItems.register(modEventBus);
-        PlayerFMTTXpProvider.register(modEventBus);
+        Attachements.register(modEventBus);
         BLOCKS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
         FMTTEntities.REGISTER.register(modEventBus);
