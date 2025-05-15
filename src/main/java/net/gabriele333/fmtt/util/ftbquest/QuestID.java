@@ -50,4 +50,9 @@ public class QuestID {
             "4405015FC980145D", //Mysterious cube
             ""
     };
+
+    public static String[] FMTTIDS = {
+            "5E0B6AF15790EB8F", //Mysterious cube
+            ""
+    };
 }
