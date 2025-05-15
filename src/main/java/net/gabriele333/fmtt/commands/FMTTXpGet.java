@@ -24,7 +24,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 
-import static net.gabriele333.fmtt.FMTTXP.PlayerFMTTXpProvider.PLAYERFMTTXP;
+import static net.gabriele333.fmtt.Attachments.Attachements.PLAYERFMTTXP;
 
 public class FMTTXpGet {
     public FMTTXpGet(CommandDispatcher<CommandSourceStack> dispatcher) {
