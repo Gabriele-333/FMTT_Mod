@@ -39,10 +39,11 @@ public class Attachements {
             "playerfmttxp", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
     );
 
-    public static final Supplier<AttachmentType<Integer>> SLEEP_DREAM = ATTACHMENT_TYPES.register(
-            "sleep_dream", () -> AttachmentType.builder(() -> 0).serialize(Codec.INT).build()
+    public static final Supplier<AttachmentType<Float>> SLEEP_DREAM = ATTACHMENT_TYPES.register(
+            "sleep_dream", () -> AttachmentType.builder(() -> 0f)  // Nota il 0f invece di 0
+                    .serialize(Codec.FLOAT)  // Usa Codec.FLOAT invece di INT
+                    .build()
     );
-
 
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
