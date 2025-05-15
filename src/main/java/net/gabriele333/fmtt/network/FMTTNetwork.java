@@ -23,9 +23,11 @@ package net.gabriele333.fmtt.network;
 
 import net.gabriele333.fmtt.network.clientbound.CompassResponsePacket;
 import net.gabriele333.fmtt.network.clientbound.ErrorMessagePacket;
+import net.gabriele333.fmtt.network.clientbound.SleepDreamResponsePacket;
 import net.gabriele333.fmtt.network.serverbound.CompassRequestPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTRewardPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTXpPacket;
+import net.gabriele333.fmtt.network.serverbound.SleepDreamPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -44,12 +46,14 @@ public class FMTTNetwork {
         // Clientbound
         clientbound(registrar, CompassResponsePacket.TYPE, CompassResponsePacket.STREAM_CODEC);
         clientbound(registrar, ErrorMessagePacket.TYPE, ErrorMessagePacket.STREAM_CODEC);
+        clientbound(registrar, SleepDreamResponsePacket.TYPE, SleepDreamResponsePacket.STREAM_CODEC);
 
 
         // Serverbound
         serverbound(registrar, FMTTXpPacket.TYPE, FMTTXpPacket.STREAM_CODEC);
         serverbound(registrar, FMTTRewardPacket.TYPE, FMTTRewardPacket.STREAM_CODEC);
         serverbound(registrar, CompassRequestPacket.TYPE, CompassRequestPacket.STREAM_CODEC);
+        serverbound(registrar, SleepDreamPacket.TYPE, SleepDreamPacket.STREAM_CODEC);
 
     }
 
