@@ -1,6 +1,6 @@
 package net.gabriele333.fmtt.mixins;/*
  * This file is part of From Magic To Tech.
- * Copyright (c) 2024, Gabriele_333, All rights reserved.
+ * Copyright (c) 2025, Gabriele_333, All rights reserved.
  *
  * From Magic To Tech is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -14,24 +14,26 @@ package net.gabriele333.fmtt.mixins;/*
  *
  * You should have received a copy of the GNU Lesser General Public License
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
+ *
+ * File created on: 19/05/2025
  */
 
-import dev.ftb.mods.ftbquests.quest.TeamData;
-import dev.ftb.mods.ftbquests.quest.reward.Reward;
+import com.mojang.blaze3d.vertex.VertexBuffer;
+import net.minecraft.client.Camera;
+import net.minecraft.client.renderer.LevelRenderer;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.gen.Accessor;
+import org.spongepowered.asm.mixin.gen.Invoker;
 
-import java.util.UUID;
+@Mixin(LevelRenderer.class)
+public interface LevelRendererAccessor {
 
-@Mixin(TeamData.class)
-public class FTBQuestsTeamDataMixin {
-    @Inject(method = "claimReward", at = @At(value = "RETURN", ordinal = 0), cancellable = true)
-    private void afterClaimReward(UUID player, Reward reward, long date, CallbackInfoReturnable<Boolean> cir) {
-        if (cir.getReturnValue()) {
-            //something
+    @Invoker
+    boolean invokeDoesMobEffectBlockSky(Camera camera);
 
-        }
-    }
+    @Accessor
+    int getTicks();
+
+    @Accessor
+    VertexBuffer getSkyBuffer();
 }

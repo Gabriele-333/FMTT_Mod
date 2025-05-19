@@ -66,11 +66,11 @@ public record SleepDreamPacket() implements ServerboundPacket {
             probability = 0.01f;
         }
 
-        if (dreamLevel == 0f) {
-            player.setData(Attachements.SLEEP_DREAM.get(), 1f);  // Imposta 1f
-        }
-
         if (player.getRandom().nextFloat() < probability) {
+            if (dreamLevel == 0f) {
+                player.setData(Attachements.SLEEP_DREAM.get(), 1f);  // Imposta 1f
+            }
+
             FTBQuestTrigger.triggerQuest(player, QuestID.FMTTIDS[0]);
             ClientboundPacket response = new SleepDreamResponsePacket();
             PacketDistributor.sendToPlayer(player, response);

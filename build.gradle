@@ -135,6 +135,8 @@ dependencies {
     implementation "curse.maven:jade-324717:6291517"
     implementation "curse.maven:ender-io-64578:6363527"
     implementation "curse.maven:guideme-1173950:6488254"
+    implementation "curse.maven:resourceful-lib-570073:5973188"
+    implementation "curse.maven:architectury-api-419699:5786327"
 
     compileOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"

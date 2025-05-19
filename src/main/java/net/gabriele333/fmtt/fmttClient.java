@@ -17,6 +17,7 @@ package net.gabriele333.fmtt;/*
  */
 
 import net.gabriele333.fmtt.block.FMTTBlockEntity;
+import net.gabriele333.fmtt.client.dimension.FMTTPlanetRenderers;
 import net.gabriele333.fmtt.client.models.CrystalModelBase;
 import net.gabriele333.fmtt.client.models.FMTTModelLayers;
 import net.gabriele333.fmtt.client.render.InitModel;
@@ -24,12 +25,17 @@ import net.gabriele333.fmtt.client.render.XpCrystallizer.XpCrystallizerRenderer;
 import net.gabriele333.fmtt.client.render.crystals.CrystalRenderer;
 import net.gabriele333.fmtt.config.ClientConfig;
 import net.gabriele333.fmtt.entity.FMTTEntities;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
+
+import java.util.function.BiConsumer;
 
 
 @OnlyIn(Dist.CLIENT)
@@ -39,6 +45,7 @@ public class fmttClient extends fmtt {
         modEventBus.addListener(this::registerEntityRenderers);
         modEventBus.addListener(this::registerBlockEntityRenderers); // Aggiunto questo
         modEventBus.addListener(this::onRegisterEntityRendererLayerDefinitions);
+        modEventBus.addListener(this::onClientReloadListeners);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, new ClientConfig().spec);
         InitModel.init();
@@ -50,11 +57,20 @@ public class fmttClient extends fmtt {
         event.registerEntityRenderer(FMTTEntities.COSMOS_CRYSTAL.get(), CrystalRenderer::new);
         event.registerEntityRenderer(FMTTEntities.MAGIC_CRYSTAL.get(), CrystalRenderer::new);
         event.registerEntityRenderer(FMTTEntities.CHANCE_CRYSTAL.get(), CrystalRenderer::new);
+
+
     }
 
 
     private void registerBlockEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(FMTTBlockEntity.XP_CRYSTALLIZER_BE.get(), XpCrystallizerRenderer::new);
+    }
+
+    public void onClientReloadListeners(RegisterClientReloadListenersEvent event) {
+        onAddReloadListener((id, listener) -> event.registerReloadListener(listener));
+    }
+    public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> consumer) {
+        consumer.accept(ResourceLocation.fromNamespaceAndPath(MOD_ID, "planet_renderers"), new FMTTPlanetRenderers());
     }
 
     public void onRegisterEntityRendererLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {

@@ -4,13 +4,14 @@
   "package": "net.gabriele333.fmtt.mixins",
   "compatibilityLevel": "JAVA_11",
   "mixins": [
-    "FTBQuestsTeamDataMixin"
+
   ],
   "client": [
     "ModelBakeryMixin",
-    "StructureTemplatePoolAccessor"
+    "StructureTemplatePoolAccessor",
+    "LevelRendererAccessor"
   ],
-  "server": ["StructureTemplatePoolAccessor"],
+  "server": ["StructureTemplatePoolAccessor", "LevelRendererAccessor"],
   "injectors": {
     "defaultRequire": 1
   }
