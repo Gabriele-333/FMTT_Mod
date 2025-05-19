@@ -29,11 +29,15 @@ import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class FMTTPlanetRenderers extends SimpleJsonResourceReloadListener {
+
+    private static final Map<ResourceKey<Level>, FMTTDimensionSpecialEffects> EFFECTS = new HashMap<>();
 
     public FMTTPlanetRenderers() {
         super(Constants.GSON, "planet_renderers");
@@ -41,11 +45,19 @@ public class FMTTPlanetRenderers extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
-        Map<ResourceKey<Level>, FMTTDimensionSpecialEffects> effects = new HashMap<>();
+        EFFECTS.clear(); // evita duplicazioni
         object.forEach((key, value) -> {
             JsonObject json = GsonHelper.convertToJsonObject(value, "planets");
             PlanetRenderer renderer = PlanetRenderer.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
-            effects.put(renderer.dimension(), new FMTTDimensionSpecialEffects(renderer));
+            EFFECTS.put(renderer.dimension(), new FMTTDimensionSpecialEffects(renderer));
         });
+    }
+
+    public static @Nullable FMTTDimensionSpecialEffects getEffect(ResourceKey<Level> dim) {
+        return EFFECTS.get(dim);
+    }
+
+    public static Set<ResourceKey<Level>> getRegisteredDimensions() {
+        return EFFECTS.keySet();
     }
 }
