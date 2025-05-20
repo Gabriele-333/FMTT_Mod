@@ -18,7 +18,7 @@ package net.gabriele333.fmtt.network.serverbound;/*
  * File created on: 14/05/2025
  */
 
-import net.gabriele333.fmtt.Attachments.Attachements;
+import net.gabriele333.fmtt.Attachments.Attachments;
 import net.gabriele333.fmtt.network.ClientboundPacket;
 import net.gabriele333.fmtt.network.CustomFMTTPayload;
 import net.gabriele333.fmtt.network.ServerboundPacket;
@@ -30,7 +30,6 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-import static net.gabriele333.fmtt.Attachments.Attachements.SLEEP_DREAM;
 import static net.gabriele333.fmtt.fmtt.LOGGER;
 
 public record SleepDreamPacket() implements ServerboundPacket {
@@ -55,7 +54,7 @@ public record SleepDreamPacket() implements ServerboundPacket {
     }
 
     public void handleOnServer(ServerPlayer player) {
-        float dreamLevel = player.getData(Attachements.SLEEP_DREAM.get());
+        float dreamLevel = player.getData(Attachments.SLEEP_DREAM.get());
         float probability;
 
         LOGGER.info("Current dream level (float): {}", dreamLevel);
@@ -68,7 +67,7 @@ public record SleepDreamPacket() implements ServerboundPacket {
 
         if (player.getRandom().nextFloat() < probability) {
             if (dreamLevel == 0f) {
-                player.setData(Attachements.SLEEP_DREAM.get(), 1f);  // Imposta 1f
+                player.setData(Attachments.SLEEP_DREAM.get(), 1f);  // Imposta 1f
             }
 
             FTBQuestTrigger.triggerQuest(player, QuestID.FMTTIDS[0]);

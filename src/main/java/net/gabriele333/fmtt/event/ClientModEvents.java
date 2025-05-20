@@ -28,7 +28,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -47,7 +46,6 @@ import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.Objects;
 
-import static net.gabriele333.fmtt.Attachments.Attachements.SLEEP_DREAM;
 import static net.gabriele333.fmtt.fmtt.LOGGER;
 import static net.gabriele333.fmtt.fmtt.MOD_ID;
 

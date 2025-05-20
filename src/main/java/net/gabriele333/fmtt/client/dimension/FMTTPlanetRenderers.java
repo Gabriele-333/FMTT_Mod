@@ -22,6 +22,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.teamresourceful.resourcefullib.common.lib.Constants;
+import net.gabriele333.fmtt.util.ClientPlatformUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -51,6 +52,7 @@ public class FMTTPlanetRenderers extends SimpleJsonResourceReloadListener {
             PlanetRenderer renderer = PlanetRenderer.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
             EFFECTS.put(renderer.dimension(), new FMTTDimensionSpecialEffects(renderer));
         });
+        ClientPlatformUtils.registerPlanetRenderers(EFFECTS);
     }
 
     public static @Nullable FMTTDimensionSpecialEffects getEffect(ResourceKey<Level> dim) {

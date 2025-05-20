@@ -27,7 +27,7 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
 
-import static net.gabriele333.fmtt.Attachments.Attachements.PLAYERFMTTXP;
+import static net.gabriele333.fmtt.Attachments.Attachments.PLAYERFMTTXP;
 import static net.gabriele333.fmtt.fmtt.LOGGER;
 
 public record FMTTXpPacket() implements ServerboundPacket {

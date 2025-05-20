@@ -4,14 +4,16 @@
   "package": "net.gabriele333.fmtt.mixins",
   "compatibilityLevel": "JAVA_11",
   "mixins": [
-
   ],
   "client": [
+    "DimensionSpecialEffectsMixin",
+    "LevelRendererAccessor",
     "ModelBakeryMixin",
-    "StructureTemplatePoolAccessor",
-    "LevelRendererAccessor"
+    "StructureTemplatePoolAccessor"
   ],
-  "server": ["StructureTemplatePoolAccessor", "LevelRendererAccessor"],
+  "server": [
+    "StructureTemplatePoolAccessor"
+  ],
   "injectors": {
     "defaultRequire": 1
   }

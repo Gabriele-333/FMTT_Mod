@@ -23,7 +23,7 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import com.mojang.math.Axis;
 import net.gabriele333.fmtt.mixins.LevelRendererAccessor;
-import net.gabriele333.fmtt.util.dimension.DimensionRenderingUtil;
+import net.gabriele333.fmtt.util.dimension.DimensionRenderingUtils;
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -85,7 +85,7 @@ public class FMTTSkyRenderer {
             renderSkyRenderable(poseStack, renderable.localRotation(), globalRotation, renderable.scale(), renderable.texture(), renderable.blend());
             if (renderable.backLightScale() > 0) {
                 setSkyRenderableColor(level, partialTick, renderable.backLightColor());
-                renderSkyRenderable(poseStack, renderable.localRotation(), globalRotation, renderable.backLightScale(), DimensionRenderingUtil.BACKLIGHT, true);
+                renderSkyRenderable(poseStack, renderable.localRotation(), globalRotation, renderable.backLightScale(), DimensionRenderingUtils.BACKLIGHT, true);
                 RenderSystem.setShaderColor(1, 1, 1, 1);
             }
         });

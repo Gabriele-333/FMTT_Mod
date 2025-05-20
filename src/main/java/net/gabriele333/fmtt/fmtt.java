@@ -20,9 +20,10 @@ package net.gabriele333.fmtt;
 
 
 import com.mojang.logging.LogUtils;
-import net.gabriele333.fmtt.Attachments.Attachements;
+import net.gabriele333.fmtt.Attachments.Attachments;
 import net.gabriele333.fmtt.block.XpCrystallizer.XpCrystallizerEntity;
 import net.gabriele333.fmtt.data.FMTTDataProvider;
+import net.gabriele333.fmtt.datagen.fmttData;
 import net.gabriele333.fmtt.entity.FMTTEntities;
 import net.gabriele333.fmtt.entity.FMTTVillager;
 import net.gabriele333.fmtt.integration.FMTTJadeIntegration;
@@ -33,6 +34,8 @@ import net.gabriele333.fmtt.tags.FMTTItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -43,6 +46,7 @@ import net.neoforged.neoforge.event.AddReloadListenerEvent;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.BiConsumer;
 
 
 import static net.gabriele333.fmtt.block.FMTTBlockEntity.BLOCK_ENTITIES;
@@ -67,12 +71,13 @@ public abstract class fmtt {
 
         LOGGER.info("ciao");
         FMTTItems.register(modEventBus);
-        Attachements.register(modEventBus);
+        Attachments.register(modEventBus);
         BLOCKS.register(modEventBus);
         BLOCK_ENTITIES.register(modEventBus);
         FMTTEntities.REGISTER.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         FMTTJadeIntegration.init(modEventBus);
+
         modEventBus.addListener(XpCrystallizerEntity::registerCapabilities);
         modEventBus.addListener((RegisterEvent event) -> {
             if (event.getRegistryKey() == Registries.VILLAGER_PROFESSION) {
@@ -85,6 +90,7 @@ public abstract class fmtt {
         NeoForge.EVENT_BUS.addListener(FMTTVillager::initTrades);
 
         modEventBus.addListener(EventPriority.LOWEST, this::onGatherData);
+        NeoForge.EVENT_BUS.addListener(this::onAddReloadListener);
 
     }
 
@@ -104,7 +110,12 @@ public abstract class fmtt {
 
 
     }
-
+    public void onAddReloadListener(AddReloadListenerEvent event) {
+        onAddReloadListeners((id, listener) -> event.addListener(listener));
+    }
+    public static void onAddReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
+        registry.accept(ResourceLocation.fromNamespaceAndPath(MOD_ID, "planets"), new fmttData());
+    }
 
 
 }

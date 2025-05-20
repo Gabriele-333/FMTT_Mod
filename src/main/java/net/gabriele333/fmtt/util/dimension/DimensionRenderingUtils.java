@@ -26,16 +26,17 @@ import java.util.List;
 
 import static net.gabriele333.fmtt.fmtt.MOD_ID;
 
-public class DimensionRenderingUtil {
+public class DimensionRenderingUtils {
 
     public static final ResourceLocation BACKLIGHT = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/environment/backlight.png");
 
     public static final ResourceLocation SUN = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/environment/sun.png");
 
     public static final ResourceLocation EARTH = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/environment/earth.png");
+    public static final ResourceLocation MOON = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/environment/moon.png");
 
     public static final List<ResourceLocation> SOLAR_SYSTEM_TEXTURES = List.of(
-            DimensionRenderingUtil.EARTH
+            DimensionRenderingUtils.EARTH
     );
 
     public static int getTicks() {

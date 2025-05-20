@@ -29,7 +29,7 @@ import java.util.function.Supplier;
 
 import static net.gabriele333.fmtt.fmtt.MOD_ID;
 
-public class Attachements {
+public class Attachments {
 
     private static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MOD_ID);
 

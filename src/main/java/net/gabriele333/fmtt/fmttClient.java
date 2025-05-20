@@ -24,6 +24,7 @@ import net.gabriele333.fmtt.client.dimension.FMTTPlanetRenderers;
 import net.gabriele333.fmtt.client.models.CrystalModelBase;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.PreparableReloadListener;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
@@ -42,6 +43,8 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.RegisterDimensionSpecialEffectsEvent;
 
+import java.util.function.BiConsumer;
+
 
 @OnlyIn(Dist.CLIENT)
 public class fmttClient extends fmtt {
@@ -50,7 +53,7 @@ public class fmttClient extends fmtt {
         modEventBus.addListener(this::registerEntityRenderers);
         modEventBus.addListener(this::registerBlockEntityRenderers); // Aggiunto questo
         modEventBus.addListener(this::onRegisterEntityRendererLayerDefinitions);
-        modEventBus.addListener(this::onRegisterReloadListeners);
+        modEventBus.addListener(this::onClientReloadListeners);
         modEventBus.addListener(this::onRegisterDimensionEffects);
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, new ClientConfig().spec);
@@ -72,8 +75,13 @@ public class fmttClient extends fmtt {
         event.registerBlockEntityRenderer(FMTTBlockEntity.XP_CRYSTALLIZER_BE.get(), XpCrystallizerRenderer::new);
     }
 
-    private void onRegisterReloadListeners(RegisterClientReloadListenersEvent event) {
-        event.registerReloadListener(new FMTTPlanetRenderers());
+
+    public static void onAddReloadListener(BiConsumer<ResourceLocation, PreparableReloadListener> consumer) {
+        consumer.accept(ResourceLocation.fromNamespaceAndPath(MOD_ID, "planet_renderers"), new FMTTPlanetRenderers());
+    }
+
+    public void onClientReloadListeners(RegisterClientReloadListenersEvent event) {
+        onAddReloadListener((id, listener) -> event.registerReloadListener(listener));
     }
 
     private void onRegisterDimensionEffects(RegisterDimensionSpecialEffectsEvent event) {
@@ -83,12 +91,11 @@ public class fmttClient extends fmtt {
             if (effect != null) {
                 event.register(id, effect);
                 LOGGER.info("Registrato DimensionSpecialEffects per {}", id);
+            } else {
+                LOGGER.warn("Nessun effetto trovato per {}", id);
             }
         }
     }
-
-
-
 
     public void onRegisterEntityRendererLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(FMTTModelLayers.CRYSTAL, CrystalModelBase::createBodyLayer);
