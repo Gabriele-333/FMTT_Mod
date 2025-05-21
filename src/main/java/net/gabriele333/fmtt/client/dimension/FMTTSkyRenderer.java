@@ -52,7 +52,7 @@ public class FMTTSkyRenderer {
         this.renderer = renderer;
     }
 
-    public void render(ClientLevel level, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
+    public void render(ClientLevel level, float partialTick, Matrix4f frustumMatrix, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
         setupFog.run();
         if (isFoggy || inFog(camera)) return;
         if (!renderer.renderInRain() && level.isRaining()) return;
@@ -64,10 +64,18 @@ public class FMTTSkyRenderer {
         VertexBuffer.unbind();
         RenderSystem.enableBlend();
 
+        // Create a PoseStack from the frustumMatrix (1.21.1) or use a new one (1.20.4)
+        PoseStack poseStack = new PoseStack();
+        poseStack.mulPose(frustumMatrix); // Works in 1.21.1, ignored in 1.20.4 if frustumMatrix is identity
 
         renderSky(level, partialTick, poseStack, projectionMatrix);
 
-        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        RenderSystem.blendFuncSeparate(
+                GlStateManager.SourceFactor.SRC_ALPHA,
+                GlStateManager.DestFactor.ONE,
+                GlStateManager.SourceFactor.ONE,
+                GlStateManager.DestFactor.ZERO
+        );
         poseStack.pushPose();
 
         renderStars(level, partialTick, poseStack, projectionMatrix, setupFog);

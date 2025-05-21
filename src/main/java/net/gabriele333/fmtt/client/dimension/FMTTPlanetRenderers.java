@@ -22,6 +22,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.mojang.serialization.JsonOps;
 import com.teamresourceful.resourcefullib.common.lib.Constants;
+import net.gabriele333.fmtt.fmtt;
 import net.gabriele333.fmtt.util.ClientPlatformUtilsImpl;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -34,11 +35,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 public class FMTTPlanetRenderers extends SimpleJsonResourceReloadListener {
 
-    private static final Map<ResourceKey<Level>, FMTTDimensionSpecialEffects> EFFECTS = new HashMap<>();
+
 
     public FMTTPlanetRenderers() {
         super(Constants.GSON, "planet_renderers");
@@ -46,20 +48,15 @@ public class FMTTPlanetRenderers extends SimpleJsonResourceReloadListener {
 
     @Override
     protected void apply(Map<ResourceLocation, JsonElement> object, ResourceManager resourceManager, ProfilerFiller profiler) {
-        EFFECTS.clear(); // evita duplicazioni
+        Map<ResourceKey<Level>, FMTTDimensionSpecialEffects> EFFECTS = new HashMap<>();
         object.forEach((key, value) -> {
             JsonObject json = GsonHelper.convertToJsonObject(value, "planets");
-            PlanetRenderer renderer = PlanetRenderer.CODEC.parse(JsonOps.INSTANCE, json).getOrThrow();
-            EFFECTS.put(renderer.dimension(), new FMTTDimensionSpecialEffects(renderer));
+            Optional<PlanetRenderer> optionalRenderer = PlanetRenderer.CODEC.parse(JsonOps.INSTANCE, json).resultOrPartial(fmtt.LOGGER::error);
+            optionalRenderer.ifPresent(renderer -> {
+                EFFECTS.put(renderer.dimension(), new FMTTDimensionSpecialEffects(renderer));
+            });
         });
         ClientPlatformUtilsImpl.registerPlanetRenderers(EFFECTS);
     }
 
-    public static @Nullable FMTTDimensionSpecialEffects getEffect(ResourceKey<Level> dim) {
-        return EFFECTS.get(dim);
-    }
-
-    public static Set<ResourceKey<Level>> getRegisteredDimensions() {
-        return EFFECTS.keySet();
-    }
 }

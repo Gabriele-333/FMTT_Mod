@@ -56,11 +56,11 @@ public class FMTTDimensionSpecialEffects extends DimensionSpecialEffects {
      *
      * @return true to prevent vanilla sky rendering
      */
-    public boolean renderSky(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
-        skyRenderer.render(level, partialTick, poseStack, camera, projectionMatrix, isFoggy, setupFog);
+    @Override
+    public boolean renderSky(ClientLevel level, int ticks, float partialTick, Matrix4f frustumMatrix, Camera camera, Matrix4f projectionMatrix, boolean isFoggy, Runnable setupFog) {
+        skyRenderer.render(level, partialTick, frustumMatrix, camera, projectionMatrix, isFoggy, setupFog);
         return renderer.customSky();
     }
-
     /**
      * Renders the snow and rain effects of this dimension.
      *
