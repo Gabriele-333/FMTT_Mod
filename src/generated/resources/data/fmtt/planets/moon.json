@@ -1,0 +1,10 @@
+{
+  "dimension": "fmtt:moon",
+  "gravity": 1.622,
+  "orbit": "fmtt:earth_orbit",
+  "oxygen": false,
+  "solar_power": 24,
+  "solar_system": "fmtt:solar_system",
+  "temperature": -173,
+  "tier": 1
+}

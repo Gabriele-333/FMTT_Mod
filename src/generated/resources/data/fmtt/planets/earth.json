@@ -1,0 +1,10 @@
+{
+  "dimension": "minecraft:overworld",
+  "gravity": 9.807,
+  "orbit": "fmtt:earth_orbit",
+  "oxygen": true,
+  "solar_power": 16,
+  "solar_system": "fmtt:solar_system",
+  "temperature": 15,
+  "tier": 1
+}

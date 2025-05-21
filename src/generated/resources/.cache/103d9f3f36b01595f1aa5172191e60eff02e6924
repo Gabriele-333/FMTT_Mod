@@ -1,0 +1,6 @@
+// 1.21.1	2025-05-21T17:15:01.2177838	Registries
+98a93a6d020a3d4685a39fa3c9001d5cf61c63a6 data/fmtt/dimension/earth_orbit.json
+d415abc302683a6a143aa90ec7aedc1af479078f data/fmtt/dimension_type/earth_orbit.json
+97705170ea9b360957e255c7c14f85beb532856c data/fmtt/dimension_type/moon.json
+8b6c993f68303165f76dc3100234c45af4468bfe data/fmtt/worldgen/biome/orbit.json
+84e423f0064f0e51ec51c4a3909ca4a6e7a02e12 data/fmtt/worldgen/noise_settings/orbit.json
