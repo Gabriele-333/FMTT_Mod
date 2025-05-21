@@ -54,7 +54,8 @@ public class fmttClient extends fmtt {
         modEventBus.addListener(this::registerBlockEntityRenderers); // Aggiunto questo
         modEventBus.addListener(this::onRegisterEntityRendererLayerDefinitions);
         modEventBus.addListener(this::onClientReloadListeners);
-        modEventBus.addListener(this::onRegisterDimensionEffects);
+
+
 
         modContainer.registerConfig(ModConfig.Type.CLIENT, new ClientConfig().spec);
         InitModel.init();
@@ -84,18 +85,6 @@ public class fmttClient extends fmtt {
         onAddReloadListener((id, listener) -> event.registerReloadListener(listener));
     }
 
-    private void onRegisterDimensionEffects(RegisterDimensionSpecialEffectsEvent event) {
-        for (ResourceKey<Level> dim : FMTTPlanetRenderers.getRegisteredDimensions()) {
-            ResourceLocation id = dim.location();
-            FMTTDimensionSpecialEffects effect = FMTTPlanetRenderers.getEffect(dim);
-            if (effect != null) {
-                event.register(id, effect);
-                LOGGER.info("Registrato DimensionSpecialEffects per {}", id);
-            } else {
-                LOGGER.warn("Nessun effetto trovato per {}", id);
-            }
-        }
-    }
 
     public void onRegisterEntityRendererLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(FMTTModelLayers.CRYSTAL, CrystalModelBase::createBodyLayer);

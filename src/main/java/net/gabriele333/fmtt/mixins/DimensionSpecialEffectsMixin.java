@@ -30,6 +30,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static net.gabriele333.fmtt.fmtt.LOGGER;
+
 @Mixin(DimensionSpecialEffects.class)
 public abstract class DimensionSpecialEffectsMixin {
 
@@ -39,6 +41,7 @@ public abstract class DimensionSpecialEffectsMixin {
         ResourceKey<Level> dimension = ResourceKey.create(Registries.DIMENSION, type.effectsLocation());
         if (ClientPlatformUtilsImpl.DIMENSION_RENDERERS.containsKey(dimension)) {
             cir.setReturnValue(ClientPlatformUtilsImpl.DIMENSION_RENDERERS.get(dimension));
+            LOGGER.info("DSEM works?");
         }
     }
 }
