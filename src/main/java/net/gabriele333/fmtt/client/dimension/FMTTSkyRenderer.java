@@ -64,6 +64,7 @@ public class FMTTSkyRenderer {
         VertexBuffer.unbind();
         RenderSystem.enableBlend();
 
+
         renderSky(level, partialTick, poseStack, projectionMatrix);
 
         RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
