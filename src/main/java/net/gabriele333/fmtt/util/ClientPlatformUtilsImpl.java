@@ -19,9 +19,7 @@ package net.gabriele333.fmtt.util;/*
  */
 
 import net.gabriele333.fmtt.client.dimension.FMTTDimensionSpecialEffects;
-import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 
 import java.util.HashMap;

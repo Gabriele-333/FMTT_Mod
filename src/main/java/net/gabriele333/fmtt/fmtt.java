@@ -23,6 +23,9 @@ import com.mojang.logging.LogUtils;
 import net.gabriele333.fmtt.Attachments.Attachments;
 import net.gabriele333.fmtt.block.XpCrystallizer.XpCrystallizerEntity;
 import net.gabriele333.fmtt.data.FMTTDataProvider;
+import net.gabriele333.fmtt.datagen.ModPlanetProvider;
+import net.gabriele333.fmtt.datagen.ModPlanetRendererProvider;
+import net.gabriele333.fmtt.datagen.ModRegistryProvider;
 import net.gabriele333.fmtt.datagen.fmttData;
 import net.gabriele333.fmtt.entity.FMTTEntities;
 import net.gabriele333.fmtt.entity.FMTTVillager;
@@ -33,6 +36,7 @@ import net.gabriele333.fmtt.tags.FMTTBlockTagsProvider;
 import net.gabriele333.fmtt.tags.FMTTItemTagsProvider;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.PreparableReloadListener;
@@ -97,12 +101,20 @@ public abstract class fmtt {
     private static FMTTItemTagsProvider itemTagsProvider;
     public void onGatherData(GatherDataEvent event) {
         LOGGER.info("GatherDataEvent triggered.");
-
+        DataGenerator generator = event.getGenerator();
         PackOutput packOutput = event.getGenerator().getPackOutput();
         CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
+
+
+        generator.addProvider(event.includeClient(), new ModPlanetRendererProvider(packOutput));
+        generator.addProvider(event.includeServer(), new ModPlanetProvider(packOutput));
+
+        generator.addProvider(event.includeServer(), new ModRegistryProvider(packOutput, lookupProvider));
+
         FMTTDataProvider provider = new FMTTDataProvider("fmtt");
+
 
         var b = new FMTTBlockTagsProvider(packOutput, lookupProvider, existingFileHelper);
         provider.addSubProvider(event.includeServer(), b);
@@ -110,12 +122,12 @@ public abstract class fmtt {
 
 
     }
+
     public void onAddReloadListener(AddReloadListenerEvent event) {
         onAddReloadListeners((id, listener) -> event.addListener(listener));
     }
     public static void onAddReloadListeners(BiConsumer<ResourceLocation, PreparableReloadListener> registry) {
         registry.accept(ResourceLocation.fromNamespaceAndPath(MOD_ID, "planets"), new fmttData());
     }
-
 
 }
