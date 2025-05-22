@@ -20,6 +20,7 @@ package net.gabriele333.fmtt.datagen;/*
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.JsonOps;
+import com.teamresourceful.resourcefullib.common.lib.Constants;
 import net.minecraft.core.Registry;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;

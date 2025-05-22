@@ -47,7 +47,9 @@ public class FMTTDimensionSpecialEffects extends DimensionSpecialEffects {
      *
      * @return true to prevent vanilla cloud rendering
      */
-    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, double camX, double camY, double camZ, Matrix4f projectionMatrix) {
+
+    //if (level.effects().renderClouds(level, ticks, partialTick, poseStack, camX, camY, camZ, frustumMatrix, projectionMatrix))
+    public boolean renderClouds(ClientLevel level, int ticks, float partialTick, PoseStack poseStack, double camX, double camY, double camZ, Matrix4f frustumMatrix, Matrix4f projectionMatrix) {
         return renderer.customClouds();
     }
 
