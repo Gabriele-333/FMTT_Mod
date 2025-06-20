@@ -28,6 +28,8 @@ import net.gabriele333.fmtt.network.serverbound.CompassRequestPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTRewardPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTXpPacket;
 import net.gabriele333.fmtt.network.serverbound.SleepDreamPacket;
+import net.gabriele333.gabrielecore.network.ClientboundPacket;
+import net.gabriele333.gabrielecore.network.ServerboundPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -61,13 +63,14 @@ public class FMTTNetwork {
                                                                   CustomPacketPayload.Type<T> type,
                                                                   StreamCodec<RegistryFriendlyByteBuf, T> codec) {
         registrar.playToClient(type, codec, ClientboundPacket::handleOnClient);
+        LOGGER.debug("Registered clientbound packet: {}", type.id());
     }
 
     private static <T extends ServerboundPacket> void serverbound(PayloadRegistrar registrar,
                                                                   CustomPacketPayload.Type<T> type,
                                                                   StreamCodec<RegistryFriendlyByteBuf, T> codec) {
         registrar.playToServer(type, codec, ServerboundPacket::handleOnServer);
-        LOGGER.info("Belin 2");
+        LOGGER.debug("Registered serverbound packet: {}", type.id());
     }
 
 }
