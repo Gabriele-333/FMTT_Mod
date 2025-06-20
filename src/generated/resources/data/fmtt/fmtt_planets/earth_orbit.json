@@ -1,9 +1,9 @@
 {
   "dimension": "fmtt:earth_orbit",
+  "fmtt_solar_system": "fmtt:solar_system",
   "gravity": 0.0,
   "oxygen": false,
   "solar_power": 32,
-  "solar_system": "fmtt:solar_system",
   "temperature": -270,
   "tier": 1
 }
