@@ -18,8 +18,8 @@ package net.gabriele333.fmtt.network.clientbound;
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 
-import net.gabriele333.fmtt.network.ClientboundPacket;
-import net.gabriele333.fmtt.network.CustomFMTTPayload;
+import net.gabriele333.gabrielecore.network.ClientboundPacket;
+import net.gabriele333.gabrielecore.network.CustomPayload;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
@@ -36,7 +36,7 @@ public record ErrorMessagePacket(String errorMessage) implements ClientboundPack
     );
 
 
-    public static final CustomPacketPayload.Type<ErrorMessagePacket> TYPE = CustomFMTTPayload.createType("error_message_packet");
+    public static final CustomPacketPayload.Type<ErrorMessagePacket> TYPE = CustomPayload.createType("error_message_packet");
 
     @Override
     public CustomPacketPayload.Type<ErrorMessagePacket> type() {

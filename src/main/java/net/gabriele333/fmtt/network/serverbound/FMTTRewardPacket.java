@@ -17,23 +17,19 @@ package net.gabriele333.fmtt.network.serverbound;/*
  */
 
 
-import net.gabriele333.fmtt.item.FMTTItems;
-import net.gabriele333.fmtt.network.CustomFMTTPayload;
-import net.gabriele333.fmtt.network.ServerboundPacket;
+
+
+import net.gabriele333.gabrielecore.network.CustomPayload;
+import net.gabriele333.gabrielecore.network.ServerboundPacket;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.RecipeManager;
-
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -42,7 +38,7 @@ import java.util.List;
 import java.util.Random;
 
 import static net.gabriele333.fmtt.fmtt.LOGGER;
-import static net.gabriele333.fmtt.tags.FMTTTags.Items.CRAFTABLE;
+
 
 public record FMTTRewardPacket() implements ServerboundPacket {
 
@@ -51,7 +47,7 @@ public record FMTTRewardPacket() implements ServerboundPacket {
                     FMTTRewardPacket::write,
                     FMTTRewardPacket::decode);
 
-    public static final Type<FMTTRewardPacket> TYPE = CustomFMTTPayload.createType("fmtt_reward_packet");
+    public static final Type<FMTTRewardPacket> TYPE = CustomPayload.createType("fmtt_reward_packet");
 
 
     @Override

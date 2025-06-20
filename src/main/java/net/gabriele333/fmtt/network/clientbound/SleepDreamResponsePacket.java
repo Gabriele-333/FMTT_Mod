@@ -20,8 +20,8 @@ package net.gabriele333.fmtt.network.clientbound;/*
 
 
 import net.gabriele333.fmtt.event.ClientModEvents;
-import net.gabriele333.fmtt.network.ClientboundPacket;
-import net.gabriele333.fmtt.network.CustomFMTTPayload;
+import net.gabriele333.gabrielecore.network.ClientboundPacket;
+import net.gabriele333.gabrielecore.network.CustomPayload;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
@@ -33,7 +33,7 @@ public record SleepDreamResponsePacket() implements ClientboundPacket {
             SleepDreamResponsePacket::write,
             SleepDreamResponsePacket::decode);
 
-    public static final Type<SleepDreamResponsePacket> TYPE = CustomFMTTPayload.createType("sleep_dream_response");
+    public static final Type<SleepDreamResponsePacket> TYPE = CustomPayload.createType("sleep_dream_response");
 
 
     @Override

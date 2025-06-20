@@ -20,8 +20,8 @@ package net.gabriele333.fmtt.network.serverbound;/*
 
 
 import net.gabriele333.fmtt.item.FMTTItems;
-import net.gabriele333.fmtt.network.CustomFMTTPayload;
-import net.gabriele333.fmtt.network.ServerboundPacket;
+import net.gabriele333.gabrielecore.network.CustomPayload;
+import net.gabriele333.gabrielecore.network.ServerboundPacket;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
@@ -37,7 +37,7 @@ public record FMTTXpPacket() implements ServerboundPacket {
                     FMTTXpPacket::write,
                     FMTTXpPacket::decode);
 
-    public static final Type<FMTTXpPacket> TYPE = CustomFMTTPayload.createType("fmtt_xp_packet");
+    public static final Type<FMTTXpPacket> TYPE = CustomPayload.createType("fmtt_xp_packet");
 
     @Override
     public Type<FMTTXpPacket> type() {

@@ -23,8 +23,8 @@ package net.gabriele333.fmtt.compass;/*
 
 
 
-import net.gabriele333.fmtt.network.ServerboundPacket;
 import net.gabriele333.fmtt.network.serverbound.CompassRequestPacket;
+import net.gabriele333.gabrielecore.network.ServerboundPacket;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 

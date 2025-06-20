@@ -16,17 +16,15 @@
  * along with From Magic To Tech.  If not, see <http://www.gnu.org/licenses/lgpl>.
  */
 package net.gabriele333.fmtt.event;
-import net.gabriele333.fmtt.client.ModpackVersion;
-import net.gabriele333.fmtt.config.ClientConfig;
+
 import net.gabriele333.fmtt.fmtt;
 import net.gabriele333.fmtt.item.FMTTItems;
-import net.gabriele333.fmtt.network.ServerboundPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTRewardPacket;
 import net.gabriele333.fmtt.network.serverbound.FMTTXpPacket;
 import net.gabriele333.fmtt.network.serverbound.SleepDreamPacket;
+import net.gabriele333.gabrielecore.network.ServerboundPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -38,20 +36,16 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.CustomizeGuiOverlayEvent;
 import net.neoforged.neoforge.client.event.RenderGuiEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerWakeUpEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 
-
-import java.util.Objects;
 
 import static net.gabriele333.fmtt.fmtt.LOGGER;
 import static net.gabriele333.fmtt.fmtt.MOD_ID;
 
 
 public class ClientModEvents {
-    private static boolean versionMessageSent = false;
 
     private static final ResourceLocation SLEEP_IMAGE = ResourceLocation.fromNamespaceAndPath(MOD_ID, "textures/ui/sleep_image.png");
     private static boolean showSleepImage = false;
@@ -72,36 +66,26 @@ public class ClientModEvents {
 
 
 
-        @SubscribeEvent(priority = EventPriority.LOW)
-        public static void onPlayerJoinClient(PlayerEvent.PlayerLoggedInEvent event) {
-            try {
-                if (!versionMessageSent && !Objects.equals(ModpackVersion.main(), ClientConfig.MiscSettings.Version.get())) {
-                    event.getEntity().sendSystemMessage(Component.literal("§bThere is a newer version of the modpack: " + ModpackVersion.main()));
-                    versionMessageSent = true;
-                }
-            } catch (Exception e) {
-                return;
-            }
-        }
-
         @SubscribeEvent
         public static void onItemRightClick(PlayerInteractEvent.RightClickItem event) {
-            ItemStack itemStack = event.getItemStack();
+            if (event.getLevel().isClientSide()) {
+                ItemStack itemStack = event.getItemStack();
 
-            // FMTT XP Item
-            if (itemStack.getItem() == FMTTItems.FMTT_XP_ITEM.get()) {
-                ServerboundPacket message = new FMTTXpPacket();
-                PacketDistributor.sendToServer(message);
-                event.setCancellationResult(InteractionResult.SUCCESS);
-                event.setCanceled(true);
-            }
+                if (itemStack.getItem() == FMTTItems.FMTT_XP_ITEM.get()) {
+                    ServerboundPacket message = new FMTTXpPacket();
+                    PacketDistributor.sendToServer(message);
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                    event.setCanceled(true);
+                    return;
+                }
 
-            // FMTT REWARD ITEM
-            if (itemStack.getItem() == FMTTItems.FMTT_REWARD_ITEM.get()) {
-                ServerboundPacket message = new FMTTRewardPacket();
-                PacketDistributor.sendToServer(message);
-                event.setCancellationResult(InteractionResult.SUCCESS);
-                event.setCanceled(true);
+                if (itemStack.getItem() == FMTTItems.FMTT_REWARD_ITEM.get()) {
+                    ServerboundPacket message = new FMTTRewardPacket();
+                    PacketDistributor.sendToServer(message);
+                    event.setCancellationResult(InteractionResult.SUCCESS);
+                    event.setCanceled(true);
+                    return;
+                }
             }
         }
 

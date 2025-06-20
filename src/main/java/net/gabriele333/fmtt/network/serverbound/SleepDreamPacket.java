@@ -19,12 +19,12 @@ package net.gabriele333.fmtt.network.serverbound;/*
  */
 
 import net.gabriele333.fmtt.Attachments.Attachments;
-import net.gabriele333.fmtt.network.ClientboundPacket;
-import net.gabriele333.fmtt.network.CustomFMTTPayload;
-import net.gabriele333.fmtt.network.ServerboundPacket;
 import net.gabriele333.fmtt.network.clientbound.SleepDreamResponsePacket;
-import net.gabriele333.fmtt.util.ftbquest.FTBQuestTrigger;
 import net.gabriele333.fmtt.util.ftbquest.QuestID;
+import net.gabriele333.gabrielecore.network.ClientboundPacket;
+import net.gabriele333.gabrielecore.network.CustomPayload;
+import net.gabriele333.gabrielecore.network.ServerboundPacket;
+import net.gabriele333.gabrielecore.utils.ftbquest.FTBQuestTrigger;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.server.level.ServerPlayer;
@@ -39,7 +39,7 @@ public record SleepDreamPacket() implements ServerboundPacket {
                     SleepDreamPacket::write,
                     SleepDreamPacket::decode);
 
-    public static final Type<SleepDreamPacket> TYPE = CustomFMTTPayload.createType("sleep_dream_packet");
+    public static final Type<SleepDreamPacket> TYPE = CustomPayload.createType("sleep_dream_packet");
 
     @Override
     public Type<SleepDreamPacket> type() {

@@ -24,8 +24,8 @@ package net.gabriele333.fmtt.network.clientbound;/*
 
 import net.gabriele333.fmtt.compass.CompassManager;
 import net.gabriele333.fmtt.compass.CompassResult;
-import net.gabriele333.fmtt.network.ClientboundPacket;
-import net.gabriele333.fmtt.network.CustomFMTTPayload;
+import net.gabriele333.gabrielecore.network.ClientboundPacket;
+import net.gabriele333.gabrielecore.network.CustomPayload;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
@@ -44,7 +44,7 @@ public record CompassResponsePacket(long attunement,
             CompassResponsePacket::write,
             CompassResponsePacket::decode);
 
-    public static final Type<CompassResponsePacket> TYPE = CustomFMTTPayload.createType("fmtt_compass_response");
+    public static final Type<CompassResponsePacket> TYPE = CustomPayload.createType("fmtt_compass_response");
 
     @Override
     public Type<CompassResponsePacket> type() {
