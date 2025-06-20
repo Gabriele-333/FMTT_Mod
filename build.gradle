@@ -49,9 +49,7 @@ repositories {
         name = "TerraformersMC"
         url = "https://maven.terraformersmc.com/"
     }
-    maven {
-        url = "https://maven.latmod.com"
-    }
+
 
 }
 
@@ -124,6 +122,7 @@ configurations {
 dependencies {
 
     implementation "net.neoforged:neoforge:${neo_version}"
+    implementation "net.gabriele333.gabrielecore:GabrieleCore:${gc_version}"
     implementation "curse.maven:applied-energistics-2-223794:6488853"
     implementation "curse.maven:modonomicon-538392:5717209"
     implementation "curse.maven:crafttweaker-239197:5708234"
@@ -137,7 +136,7 @@ dependencies {
     implementation "curse.maven:guideme-1173950:6488254"
     implementation "curse.maven:resourceful-lib-570073:5973188"
     implementation "curse.maven:architectury-api-419699:5786327"
-
+    implementation "curse.maven:create-328085:6323264"
 
     compileOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"
     runtimeOnly "dev.emi:emi-neoforge:${emi_version}+1.21.1"

@@ -19,8 +19,8 @@ package net.gabriele333.fmtt.holydays.advent;/*
 
 
 import java.time.LocalDate;
-import net.gabriele333.fmtt.util.ftbquest.FTBQuestTrigger;
 import net.gabriele333.fmtt.util.ftbquest.QuestID;
+import net.gabriele333.gabrielecore.utils.ftbquest.FTBQuestTrigger;
 import net.minecraft.server.level.ServerPlayer;
 import net.gabriele333.fmtt.fmtt;
 import net.neoforged.bus.api.SubscribeEvent;
