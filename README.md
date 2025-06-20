@@ -7,3 +7,10 @@ In FMTT modpack, you will start an adventure where you can do whatever you want.
 -> This is the mod of the modpack
 
 
+## Licensing
+
+This project contains code under multiple open-source licenses:
+
+- Portions of the code are licensed under the **GNU LGPLv3**
+- Portions of the code are licensed under the **MIT License**
+  See `LICENSE-MIT` and `LICENSE-LGPLv3` for full details.
